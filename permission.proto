@@ -1,0 +1,143 @@
+syntax = "proto3";
+package permission;
+
+option go_package = "xpb;xpb";
+
+// PermissionService provides token auth + rate-limit endpoints
+service PermissionService {
+  // Ping route
+  rpc Ping(PingRequest) returns (PingResponse);
+  // Generate access + refresh tokens
+  rpc GenerateTokens(GenerateTokensRequest) returns (GenerateTokensResponse);
+  // Refresh access token
+  rpc RefreshAccessToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+  
+  // Check token and rate-limit; returns allowed or not
+  rpc CheckAuthToken(CheckAuthRequest) returns (CheckAuthResponse);
+  // Force-update the rate-limit with Slicing-Window algorithm
+  rpc UpdateRateLimit(UpdateRateLimitRequest) returns (UpdateRateLimitResponse);
+  //Check auth firebase token
+  rpc CheckAuthFirebaseToken(CheckAuthRequest) returns (CheckAuthResponse);
+  // Get user ID from Firebase token
+  rpc GetUserIDFromFirebase(CheckAuthRequest) returns (GetUserIDFromFirebaseResponse);
+  // Get user ID from regular auth token
+  rpc GetUserIDFromToken(CheckAuthRequest) returns (GetUserIDFromTokenResponse);
+  // Get audience (aud) from token
+  rpc GetAudFromToken(CheckAuthRequest) returns (GetAudFromTokenResponse);
+}
+
+message PingRequest {
+  string message = 1; // optional, or empty
+}
+
+message PingResponse {
+  string message = 1;
+}
+
+
+// CheckAuthRequest checks if the token is valid and allowed to access the service
+message CheckAuthRequest {
+  string token = 1;
+}
+
+// UserInfo contains full user information
+message UserInfo {
+  string user_id = 1;
+  string email = 2;
+  string phone = 3;
+  string username = 4;
+  string fullname = 5;
+  string subscription = 6;
+  string subscription_display = 7;
+  int64 subscription_start = 8;
+  int64 subscription_end = 9;
+  string access_services = 10; // JSON string
+  string picture = 11;
+  string info = 12; // JSON string
+  bool email_verified = 13;
+  string aud = 14;
+  int64 exp = 15;
+  int64 last_login = 16;
+}
+
+// UserInfoFromFB represents full information from Firebase token
+message UserInfoFromFB {
+  string name = 1;
+  string picture = 2;
+  string issuer = 3;
+  string audience = 4;
+  int64 auth_time = 5;
+  string user_id = 6;
+  string subject = 7;
+  int64 issued_at = 8;
+  int64 exp = 9;
+  string email = 10;
+  bool email_verified = 11;
+  string firebase = 12; // JSON string containing identities and sign_in_provider
+}
+
+// CheckAuthResponse returns user info if auth succeeds, or error message if fails
+message CheckAuthResponse {
+  string message = 1; // error message if authentication fails
+  UserInfo user_info = 2; // returned when CheckAuthToken succeeds
+  UserInfoFromFB user_info_from_fb = 3; // returned when CheckAuthFirebaseToken succeeds
+}
+
+
+// UpdateRateLimitRequest force-updates the rate-limit for the token and service
+message UpdateRateLimitRequest {
+  string token = 1;
+}
+
+// UpdateRateLimitResponse indicates if the rate-limit update was successful
+message UpdateRateLimitResponse {
+  bool success = 1;
+}
+
+// GenerateTokens messages
+message GenerateTokensRequest {
+  string user_id = 1;
+  string email = 2;
+  bool email_verified = 3;
+  string aud = 4;
+}
+
+message GenerateTokensResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 access_expires_at = 3;
+  int64 refresh_expires_at = 4;
+  string session_token = 5;
+  string session_secret = 6;
+}
+
+// RefreshAccessToken messages
+message RefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+message RefreshTokenResponse {
+  string access_token = 1;
+  int64 access_expires_at = 2;
+  string user_id = 3;
+  string refresh_token = 4;
+  int64 refresh_expires_at = 5;
+  string session_token = 6;
+  string session_secret = 7;
+}
+
+// GetUserIDFromFirebaseResponse returns user ID from Firebase token
+message GetUserIDFromFirebaseResponse {
+  string user_id = 1;
+}
+
+// GetUserIDFromTokenResponse returns user ID from regular auth token
+message GetUserIDFromTokenResponse {
+  string user_id = 1;
+}
+
+// GetAudFromTokenResponse returns audience from token
+message GetAudFromTokenResponse {
+  string aud = 1;
+}
+

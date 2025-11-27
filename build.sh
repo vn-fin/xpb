@@ -1,3 +1,15 @@
 #!/bin/bash
+set -e
 
-protoc --go_out=./ messages.proto
+echo "Generating Go…"
+protoc --go_out=. --go-grpc_out=. \
+  messages.proto permission.proto
+
+echo "Generating Python…"
+python3 -m grpc_tools.protoc \
+  -I . \
+  --python_out=xpb \
+  --grpc_python_out=xpb \
+  messages.proto permission.proto
+
+echo "Done!"

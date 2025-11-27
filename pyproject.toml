@@ -1,0 +1,11 @@
+[project]
+name = "xpb"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "grpcio>=1.76.0",
+    "grpcio-tools>=1.76.0",
+    "grpclib>=0.4.8",
+    "protobuf>=6.33.1",
+]
