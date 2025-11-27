@@ -8,8 +8,8 @@ protoc --go_out=. --go-grpc_out=. \
 echo "Generating Python…"
 python3 -m grpc_tools.protoc \
   -I . \
-  --python_out=py_xpb \
-  --grpc_python_out=py_xpb \
+  --python_out=xpb \
+  --grpc_python_out=xpb \
   messages.proto permission.proto
 
 echo "Done!"
