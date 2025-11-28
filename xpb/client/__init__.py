@@ -55,4 +55,4 @@ def get_permission_client() -> PermissionClient:
     return _permission_client_instance
 
 
-__all__ = ["get_permission_client"]
+__all__ = ["get_permission_client", "PermissionClient"]
