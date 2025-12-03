@@ -14,5 +14,5 @@ type TickInfo struct {
 
 func (c *TickInfo) Build() {
 	// Parse time from int64 to time.Time
-	c.TimeT = time.Unix(c.TimeInt, 0)
+	c.TimeT = time.Unix(int64(c.TimeInt), 0)
 }
