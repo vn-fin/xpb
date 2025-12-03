@@ -5,7 +5,7 @@ import "time"
 // TickInfo represents a trade tick message.
 type TickInfo struct {
 	Symbol  string    `json:"symbol"`
-	TimeInt int64     `json:"time"`
+	TimeInt float64     `json:"time"`
 	TimeT   time.Time `json:"_"`
 	Price   float64   `json:"price"`
 	Volume  float64   `json:"vol"`
