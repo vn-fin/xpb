@@ -7,10 +7,10 @@ type OrderBookInfo struct {
 	Symbol    string    `json:"symbol"`
 	TimeF     float64   `json:"time"`
 	TimeT     time.Time `json:"_"`
-	BidPrices []float64 `json:"bid_prices"`
-	AskPrices []float64 `json:"ask_prices"`
-	BidSizes  []float64 `json:"bid_sizes"`
-	AskSizes  []float64 `json:"ask_sizes"`
+	BidPrices []float64 `json:"bp"`
+	AskPrices []float64 `json:"ap"`
+	BidSizes  []float64 `json:"bq"`
+	AskSizes  []float64 `json:"aq"`
 }
 
 func (c *OrderBookInfo) Build() {
