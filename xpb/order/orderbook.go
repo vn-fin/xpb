@@ -5,7 +5,7 @@ import "time"
 // OrderBookInfo represents an order book update message.
 type OrderBookInfo struct {
 	Symbol    string    `json:"symbol"`
-	TimeInt   int64     `json:"time"`
+	TimeF     int64     `json:"time"`
 	TimeT     time.Time `json:"_"`
 	BidPrices []float64 `json:"bid_prices"`
 	AskPrices []float64 `json:"ask_prices"`
