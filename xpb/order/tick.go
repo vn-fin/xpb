@@ -9,7 +9,7 @@ type TickInfo struct {
 	TimeT  time.Time `json:"_"`
 	Price  float64   `json:"price"`
 	Volume float64   `json:"vol"`
-	Side   float64   `json:"side"`
+	Side   string    `json:"side"`
 }
 
 func (c *TickInfo) Build() {
