@@ -4,7 +4,11 @@ import "time"
 
 type OrderInfo struct {
 	OrderID      string    `json:"order_id"`
+	UserID       string    `json:"user_id"`
+	AccountID    string    `json:"account_id"`
+	SubAccountId string    `json:"sub_account_id"`
 	Symbol       string    `json:"symbol"`
+	SymbolType   string    `json:"symbol_type"`
 	Side         SideT     `json:"side"`
 	OrderType    TypeT     `json:"order_type"`
 	OrderPrice   float64   `json:"order_price"`
