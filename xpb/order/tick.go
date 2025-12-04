@@ -4,15 +4,16 @@ import "time"
 
 // TickInfo represents a trade tick message.
 type TickInfo struct {
-	Symbol  string    `json:"symbol"`
-	TimeInt float64     `json:"time"`
-	TimeT   time.Time `json:"_"`
-	Price   float64   `json:"price"`
-	Volume  float64   `json:"vol"`
-	Size    float64   `json:"size"`
+	Symbol string    `json:"symbol"`
+	TimeF  float64   `json:"time"`
+	TimeT  time.Time `json:"_"`
+	Price  float64   `json:"price"`
+	Volume float64   `json:"vol"`
+	Size   float64   `json:"size"`
 }
 
 func (c *TickInfo) Build() {
-	// Parse time from int64 to time.Time
-	c.TimeT = time.Unix(int64(c.TimeInt), 0)
+	seconds := int64(c.TimeF)
+	nanos := int64((c.TimeF - float64(seconds)) * 1e9)
+	c.TimeT = time.Unix(seconds, nanos)
 }
