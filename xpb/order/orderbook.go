@@ -5,7 +5,7 @@ import "time"
 // OrderBookInfo represents an order book update message.
 type OrderBookInfo struct {
 	Symbol    string    `json:"symbol"`
-	TimeF     int64     `json:"time"`
+	TimeF     float64   `json:"time"`
 	TimeT     time.Time `json:"_"`
 	BidPrices []float64 `json:"bid_prices"`
 	AskPrices []float64 `json:"ask_prices"`
@@ -15,5 +15,7 @@ type OrderBookInfo struct {
 
 func (c *OrderBookInfo) Build() {
 	// Parse time from int64 to time.Time
-	c.TimeT = time.Unix(c.TimeInt, 0)
+	seconds := int64(c.TimeF)
+	nanos := int64((c.TimeF - float64(seconds)) * 1e9)
+	c.TimeT = time.Unix(seconds, nanos)
 }
