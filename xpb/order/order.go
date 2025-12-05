@@ -3,10 +3,11 @@ package order
 import "time"
 
 type OrderInfo struct {
-	OrderID      string    `json:"order_id"`
-	UserID       string    `json:"user_id"`
-	AccountID    string    `json:"account_id"`
-	SubAccountId string    `json:"sub_account_id"`
+	OrderID string `json:"order_id"`
+	UserID  string `json:"user_id"`
+	//AccountID    string    `json:"account_id"`
+	//SubAccountId string    `json:"sub_account_id"`
+	CredentialID string    `json:"credential_id"`
 	Symbol       string    `json:"symbol"`
 	SymbolType   string    `json:"symbol_type"`
 	Side         SideT     `json:"side"`
