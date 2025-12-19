@@ -25,7 +25,7 @@ const (
 const (
 	StatusCreated         StatusT = "created"
 	StatusPending         StatusT = "pending"
-	StatusPartiallyFilled StatusT = "partially"
+	StatusPartiallyFilled StatusT = "p_filled"
 	StatusFullFilled      StatusT = "filled"
 
 	// terminal states
