@@ -33,3 +33,11 @@ const (
 	StatusRejected StatusT = "rejected"
 	StatusExpired  StatusT = "expired"
 )
+
+// Symbol types
+type SymbolTypeT string
+
+const (
+	SymbolTypeVnStock  SymbolTypeT = "VnStock"
+	SymbolTypeVnFuture SymbolTypeT = "VnFuture"
+)
