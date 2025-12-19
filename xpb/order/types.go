@@ -8,7 +8,7 @@ type SideT string
 type TypeT string
 
 // StatusT presents the status of an order
-type StatusT int
+type StatusT string
 
 const (
 	SideBuy  SideT = "B"
@@ -23,11 +23,13 @@ const (
 )
 
 const (
-	StatusCreated         StatusT = 1 // vừa đặt lệnh
-	StatusPending         StatusT = 2 // đang chờ khớp
-	StatusFilled          StatusT = 3 // khớp hoàn toàn
-	StatusCanceled        StatusT = 4 // đã hủy
-	StatusRejected        StatusT = 5 // bị reject (random rate 1%), ngoài giờ giao dịch
-	StatusExpired         StatusT = 6 // sau 3g15, nếu chưa khớp -> hết hạn (cron)
-	StatusPartiallyFilled StatusT = 7 // khớp 1 phần: mua 10k, khớp 500
+	StatusCreated         StatusT = "created"
+	StatusPending         StatusT = "pending"
+	StatusPartiallyFilled StatusT = "partially"
+	StatusFullFilled      StatusT = "filled"
+
+	// terminal states
+	StatusCanceled StatusT = "canceled"
+	StatusRejected StatusT = "rejected"
+	StatusExpired  StatusT = "expired"
 )
