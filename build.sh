@@ -3,7 +3,7 @@ set -e
 
 echo "Generating Go…"
 protoc --go_out=. --go-grpc_out=. \
-  messages.proto permission.proto
+  messages.proto permission.proto brokers.proto
 
 echo "Generating Python…"
 python3 -m grpc_tools.protoc \

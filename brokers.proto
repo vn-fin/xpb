@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+option go_package = "xpb/brokers";
+
+
+service BrokerGatewayService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  // Create order
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  // Get order
+  rpc GetOrderById(GetOrderByIdRequest) returns (GetOrderByIdResponse);
+  rpc GetPendingOrders(GetPendingOrdersRequest) returns (GetPendingOrdersResponse);
+
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
+  rpc GetPortfolio(GetPortfolioRequest) returns (GetPortfolioResponse);
+  rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
+}
+
+
+message OrderInfo {
+  // Primary keys
+  string id = 1;
+  string credential_id = 2;
+  string session_id = 3;
+  // Symbol
+  string symbol = 4;
+  string symbol_type = 5;
+  // Order details
+  string order_side = 6;
+  string order_type = 7;
+  double order_price = 8;
+  // Quantities
+  double quantity = 9;
+  double filled_qty = 10;
+  double remaining_qty = 11;
+  double matched_qty = 12;
+  double matched_price = 13;
+  double avg_price = 14;
+  // Status
+  string status = 15;
+  string message = 16;
+  // Broker
+  string broker = 17;
+  string original_id = 18;
+  double cash = 19;
+  double fee = 20;
+  // Timestamp
+  int64 created_at = 21;
+  int64 updated_at = 22;
+  // Info json (request/response)
+  string info = 23;
+}
+
+/* =========================
+   Login
+========================= */
+
+message LoginRequest {
+  string credential_id = 1;
+}
+
+message LoginResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+/* =========================
+   Order
+========================= */
+
+
+message CreateOrderRequest {
+  string credential_id = 1;
+  string symbol = 2;
+  string side = 3;
+  string type = 4;
+  int64 quantity = 5;
+  double price = 6;
+  string session_id = 7;
+  string user_id = 8;
+}
+
+message CreateOrderResponse {
+  bool success = 1;
+  string message = 2;
+  string order_id = 3;
+  OrderInfo order = 4;
+}
+
+/* =========================
+   Get Order
+========================= */
+
+message GetOrderByIdRequest {
+  string credential_id = 1;
+  string order_id = 2;
+}
+
+message GetOrderByIdResponse {
+  bool success = 1;
+  string message = 2;
+  OrderInfo order = 3;
+}
+
+/* =========================
+   Cancel Order
+========================= */
+
+message CancelOrderRequest {
+  string credential_id = 1;
+  string order_id = 2;
+}
+
+message CancelOrderResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+/* =========================
+   Portfolio
+========================= */
+
+message PortfolioItem {
+  string symbol = 1;
+  int64 quantity = 2;
+  double avg_price = 3;
+  double market_price = 4;
+}
+
+message GetPortfolioRequest {
+  string credential_id = 1;
+}
+
+message GetPortfolioResponse {
+  bool success = 1;
+  string message = 2;
+  repeated PortfolioItem items = 3;
+}
+
+/* =========================
+   Account Balance
+========================= */
+
+message GetAccountBalanceRequest {
+  string credential_id = 1;
+}
+
+message GetAccountBalanceResponse {
+  bool success = 1;
+  string message = 2;
+  double cash = 3;
+  double equity = 4;
+}
+
+/* =========================
+   Pending Orders
+========================= */
+
+message GetPendingOrdersRequest {
+  string credential_id = 1;
+}
+
+message GetPendingOrdersResponse {
+  bool success = 1;
+  string message = 2;
+  repeated OrderInfo orders = 3;
+}
