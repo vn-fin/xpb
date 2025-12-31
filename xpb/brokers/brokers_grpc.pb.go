@@ -19,10 +19,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BrokerGatewayServiceClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	// Create order
 	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error)
-	// Get order
-	GetOrderById(ctx context.Context, in *GetOrderByIdRequest, opts ...grpc.CallOption) (*GetOrderByIdResponse, error)
+	GetOrderById(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*GetOrderResponse, error)
 	GetPendingOrders(ctx context.Context, in *GetPendingOrdersRequest, opts ...grpc.CallOption) (*GetPendingOrdersResponse, error)
 	CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error)
 	GetPortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
@@ -55,8 +53,8 @@ func (c *brokerGatewayServiceClient) CreateOrder(ctx context.Context, in *Create
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) GetOrderById(ctx context.Context, in *GetOrderByIdRequest, opts ...grpc.CallOption) (*GetOrderByIdResponse, error) {
-	out := new(GetOrderByIdResponse)
+func (c *brokerGatewayServiceClient) GetOrderById(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*GetOrderResponse, error) {
+	out := new(GetOrderResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetOrderById", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -105,10 +103,8 @@ func (c *brokerGatewayServiceClient) GetAccountBalance(ctx context.Context, in *
 // for forward compatibility
 type BrokerGatewayServiceServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	// Create order
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error)
-	// Get order
-	GetOrderById(context.Context, *GetOrderByIdRequest) (*GetOrderByIdResponse, error)
+	GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error)
 	GetPendingOrders(context.Context, *GetPendingOrdersRequest) (*GetPendingOrdersResponse, error)
 	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error)
 	GetPortfolio(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
@@ -126,7 +122,7 @@ func (UnimplementedBrokerGatewayServiceServer) Login(context.Context, *LoginRequ
 func (UnimplementedBrokerGatewayServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) GetOrderById(context.Context, *GetOrderByIdRequest) (*GetOrderByIdResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderById not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) GetPendingOrders(context.Context, *GetPendingOrdersRequest) (*GetPendingOrdersResponse, error) {
@@ -191,7 +187,7 @@ func _BrokerGatewayService_CreateOrder_Handler(srv interface{}, ctx context.Cont
 }
 
 func _BrokerGatewayService_GetOrderById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderByIdRequest)
+	in := new(GetOrderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -203,7 +199,7 @@ func _BrokerGatewayService_GetOrderById_Handler(srv interface{}, ctx context.Con
 		FullMethod: "/BrokerGatewayService/GetOrderById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).GetOrderById(ctx, req.(*GetOrderByIdRequest))
+		return srv.(BrokerGatewayServiceServer).GetOrderById(ctx, req.(*GetOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

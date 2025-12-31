@@ -5,56 +5,33 @@ option go_package = "xpb/brokers";
 
 service BrokerGatewayService {
   rpc Login(LoginRequest) returns (LoginResponse);
-  // Create order
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
-  // Get order
-  rpc GetOrderById(GetOrderByIdRequest) returns (GetOrderByIdResponse);
+  rpc GetOrderById(GetOrderRequest) returns (GetOrderResponse);
   rpc GetPendingOrders(GetPendingOrdersRequest) returns (GetPendingOrdersResponse);
-
   rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
   rpc GetPortfolio(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
 }
 
-
+/* OrderInfo - matches internal/models order.OrderInfo */
 message OrderInfo {
-  // Primary keys
-  string id = 1;
-  string credential_id = 2;
-  string session_id = 3;
-  // Symbol
+  string order_id = 1;
+  string user_id = 2;
+  string credential_id = 3;
   string symbol = 4;
   string symbol_type = 5;
-  // Order details
-  string order_side = 6;
+  string side = 6;
   string order_type = 7;
   double order_price = 8;
-  // Quantities
   double quantity = 9;
   double filled_qty = 10;
   double remaining_qty = 11;
-  double matched_qty = 12;
-  double matched_price = 13;
-  double avg_price = 14;
-  // Status
-  string status = 15;
-  string message = 16;
-  // Broker
-  string broker = 17;
-  string original_id = 18;
-  double cash = 19;
-  double fee = 20;
-  // Timestamp
-  int64 created_at = 21;
-  int64 updated_at = 22;
-  // Info json (request/response)
-  string info = 23;
+  string status = 12;
+  int64 created_at = 13;
+  int64 updated_at = 14;
 }
 
-/* =========================
-   Login
-========================= */
-
+/* Login */
 message LoginRequest {
   string credential_id = 1;
 }
@@ -64,20 +41,16 @@ message LoginResponse {
   string message = 2;
 }
 
-/* =========================
-   Order
-========================= */
-
-
+/* Create Order - matches models.CreateOrderRequest */
 message CreateOrderRequest {
-  string credential_id = 1;
-  string symbol = 2;
-  string side = 3;
-  string type = 4;
-  int64 quantity = 5;
-  double price = 6;
-  string session_id = 7;
-  string user_id = 8;
+  string access_token = 1;
+  string group_id = 2;
+  string session_id = 3;
+  string symbol = 4;
+  string order_side = 5;
+  string order_type = 6;
+  double price = 7;
+  int64 quantity = 8;
 }
 
 message CreateOrderResponse {
@@ -87,28 +60,24 @@ message CreateOrderResponse {
   OrderInfo order = 4;
 }
 
-/* =========================
-   Get Order
-========================= */
-
-message GetOrderByIdRequest {
-  string credential_id = 1;
-  string order_id = 2;
+/* Get Order - matches models.GetOrderRequest */
+message GetOrderRequest {
+  string access_token = 1;
+  string group_id = 2;
+  string order_id = 3;
 }
 
-message GetOrderByIdResponse {
+message GetOrderResponse {
   bool success = 1;
   string message = 2;
   OrderInfo order = 3;
 }
 
-/* =========================
-   Cancel Order
-========================= */
-
+/* Cancel Order - matches models.CancelOrderRequest */
 message CancelOrderRequest {
-  string credential_id = 1;
-  string order_id = 2;
+  string access_token = 1;
+  string group_id = 2;
+  string order_id = 3;
 }
 
 message CancelOrderResponse {
@@ -116,10 +85,7 @@ message CancelOrderResponse {
   string message = 2;
 }
 
-/* =========================
-   Portfolio
-========================= */
-
+/* Portfolio */
 message PortfolioItem {
   string symbol = 1;
   int64 quantity = 2;
@@ -128,7 +94,7 @@ message PortfolioItem {
 }
 
 message GetPortfolioRequest {
-  string credential_id = 1;
+  string group_id = 1;
 }
 
 message GetPortfolioResponse {
@@ -137,12 +103,10 @@ message GetPortfolioResponse {
   repeated PortfolioItem items = 3;
 }
 
-/* =========================
-   Account Balance
-========================= */
-
+/* Account Balance - matches models.GetAccountBalanceRequest */
 message GetAccountBalanceRequest {
-  string credential_id = 1;
+  string access_token = 1;
+  string group_id = 2;
 }
 
 message GetAccountBalanceResponse {
@@ -152,16 +116,11 @@ message GetAccountBalanceResponse {
   double equity = 4;
 }
 
-/* =========================
-   Pending Orders
-========================= */
-
+/* Pending Orders - matches models.GetPendingOrdersRequest */
 message GetPendingOrdersRequest {
-  string credential_id = 1;
+  string group_id = 1;
 }
 
 message GetPendingOrdersResponse {
-  bool success = 1;
-  string message = 2;
-  repeated OrderInfo orders = 3;
+  repeated GetOrderResponse pending_orders = 1;
 }
