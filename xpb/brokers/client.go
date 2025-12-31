@@ -82,7 +82,7 @@ func (c *Client) CreateOrder(ctx context.Context, req *CreateOrderRequest) (*Cre
 }
 
 // GetOrderById retrieves an order by its ID
-func (c *Client) GetOrderById(ctx context.Context, req *GetOrderByIdRequest) (*GetOrderByIdResponse, error) {
+func (c *Client) GetOrderById(ctx context.Context, req *GetOrderRequest) (*GetOrderResponse, error) {
 	return c.client.GetOrderById(c.contextWithAuth(ctx), req)
 }
 
