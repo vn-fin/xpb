@@ -1,5 +1,5 @@
 import os
-from typing import Optional
+from typing import Optional, Dict
 import grpc
 from xpb import permission_pb2, permission_pb2_grpc
 
@@ -45,6 +45,15 @@ class PermissionClient:
         if self._token:
             return [('authorization', self._token)]
         return []
+
+    def get_token_info(self, access_token: str) -> Dict:
+        self._ensure_stub()
+        request = permission_pb2.CheckAuthRequest(token=access_token)
+        try:
+            response = self.stub.CheckAuthToken(request, metadata=self._get_metadata())
+            return response
+        except Exception as e:
+            raise ValueError(f"Error: {e}")
 
     # ----------------- API Methods ----------------- #
     def get_user_id_from_access_token(self, access_token: str) -> str:
