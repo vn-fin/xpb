@@ -129,7 +129,6 @@ message GetPendingOrdersResponse {
 }
 
 message GetOrdersBySessionRequest{
-  string access_token = 1;
   string group_id = 2;
   string session_id = 3;
 }
