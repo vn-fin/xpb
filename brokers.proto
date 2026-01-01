@@ -8,12 +8,14 @@ service BrokerGatewayService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
   rpc GetOrderById(GetOrderRequest) returns (GetOrderResponse);
   rpc GetPendingOrders(GetPendingOrdersRequest) returns (GetPendingOrdersResponse);
+  rpc GetListOrders(GetListOrdersRequest) returns (GetListOrdersResponse);
+  rpc GetOrdersBySession(GetOrdersBySessionRequest) returns (GetOrdersBySessionResponse);
   rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
   rpc GetPortfolio(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
 }
 
-/* OrderInfo - matches internal/models order.OrderInfo */
+/* OrderInfo - matches xno_execution.gateway.credential_orders table */
 message OrderInfo {
   string order_id = 1;
   string user_id = 2;
@@ -123,5 +125,26 @@ message GetPendingOrdersRequest {
 }
 
 message GetPendingOrdersResponse {
+  repeated GetOrderResponse pending_orders = 1;
+}
+
+message GetOrdersBySessionRequest{
+  string access_token = 1;
+  string group_id = 2;
+  string session_id = 3;
+}
+
+message GetOrdersBySessionResponse{
+  bool success = 1;
+  string message = 2;
+  OrderInfo order = 3;
+}
+
+message GetListOrdersRequest {
+  string access_token = 1;
+  string group_id = 2;
+}
+
+message GetListOrdersResponse {
   repeated GetOrderResponse pending_orders = 1;
 }
