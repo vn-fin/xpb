@@ -137,7 +137,7 @@ message GetOrdersBySessionRequest{
 message GetOrdersBySessionResponse{
   bool success = 1;
   string message = 2;
-  OrderInfo order = 3;
+  repeated OrderInfo orders = 3;
 }
 
 message GetListOrdersRequest {
