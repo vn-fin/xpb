@@ -73,6 +73,11 @@ func (c *Client) GetAccountBalance(ctx context.Context, req *GetAccountBalanceRe
 	return c.client.GetAccountBalance(ctx, req)
 }
 
+// GetOrderdBySession
+func (c *Client) GetOrdersBySession(ctx context.Context, req *GetOrdersBySessionRequest) (*GetOrdersBySessionResponse, error) {
+	return c.client.GetOrdersBySession(ctx, req)
+}
+
 // UpdateOrder retrieves the account balance
 func (c *Client) UpdateOrder(ctx context.Context, req *UpdateOrderRequest) (*UpdateOrderResponse, error) {
 	return c.client.UpdateOrder(ctx, req)
