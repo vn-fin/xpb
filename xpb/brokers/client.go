@@ -72,3 +72,8 @@ func (c *Client) GetPortfolio(ctx context.Context, req *GetPortfolioRequest) (*G
 func (c *Client) GetAccountBalance(ctx context.Context, req *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
 	return c.client.GetAccountBalance(ctx, req)
 }
+
+// UpdateOrder retrieves the account balance
+func (c *Client) UpdateOrder(ctx context.Context, req *UpdateOrderRequest) (*UpdateOrderResponse, error) {
+	return c.client.UpdateOrder(ctx, req)
+}

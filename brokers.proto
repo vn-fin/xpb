@@ -11,6 +11,7 @@ service BrokerGatewayService {
   rpc GetListOrders(GetListOrdersRequest) returns (GetListOrdersResponse);
   rpc GetOrdersBySession(GetOrdersBySessionRequest) returns (GetOrdersBySessionResponse);
   rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
+  rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
   rpc GetPortfolio(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
 }
@@ -146,4 +147,21 @@ message GetListOrdersRequest {
 
 message GetListOrdersResponse {
   repeated GetOrderResponse pending_orders = 1;
+}
+
+
+
+/* Update Order - cancel old order, create new order with updated price */
+message UpdateOrderRequest {
+  string access_token = 1;
+  string group_id = 2;
+  string order_id = 3;
+  double price = 4;
+}
+
+message UpdateOrderResponse {
+  bool success = 1;
+  string message = 2;
+  string order_id = 3;
+  OrderInfo order = 4;
 }
