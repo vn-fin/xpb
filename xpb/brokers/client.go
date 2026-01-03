@@ -72,3 +72,9 @@ func (c *Client) GetPortfolio(ctx context.Context, req *GetPortfolioRequest) (*G
 func (c *Client) GetAccountBalance(ctx context.Context, req *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
 	return c.client.GetAccountBalance(ctx, req)
 }
+	
+// GetOrderdBySession
+func (c *Client) GetOrdersBySession(ctx context.Context, req *GetOrdersBySessionRequest) (*GetOrdersBySessionResponse, error) {
+	return c.client.GetOrdersBySession(ctx, req)
+}
+
