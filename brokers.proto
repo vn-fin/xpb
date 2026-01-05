@@ -43,6 +43,7 @@ message LoginRequest {
 message LoginResponse {
   bool success = 1;
   string message = 2;
+  string access_token =3;
 }
 
 /* Create Order - matches models.CreateOrderRequest */
