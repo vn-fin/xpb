@@ -169,9 +169,10 @@ message UpdateOrderResponse {
 
 message CreateFutureOrderRequest {
   string access_token = 1;
-  string symbol = 4;
-  string order_side = 5;
-  string order_type = 6;
-  double price = 7;
-  int64 quantity = 8;
+  string credential_id = 2;
+  string symbol = 3;
+  string order_side = 4;
+  string order_type = 5;
+  double price = 6;
+  int64 quantity = 7;
 }
