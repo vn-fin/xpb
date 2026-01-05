@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 type BrokerGatewayServiceClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error)
+	CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error)
 	GetOrderById(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*GetOrderResponse, error)
 	GetPendingOrders(ctx context.Context, in *GetPendingOrdersRequest, opts ...grpc.CallOption) (*GetPendingOrdersResponse, error)
 	GetListOrders(ctx context.Context, in *GetListOrdersRequest, opts ...grpc.CallOption) (*GetListOrdersResponse, error)
@@ -51,6 +52,15 @@ func (c *brokerGatewayServiceClient) Login(ctx context.Context, in *LoginRequest
 func (c *brokerGatewayServiceClient) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error) {
 	out := new(CreateOrderResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CreateOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error) {
+	out := new(CreateOrderResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CreateFutureOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +145,7 @@ func (c *brokerGatewayServiceClient) GetAccountBalance(ctx context.Context, in *
 type BrokerGatewayServiceServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error)
+	CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*CreateOrderResponse, error)
 	GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error)
 	GetPendingOrders(context.Context, *GetPendingOrdersRequest) (*GetPendingOrdersResponse, error)
 	GetListOrders(context.Context, *GetListOrdersRequest) (*GetListOrdersResponse, error)
@@ -155,6 +166,9 @@ func (UnimplementedBrokerGatewayServiceServer) Login(context.Context, *LoginRequ
 }
 func (UnimplementedBrokerGatewayServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*CreateOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateFutureOrder not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderById not implemented")
@@ -225,6 +239,24 @@ func _BrokerGatewayService_CreateOrder_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BrokerGatewayServiceServer).CreateOrder(ctx, req.(*CreateOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_CreateFutureOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateFutureOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).CreateFutureOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/CreateFutureOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).CreateFutureOrder(ctx, req.(*CreateFutureOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -387,6 +419,10 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateOrder",
 			Handler:    _BrokerGatewayService_CreateOrder_Handler,
+		},
+		{
+			MethodName: "CreateFutureOrder",
+			Handler:    _BrokerGatewayService_CreateFutureOrder_Handler,
 		},
 		{
 			MethodName: "GetOrderById",
