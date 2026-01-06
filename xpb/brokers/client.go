@@ -2,6 +2,7 @@ package brokers
 
 import (
 	"context"
+	"os"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -14,7 +15,8 @@ type Client struct {
 }
 
 // NewClient creates a new broker client with the given server address
-func NewClient(serverAddr string) (*Client, error) {
+func NewClient() (*Client, error) {
+	serverAddr := os.Getenv("BROKERS_GRPC_HOST")
 	conn, err := grpc.NewClient(serverAddr,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
