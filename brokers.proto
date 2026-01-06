@@ -144,7 +144,7 @@ message GetOrdersBySessionResponse{
 
 message GetListOrdersRequest {
   string access_token = 1;
-  string group_id = 2;
+  string credential_id = 2;
 }
 
 message GetListOrdersResponse {
