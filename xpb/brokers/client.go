@@ -88,3 +88,7 @@ func (c *Client) UpdateOrder(ctx context.Context, req *UpdateOrderRequest) (*Upd
 func (c *Client) CreateFutureOrder(ctx context.Context, req *CreateFutureOrderRequest) (*CreateOrderResponse, error) {
 	return c.client.CreateFutureOrder(ctx, req)
 }
+
+func (c *Client) GetListOrders(ctx context.Context, req *GetListOrdersRequest) (*GetListOrdersResponse, error) {
+	return c.client.GetListOrders(ctx, req)
+}
