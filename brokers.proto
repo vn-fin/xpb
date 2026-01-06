@@ -81,7 +81,6 @@ message GetOrderResponse {
 /* Cancel Order - matches models.CancelOrderRequest */
 message CancelOrderRequest {
   string access_token = 1;
-  string group_id = 2;
   string order_id = 3;
 }
 
@@ -150,8 +149,6 @@ message GetListOrdersRequest {
 message GetListOrdersResponse {
   repeated OrderInfo orders = 1;
 }
-
-
 
 /* Update Order - cancel old order, create new order with updated price */
 message UpdateOrderRequest {
