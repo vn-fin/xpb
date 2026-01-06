@@ -65,6 +65,11 @@ func (c *Client) CancelOrder(ctx context.Context, req *CancelOrderRequest) (*Can
 	return c.client.CancelOrder(ctx, req)
 }
 
+// CancelFutureOrder cancels an order
+func (c *Client) CancelFutureOrder(ctx context.Context, req *CancelFutureOrderRequest) (*CancelOrderResponse, error) {
+	return c.client.CancelFutureOrder(ctx, req)
+}
+
 // GetPortfolio retrieves the portfolio
 func (c *Client) GetPortfolio(ctx context.Context, req *GetPortfolioRequest) (*GetPortfolioResponse, error) {
 	return c.client.GetPortfolio(ctx, req)
