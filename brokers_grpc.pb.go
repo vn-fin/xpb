@@ -5,6 +5,7 @@ package brokers
 import (
 	context "context"
 
+	brokers2 "github.com/vn-fin/xpb/xpb/brokers"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,17 +20,17 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BrokerGatewayServiceClient interface {
-	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error)
-	CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error)
-	GetOrderById(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*GetOrderResponse, error)
-	GetPendingOrders(ctx context.Context, in *GetPendingOrdersRequest, opts ...grpc.CallOption) (*GetPendingOrdersResponse, error)
-	GetListOrders(ctx context.Context, in *GetListOrdersRequest, opts ...grpc.CallOption) (*GetListOrdersResponse, error)
-	GetOrdersBySession(ctx context.Context, in *GetOrdersBySessionRequest, opts ...grpc.CallOption) (*GetOrdersBySessionResponse, error)
-	CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error)
-	UpdateOrder(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*UpdateOrderResponse, error)
-	GetPortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
-	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
+	Login(ctx context.Context, in *brokers2.LoginRequest, opts ...grpc.CallOption) (*brokers2.LoginResponse, error)
+	CreateOrder(ctx context.Context, in *brokers2.CreateOrderRequest, opts ...grpc.CallOption) (*brokers2.CreateOrderResponse, error)
+	CreateFutureOrder(ctx context.Context, in *brokers2.CreateFutureOrderRequest, opts ...grpc.CallOption) (*brokers2.CreateOrderResponse, error)
+	GetOrderById(ctx context.Context, in *brokers2.GetOrderRequest, opts ...grpc.CallOption) (*brokers2.GetOrderResponse, error)
+	GetPendingOrders(ctx context.Context, in *brokers2.GetPendingOrdersRequest, opts ...grpc.CallOption) (*brokers2.GetPendingOrdersResponse, error)
+	GetListOrders(ctx context.Context, in *brokers2.GetListOrdersRequest, opts ...grpc.CallOption) (*brokers2.GetListOrdersResponse, error)
+	GetOrdersBySession(ctx context.Context, in *brokers2.GetOrdersBySessionRequest, opts ...grpc.CallOption) (*brokers2.GetOrdersBySessionResponse, error)
+	CancelOrder(ctx context.Context, in *brokers2.CancelOrderRequest, opts ...grpc.CallOption) (*brokers2.CancelOrderResponse, error)
+	UpdateOrder(ctx context.Context, in *brokers2.UpdateOrderRequest, opts ...grpc.CallOption) (*brokers2.UpdateOrderResponse, error)
+	GetPortfolio(ctx context.Context, in *brokers2.GetPortfolioRequest, opts ...grpc.CallOption) (*brokers2.GetPortfolioResponse, error)
+	GetAccountBalance(ctx context.Context, in *brokers2.GetAccountBalanceRequest, opts ...grpc.CallOption) (*brokers2.GetAccountBalanceResponse, error)
 }
 
 type brokerGatewayServiceClient struct {
@@ -40,8 +41,8 @@ func NewBrokerGatewayServiceClient(cc grpc.ClientConnInterface) BrokerGatewaySer
 	return &brokerGatewayServiceClient{cc}
 }
 
-func (c *brokerGatewayServiceClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
-	out := new(LoginResponse)
+func (c *brokerGatewayServiceClient) Login(ctx context.Context, in *brokers2.LoginRequest, opts ...grpc.CallOption) (*brokers2.LoginResponse, error) {
+	out := new(brokers2.LoginResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -49,8 +50,8 @@ func (c *brokerGatewayServiceClient) Login(ctx context.Context, in *LoginRequest
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error) {
-	out := new(CreateOrderResponse)
+func (c *brokerGatewayServiceClient) CreateOrder(ctx context.Context, in *brokers2.CreateOrderRequest, opts ...grpc.CallOption) (*brokers2.CreateOrderResponse, error) {
+	out := new(brokers2.CreateOrderResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CreateOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -58,8 +59,8 @@ func (c *brokerGatewayServiceClient) CreateOrder(ctx context.Context, in *Create
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error) {
-	out := new(CreateOrderResponse)
+func (c *brokerGatewayServiceClient) CreateFutureOrder(ctx context.Context, in *brokers2.CreateFutureOrderRequest, opts ...grpc.CallOption) (*brokers2.CreateOrderResponse, error) {
+	out := new(brokers2.CreateOrderResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CreateFutureOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -67,8 +68,8 @@ func (c *brokerGatewayServiceClient) CreateFutureOrder(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) GetOrderById(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*GetOrderResponse, error) {
-	out := new(GetOrderResponse)
+func (c *brokerGatewayServiceClient) GetOrderById(ctx context.Context, in *brokers2.GetOrderRequest, opts ...grpc.CallOption) (*brokers2.GetOrderResponse, error) {
+	out := new(brokers2.GetOrderResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetOrderById", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -76,8 +77,8 @@ func (c *brokerGatewayServiceClient) GetOrderById(ctx context.Context, in *GetOr
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) GetPendingOrders(ctx context.Context, in *GetPendingOrdersRequest, opts ...grpc.CallOption) (*GetPendingOrdersResponse, error) {
-	out := new(GetPendingOrdersResponse)
+func (c *brokerGatewayServiceClient) GetPendingOrders(ctx context.Context, in *brokers2.GetPendingOrdersRequest, opts ...grpc.CallOption) (*brokers2.GetPendingOrdersResponse, error) {
+	out := new(brokers2.GetPendingOrdersResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetPendingOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -85,8 +86,8 @@ func (c *brokerGatewayServiceClient) GetPendingOrders(ctx context.Context, in *G
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) GetListOrders(ctx context.Context, in *GetListOrdersRequest, opts ...grpc.CallOption) (*GetListOrdersResponse, error) {
-	out := new(GetListOrdersResponse)
+func (c *brokerGatewayServiceClient) GetListOrders(ctx context.Context, in *brokers2.GetListOrdersRequest, opts ...grpc.CallOption) (*brokers2.GetListOrdersResponse, error) {
+	out := new(brokers2.GetListOrdersResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetListOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -94,8 +95,8 @@ func (c *brokerGatewayServiceClient) GetListOrders(ctx context.Context, in *GetL
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) GetOrdersBySession(ctx context.Context, in *GetOrdersBySessionRequest, opts ...grpc.CallOption) (*GetOrdersBySessionResponse, error) {
-	out := new(GetOrdersBySessionResponse)
+func (c *brokerGatewayServiceClient) GetOrdersBySession(ctx context.Context, in *brokers2.GetOrdersBySessionRequest, opts ...grpc.CallOption) (*brokers2.GetOrdersBySessionResponse, error) {
+	out := new(brokers2.GetOrdersBySessionResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetOrdersBySession", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -103,8 +104,8 @@ func (c *brokerGatewayServiceClient) GetOrdersBySession(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error) {
-	out := new(CancelOrderResponse)
+func (c *brokerGatewayServiceClient) CancelOrder(ctx context.Context, in *brokers2.CancelOrderRequest, opts ...grpc.CallOption) (*brokers2.CancelOrderResponse, error) {
+	out := new(brokers2.CancelOrderResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CancelOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -112,8 +113,8 @@ func (c *brokerGatewayServiceClient) CancelOrder(ctx context.Context, in *Cancel
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) UpdateOrder(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*UpdateOrderResponse, error) {
-	out := new(UpdateOrderResponse)
+func (c *brokerGatewayServiceClient) UpdateOrder(ctx context.Context, in *brokers2.UpdateOrderRequest, opts ...grpc.CallOption) (*brokers2.UpdateOrderResponse, error) {
+	out := new(brokers2.UpdateOrderResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/UpdateOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -121,8 +122,8 @@ func (c *brokerGatewayServiceClient) UpdateOrder(ctx context.Context, in *Update
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) GetPortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error) {
-	out := new(GetPortfolioResponse)
+func (c *brokerGatewayServiceClient) GetPortfolio(ctx context.Context, in *brokers2.GetPortfolioRequest, opts ...grpc.CallOption) (*brokers2.GetPortfolioResponse, error) {
+	out := new(brokers2.GetPortfolioResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetPortfolio", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -130,8 +131,8 @@ func (c *brokerGatewayServiceClient) GetPortfolio(ctx context.Context, in *GetPo
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error) {
-	out := new(GetAccountBalanceResponse)
+func (c *brokerGatewayServiceClient) GetAccountBalance(ctx context.Context, in *brokers2.GetAccountBalanceRequest, opts ...grpc.CallOption) (*brokers2.GetAccountBalanceResponse, error) {
+	out := new(brokers2.GetAccountBalanceResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetAccountBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -143,17 +144,17 @@ func (c *brokerGatewayServiceClient) GetAccountBalance(ctx context.Context, in *
 // All implementations must embed UnimplementedBrokerGatewayServiceServer
 // for forward compatibility
 type BrokerGatewayServiceServer interface {
-	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error)
-	CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*CreateOrderResponse, error)
-	GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error)
-	GetPendingOrders(context.Context, *GetPendingOrdersRequest) (*GetPendingOrdersResponse, error)
-	GetListOrders(context.Context, *GetListOrdersRequest) (*GetListOrdersResponse, error)
-	GetOrdersBySession(context.Context, *GetOrdersBySessionRequest) (*GetOrdersBySessionResponse, error)
-	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error)
-	UpdateOrder(context.Context, *UpdateOrderRequest) (*UpdateOrderResponse, error)
-	GetPortfolio(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
-	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
+	Login(context.Context, *brokers2.LoginRequest) (*brokers2.LoginResponse, error)
+	CreateOrder(context.Context, *brokers2.CreateOrderRequest) (*brokers2.CreateOrderResponse, error)
+	CreateFutureOrder(context.Context, *brokers2.CreateFutureOrderRequest) (*brokers2.CreateOrderResponse, error)
+	GetOrderById(context.Context, *brokers2.GetOrderRequest) (*brokers2.GetOrderResponse, error)
+	GetPendingOrders(context.Context, *brokers2.GetPendingOrdersRequest) (*brokers2.GetPendingOrdersResponse, error)
+	GetListOrders(context.Context, *brokers2.GetListOrdersRequest) (*brokers2.GetListOrdersResponse, error)
+	GetOrdersBySession(context.Context, *brokers2.GetOrdersBySessionRequest) (*brokers2.GetOrdersBySessionResponse, error)
+	CancelOrder(context.Context, *brokers2.CancelOrderRequest) (*brokers2.CancelOrderResponse, error)
+	UpdateOrder(context.Context, *brokers2.UpdateOrderRequest) (*brokers2.UpdateOrderResponse, error)
+	GetPortfolio(context.Context, *brokers2.GetPortfolioRequest) (*brokers2.GetPortfolioResponse, error)
+	GetAccountBalance(context.Context, *brokers2.GetAccountBalanceRequest) (*brokers2.GetAccountBalanceResponse, error)
 	mustEmbedUnimplementedBrokerGatewayServiceServer()
 }
 
@@ -161,37 +162,37 @@ type BrokerGatewayServiceServer interface {
 type UnimplementedBrokerGatewayServiceServer struct {
 }
 
-func (UnimplementedBrokerGatewayServiceServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) Login(context.Context, *brokers2.LoginRequest) (*brokers2.LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) CreateOrder(context.Context, *brokers2.CreateOrderRequest) (*brokers2.CreateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*CreateOrderResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) CreateFutureOrder(context.Context, *brokers2.CreateFutureOrderRequest) (*brokers2.CreateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFutureOrder not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) GetOrderById(context.Context, *brokers2.GetOrderRequest) (*brokers2.GetOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderById not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) GetPendingOrders(context.Context, *GetPendingOrdersRequest) (*GetPendingOrdersResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) GetPendingOrders(context.Context, *brokers2.GetPendingOrdersRequest) (*brokers2.GetPendingOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPendingOrders not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) GetListOrders(context.Context, *GetListOrdersRequest) (*GetListOrdersResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) GetListOrders(context.Context, *brokers2.GetListOrdersRequest) (*brokers2.GetListOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetListOrders not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) GetOrdersBySession(context.Context, *GetOrdersBySessionRequest) (*GetOrdersBySessionResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) GetOrdersBySession(context.Context, *brokers2.GetOrdersBySessionRequest) (*brokers2.GetOrdersBySessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrdersBySession not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) CancelOrder(context.Context, *brokers2.CancelOrderRequest) (*brokers2.CancelOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOrder not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) UpdateOrder(context.Context, *UpdateOrderRequest) (*UpdateOrderResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) UpdateOrder(context.Context, *brokers2.UpdateOrderRequest) (*brokers2.UpdateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrder not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) GetPortfolio(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) GetPortfolio(context.Context, *brokers2.GetPortfolioRequest) (*brokers2.GetPortfolioResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPortfolio not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) GetAccountBalance(context.Context, *brokers2.GetAccountBalanceRequest) (*brokers2.GetAccountBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalance not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) mustEmbedUnimplementedBrokerGatewayServiceServer() {}
@@ -208,7 +209,7 @@ func RegisterBrokerGatewayServiceServer(s grpc.ServiceRegistrar, srv BrokerGatew
 }
 
 func _BrokerGatewayService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginRequest)
+	in := new(brokers2.LoginRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -220,13 +221,13 @@ func _BrokerGatewayService_Login_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/BrokerGatewayService/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).Login(ctx, req.(*LoginRequest))
+		return srv.(BrokerGatewayServiceServer).Login(ctx, req.(*brokers2.LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_CreateOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateOrderRequest)
+	in := new(brokers2.CreateOrderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -238,13 +239,13 @@ func _BrokerGatewayService_CreateOrder_Handler(srv interface{}, ctx context.Cont
 		FullMethod: "/BrokerGatewayService/CreateOrder",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).CreateOrder(ctx, req.(*CreateOrderRequest))
+		return srv.(BrokerGatewayServiceServer).CreateOrder(ctx, req.(*brokers2.CreateOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_CreateFutureOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateFutureOrderRequest)
+	in := new(brokers2.CreateFutureOrderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -256,13 +257,13 @@ func _BrokerGatewayService_CreateFutureOrder_Handler(srv interface{}, ctx contex
 		FullMethod: "/BrokerGatewayService/CreateFutureOrder",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).CreateFutureOrder(ctx, req.(*CreateFutureOrderRequest))
+		return srv.(BrokerGatewayServiceServer).CreateFutureOrder(ctx, req.(*brokers2.CreateFutureOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_GetOrderById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderRequest)
+	in := new(brokers2.GetOrderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -274,13 +275,13 @@ func _BrokerGatewayService_GetOrderById_Handler(srv interface{}, ctx context.Con
 		FullMethod: "/BrokerGatewayService/GetOrderById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).GetOrderById(ctx, req.(*GetOrderRequest))
+		return srv.(BrokerGatewayServiceServer).GetOrderById(ctx, req.(*brokers2.GetOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_GetPendingOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPendingOrdersRequest)
+	in := new(brokers2.GetPendingOrdersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -292,13 +293,13 @@ func _BrokerGatewayService_GetPendingOrders_Handler(srv interface{}, ctx context
 		FullMethod: "/BrokerGatewayService/GetPendingOrders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).GetPendingOrders(ctx, req.(*GetPendingOrdersRequest))
+		return srv.(BrokerGatewayServiceServer).GetPendingOrders(ctx, req.(*brokers2.GetPendingOrdersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_GetListOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetListOrdersRequest)
+	in := new(brokers2.GetListOrdersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -310,13 +311,13 @@ func _BrokerGatewayService_GetListOrders_Handler(srv interface{}, ctx context.Co
 		FullMethod: "/BrokerGatewayService/GetListOrders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).GetListOrders(ctx, req.(*GetListOrdersRequest))
+		return srv.(BrokerGatewayServiceServer).GetListOrders(ctx, req.(*brokers2.GetListOrdersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_GetOrdersBySession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrdersBySessionRequest)
+	in := new(brokers2.GetOrdersBySessionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -328,13 +329,13 @@ func _BrokerGatewayService_GetOrdersBySession_Handler(srv interface{}, ctx conte
 		FullMethod: "/BrokerGatewayService/GetOrdersBySession",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).GetOrdersBySession(ctx, req.(*GetOrdersBySessionRequest))
+		return srv.(BrokerGatewayServiceServer).GetOrdersBySession(ctx, req.(*brokers2.GetOrdersBySessionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_CancelOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelOrderRequest)
+	in := new(brokers2.CancelOrderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -346,13 +347,13 @@ func _BrokerGatewayService_CancelOrder_Handler(srv interface{}, ctx context.Cont
 		FullMethod: "/BrokerGatewayService/CancelOrder",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).CancelOrder(ctx, req.(*CancelOrderRequest))
+		return srv.(BrokerGatewayServiceServer).CancelOrder(ctx, req.(*brokers2.CancelOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_UpdateOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOrderRequest)
+	in := new(brokers2.UpdateOrderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -364,13 +365,13 @@ func _BrokerGatewayService_UpdateOrder_Handler(srv interface{}, ctx context.Cont
 		FullMethod: "/BrokerGatewayService/UpdateOrder",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).UpdateOrder(ctx, req.(*UpdateOrderRequest))
+		return srv.(BrokerGatewayServiceServer).UpdateOrder(ctx, req.(*brokers2.UpdateOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_GetPortfolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPortfolioRequest)
+	in := new(brokers2.GetPortfolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -382,13 +383,13 @@ func _BrokerGatewayService_GetPortfolio_Handler(srv interface{}, ctx context.Con
 		FullMethod: "/BrokerGatewayService/GetPortfolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).GetPortfolio(ctx, req.(*GetPortfolioRequest))
+		return srv.(BrokerGatewayServiceServer).GetPortfolio(ctx, req.(*brokers2.GetPortfolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BrokerGatewayService_GetAccountBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountBalanceRequest)
+	in := new(brokers2.GetAccountBalanceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -400,7 +401,7 @@ func _BrokerGatewayService_GetAccountBalance_Handler(srv interface{}, ctx contex
 		FullMethod: "/BrokerGatewayService/GetAccountBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).GetAccountBalance(ctx, req.(*GetAccountBalanceRequest))
+		return srv.(BrokerGatewayServiceServer).GetAccountBalance(ctx, req.(*brokers2.GetAccountBalanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

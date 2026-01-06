@@ -128,7 +128,7 @@ message GetPendingOrdersRequest {
 }
 
 message GetPendingOrdersResponse {
-  repeated GetOrderResponse pending_orders = 1;
+  repeated OrderInfo pending_orders = 1;
 }
 
 message GetOrdersBySessionRequest{
@@ -148,7 +148,7 @@ message GetListOrdersRequest {
 }
 
 message GetListOrdersResponse {
-  repeated GetOrderResponse pending_orders = 1;
+  repeated OrderInfo orders = 1;
 }
 
 
