@@ -39,6 +39,7 @@ message OrderInfo {
 /* Login */
 message LoginRequest {
   string credential_id = 1;
+  string otp = 2;
 }
 
 message LoginResponse {
