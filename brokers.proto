@@ -64,7 +64,6 @@ message CreateOrderResponse {
   bool success = 1;
   string message = 2;
   string order_id = 3;
-  OrderInfo order = 4;
 }
 
 /* Get Order - matches models.GetOrderRequest */
