@@ -51,10 +51,11 @@ message LoginResponse {
 /* Create Order - matches models.CreateOrderRequest */
 message OrderInputInfo {
   string symbol = 1;
-  double price = 2;
-  int64 quantity = 3;
-  string order_type = 4;
-  string order_side = 5;
+  string symbol_type = 2;
+  double price = 3;
+  int64 quantity = 4;
+  string order_type = 5;
+  string order_side = 6;
 }
 
 message CreateOrderRequest {
