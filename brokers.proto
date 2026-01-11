@@ -62,7 +62,7 @@ message CreateOrderRequest {
   string access_token = 1;
   string group_id = 2;
   string basket_session_id = 3;
-  repeated OrderInputInfo order_info = 4;
+  OrderInputInfo order_info = 4;
 }
 
 message CreateOrderResponse {
