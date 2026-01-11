@@ -166,14 +166,14 @@ message GetListOrdersResponse {
 message UpdateOrderRequest {
   string access_token = 1;
   string group_id = 2;
-  string order_id = 3;
+  string order_session_id = 3;
   double price = 4;
 }
 
 message UpdateOrderResponse {
   bool success = 1;
   string message = 2;
-  string order_id = 3;
+  string order_session_id = 3;
   OrderInfo order = 4;
 }
 
@@ -186,5 +186,13 @@ message CreateFutureOrderRequest {
   double price = 6;
   int64 quantity = 7;
 }
+
+message CreateFutureOrderResponse {
+  bool success = 1;
+  string message = 2;
+  string order_id = 3;
+  OrderInfo order = 4;
+}
+
 
 
