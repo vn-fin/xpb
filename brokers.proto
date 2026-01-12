@@ -18,6 +18,17 @@ service BrokerGatewayService {
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
 }
 
+message GatewayOrderAgg {
+  string order_session_id = 1;
+  string symbol = 2;
+
+  double quantity = 3;
+  double filled_qty = 4;
+  double remaining_qty = 5;
+  double matched_qty = 6;
+  double cash = 7;
+  string status = 8; // "pending" | "p_filled" | "filled" | "rejected"
+}
 /* OrderInfo - matches xno_execution.gateway.credential_orders table */
 message OrderInfo {
   string order_id = 1;
@@ -157,7 +168,7 @@ message GetOrdersBySessionRequest{
 message GetOrdersBySessionResponse{
   bool success = 1;
   string message = 2;
-  repeated OrderInfo orders = 3;
+  repeated GatewayOrderAgg orders = 3;
 }
 
 message GetListOrdersRequest {
