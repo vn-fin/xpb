@@ -21,13 +21,15 @@ service BrokerGatewayService {
 message GatewayOrderAgg {
   string order_session_id = 1;
   string symbol = 2;
-  string price = 3;
-  double quantity = 4;
-  double filled_qty = 5;
-  double remaining_qty = 6;
-  double matched_qty = 7;
-  double cash = 8;
-  string status = 9; // "pending" | "p_filled" | "filled" | "rejected"
+  float price = 3;
+  string order_side =4;
+  string order_type = 5;
+  double quantity = 6;
+  double filled_qty = 7;
+  double remaining_qty = 8;
+  double matched_qty = 9;
+  double cash = 10;
+  string status = 11; // "pending" | "p_filled" | "filled" | "rejected"
 }
 /* OrderInfo - matches xno_execution.gateway.credential_orders table */
 message OrderInfo {
