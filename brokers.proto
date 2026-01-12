@@ -6,7 +6,7 @@ option go_package = "xpb/brokers";
 service BrokerGatewayService {
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
-  rpc CreateFutureOrder(CreateFutureOrderRequest) returns (OrderCreatedInfo);
+  rpc CreateFutureOrder(CreateFutureOrderRequest) returns (CreateFutureOrderResponse);
   rpc GetOrderById(GetOrderRequest) returns (GetOrderResponse);
   rpc GetPendingOrders(GetPendingOrdersRequest) returns (GetPendingOrdersResponse);
   rpc GetListOrders(GetListOrdersRequest) returns (GetListOrdersResponse);

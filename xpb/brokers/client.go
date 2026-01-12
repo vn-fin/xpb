@@ -90,7 +90,7 @@ func (c *Client) UpdateOrder(ctx context.Context, req *UpdateOrderRequest) (*Upd
 }
 
 // CreateFutureOrder retrieves the account balance
-func (c *Client) CreateFutureOrder(ctx context.Context, req *CreateFutureOrderRequest) (*CreateOrderResponse, error) {
+func (c *Client) CreateFutureOrder(ctx context.Context, req *CreateFutureOrderRequest) (*CreateFutureOrderResponse, error) {
 	return c.client.CreateFutureOrder(ctx, req)
 }
 
