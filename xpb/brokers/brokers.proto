@@ -30,6 +30,8 @@ message GatewayOrderAgg {
   double matched_qty = 9;
   double cash = 10;
   string status = 11; // "pending" | "p_filled" | "filled" | "rejected"
+  int64 created_at = 12;
+  int64 updated_at = 13;
 }
 /* OrderInfo - matches xno_execution.gateway.credential_orders table */
 message OrderInfo {
