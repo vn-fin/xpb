@@ -21,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 type BrokerGatewayServiceClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error)
-	CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*CreateFutureOrderResponse, error)
+	CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*OrderCreatedInfo, error)
 	GetOrderById(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*GetOrderResponse, error)
 	GetPendingOrders(ctx context.Context, in *GetPendingOrdersRequest, opts ...grpc.CallOption) (*GetPendingOrdersResponse, error)
 	GetListOrders(ctx context.Context, in *GetListOrdersRequest, opts ...grpc.CallOption) (*GetListOrdersResponse, error)
@@ -59,8 +59,8 @@ func (c *brokerGatewayServiceClient) CreateOrder(ctx context.Context, in *Create
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*CreateFutureOrderResponse, error) {
-	out := new(CreateFutureOrderResponse)
+func (c *brokerGatewayServiceClient) CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*OrderCreatedInfo, error) {
+	out := new(OrderCreatedInfo)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CreateFutureOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ func (c *brokerGatewayServiceClient) GetAccountBalance(ctx context.Context, in *
 type BrokerGatewayServiceServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error)
-	CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*CreateFutureOrderResponse, error)
+	CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*OrderCreatedInfo, error)
 	GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error)
 	GetPendingOrders(context.Context, *GetPendingOrdersRequest) (*GetPendingOrdersResponse, error)
 	GetListOrders(context.Context, *GetListOrdersRequest) (*GetListOrdersResponse, error)
@@ -178,7 +178,7 @@ func (UnimplementedBrokerGatewayServiceServer) Login(context.Context, *LoginRequ
 func (UnimplementedBrokerGatewayServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*CreateFutureOrderResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*OrderCreatedInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFutureOrder not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error) {
