@@ -103,7 +103,7 @@ message GetOrderRequest {
 message GetOrderResponse {
   bool success = 1;
   string message = 2;
-  OrderInfo order = 3;
+  GatewayOrderAgg order = 3;
 }
 
 /* Cancel Order - matches models.CancelOrderRequest */
