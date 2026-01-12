@@ -36,6 +36,11 @@ message OrderInfo {
   int64 updated_at = 14;
 }
 
+message OrderCreatedInfo{
+  string symbol = 1;
+  string order_session_id = 2;
+}
+
 /* Login */
 message LoginRequest {
   string credential_id = 1;
@@ -68,8 +73,9 @@ message CreateOrderRequest {
 message CreateOrderResponse {
   bool success = 1;
   string message = 2;
-  string order_session_id = 3;
+  repeated OrderCreatedInfo orders = 3;
 }
+
 
 /* Get Order - matches models.GetOrderRequest */
 message GetOrderRequest {
