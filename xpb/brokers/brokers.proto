@@ -21,7 +21,7 @@ service BrokerGatewayService {
 message GatewayOrderAgg {
   string order_session_id = 1;
   string symbol = 2;
-  float price = 3;
+  double price = 3;
   string order_side =4;
   string order_type = 5;
   double quantity = 6;
