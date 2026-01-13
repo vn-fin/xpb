@@ -114,7 +114,7 @@ message CancelOrderRequest {
 message CancelFutureOrderRequest{
   string access_token = 1;
   string credential_id = 2;
-  string order_id = 3;
+  string order_session_id = 3;
 }
 
 message CancelOrderResponse {
