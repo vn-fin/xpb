@@ -2,10 +2,15 @@ package brokers
 
 import (
 	"context"
-	"os"
+	"sync"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+)
+
+var (
+	defaultClient *Client
+	clientMu      sync.Mutex
 )
 
 // Client wraps the BrokerGatewayServiceClient
@@ -14,9 +19,28 @@ type Client struct {
 	client BrokerGatewayServiceClient
 }
 
+// GetClient returns a singleton client instance.
+// It initializes the client if it doesn't exist.
+func GetClient() (*Client, error) {
+	clientMu.Lock()
+	defer clientMu.Unlock()
+
+	if defaultClient != nil {
+		return defaultClient, nil
+	}
+
+	c, err := NewClient()
+	if err != nil {
+		return nil, err
+	}
+	defaultClient = c
+	return defaultClient, nil
+}
+
 // NewClient creates a new broker client with the given server address
+
 func NewClient() (*Client, error) {
-	serverAddr := os.Getenv("BROKERS_GRPC_HOST")
+	serverAddr := "100.74.98.123:50049"
 	conn, err := grpc.NewClient(serverAddr,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
