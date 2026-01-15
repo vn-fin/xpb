@@ -175,7 +175,7 @@ message GetOrdersBySessionResponse{
 }
 
 message GetListOrdersRequest {
-  string access_token = 1;
+  string user_id = 2;
 }
 
 message GetListOrdersResponse {
@@ -199,6 +199,7 @@ message UpdateOrderResponse {
 
 message CreateFutureOrderRequest {
   string access_token = 1;
+  string user_id = 2;
   string symbol = 3;
   string order_side = 4;
   string order_type = 5;
