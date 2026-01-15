@@ -9,7 +9,7 @@ service BrokerGatewayService {
   rpc CreateFutureOrder(CreateFutureOrderRequest) returns (CreateFutureOrderResponse);
   rpc GetOrderById(GetOrderRequest) returns (GetOrderResponse);
   rpc GetPendingOrders(GetPendingOrdersRequest) returns (GetPendingOrdersResponse);
-  rpc GetListOrders(GetListOrdersRequest) returns (GetListOrdersResponse);
+  rpc GetListFutureOrders(GetListOrdersRequest) returns (GetListOrdersResponse);
   rpc GetOrdersBySession(GetOrdersBySessionRequest) returns (GetOrdersBySessionResponse);
   rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
   rpc CancelFutureOrder(CancelFutureOrderRequest) returns (CancelOrderResponse);
