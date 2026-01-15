@@ -2,6 +2,7 @@ package brokers
 
 import (
 	"context"
+	"os"
 	"sync"
 
 	"google.golang.org/grpc"
@@ -40,7 +41,7 @@ func GetClient() (*Client, error) {
 // NewClient creates a new broker client with the given server address
 
 func NewClient() (*Client, error) {
-	serverAddr := "100.74.98.123:50049"
+	serverAddr := os.Getenv("BROKERS_GRPC_HOST")
 	conn, err := grpc.NewClient(serverAddr,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
