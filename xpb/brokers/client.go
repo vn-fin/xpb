@@ -118,6 +118,6 @@ func (c *Client) CreateFutureOrder(ctx context.Context, req *CreateFutureOrderRe
 	return c.client.CreateFutureOrder(ctx, req)
 }
 
-func (c *Client) GetListOrders(ctx context.Context, req *GetListOrdersRequest) (*GetListOrdersResponse, error) {
-	return c.client.GetListOrders(ctx, req)
+func (c *Client) GetListFutureOrders(ctx context.Context, req *GetListOrdersRequest) (*GetListOrdersResponse, error) {
+	return c.client.GetListFutureOrders(ctx, req)
 }
