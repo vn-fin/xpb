@@ -175,11 +175,11 @@ message GetOrdersBySessionResponse{
 }
 
 message GetListOrdersRequest {
-  string user_id = 2;
+  string user_id = 1;
 }
 
 message GetListOrdersResponse {
-  repeated OrderInfo orders = 1;
+  repeated GatewayOrderAgg orders = 1;
 }
 
 /* Update Order - cancel old order, create new order with updated price */
