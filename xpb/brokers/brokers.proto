@@ -126,11 +126,11 @@ message CancelOrderResponse {
 message PortfolioItem {
   string symbol = 1;
   int64 quantity = 2;
-  int64 t_0 = 3;
-  int64 t_1 = 4;
-  int64 t_2 = 5;
-  int64 t_3 =6;
-  int64 max_sell_qty = 7;
+  optional int64 t_0 = 3;
+  optional int64 t_1 = 4;
+  optional int64 t_2 = 5;
+  optional int64 t_3 =6;
+  optional int64 max_sell_qty = 7;
   double avg_price = 8;
   double market_price = 9;
 }
