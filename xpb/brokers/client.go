@@ -122,3 +122,7 @@ func (c *Client) CreateFutureOrder(ctx context.Context, req *CreateFutureOrderRe
 func (c *Client) GetListFutureOrders(ctx context.Context, req *GetListOrdersRequest) (*GetListOrdersResponse, error) {
 	return c.client.GetListFutureOrders(ctx, req)
 }
+
+func (c *Client) GetPortfolioByGroupId(ctx context.Context, req *GetPortfolioRequest) (*GetPortfolioResponse, error) {
+	return c.client.GetPortfolioByGroupId(ctx, req)
+}

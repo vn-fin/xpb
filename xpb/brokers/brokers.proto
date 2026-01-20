@@ -16,6 +16,7 @@ service BrokerGatewayService {
   rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
   rpc GetPortfolio(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
+  rpc GetPortfolioByGroupId(GetPortfolioRequest) returns (GetPortfolioResponse);
 }
 
 message GatewayOrderAgg {
