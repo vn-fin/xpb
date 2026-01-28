@@ -38,6 +38,8 @@ type BrokerGatewayServiceClient interface {
 	ExecutionCancelOrder(ctx context.Context, in *ExecutionCancelOrderRequest, opts ...grpc.CallOption) (*ExecutionCancelOrderResponse, error)
 	ExecutionGetPendingOrders(ctx context.Context, in *ExecutionGetPendingOrdersRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersResponse, error)
 	ExecutionGetPendingOrdersBySymbol(ctx context.Context, in *ExecutionGetPendingOrdersBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersBySymbolResponse, error)
+	ExecutionGetMaxSellQtyBySymbol(ctx context.Context, in *ExecutionGetMaxSellQtyBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtyBySymbolResponse, error)
+	ExecutionGetMaxSellQtys(ctx context.Context, in *ExecutionGetMaxSellQtysRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtysResponse, error)
 }
 
 type brokerGatewayServiceClient struct {
@@ -219,6 +221,24 @@ func (c *brokerGatewayServiceClient) ExecutionGetPendingOrdersBySymbol(ctx conte
 	return out, nil
 }
 
+func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtyBySymbol(ctx context.Context, in *ExecutionGetMaxSellQtyBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtyBySymbolResponse, error) {
+	out := new(ExecutionGetMaxSellQtyBySymbolResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetMaxSellQtyBySymbol", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtys(ctx context.Context, in *ExecutionGetMaxSellQtysRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtysResponse, error) {
+	out := new(ExecutionGetMaxSellQtysResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetMaxSellQtys", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BrokerGatewayServiceServer is the server API for BrokerGatewayService service.
 // All implementations must embed UnimplementedBrokerGatewayServiceServer
 // for forward compatibility
@@ -243,6 +263,8 @@ type BrokerGatewayServiceServer interface {
 	ExecutionCancelOrder(context.Context, *ExecutionCancelOrderRequest) (*ExecutionCancelOrderResponse, error)
 	ExecutionGetPendingOrders(context.Context, *ExecutionGetPendingOrdersRequest) (*ExecutionGetPendingOrdersResponse, error)
 	ExecutionGetPendingOrdersBySymbol(context.Context, *ExecutionGetPendingOrdersBySymbolRequest) (*ExecutionGetPendingOrdersBySymbolResponse, error)
+	ExecutionGetMaxSellQtyBySymbol(context.Context, *ExecutionGetMaxSellQtyBySymbolRequest) (*ExecutionGetMaxSellQtyBySymbolResponse, error)
+	ExecutionGetMaxSellQtys(context.Context, *ExecutionGetMaxSellQtysRequest) (*ExecutionGetMaxSellQtysResponse, error)
 	mustEmbedUnimplementedBrokerGatewayServiceServer()
 }
 
@@ -306,6 +328,12 @@ func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPendingOrders(context
 }
 func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPendingOrdersBySymbol(context.Context, *ExecutionGetPendingOrdersBySymbolRequest) (*ExecutionGetPendingOrdersBySymbolResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPendingOrdersBySymbol not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetMaxSellQtyBySymbol(context.Context, *ExecutionGetMaxSellQtyBySymbolRequest) (*ExecutionGetMaxSellQtyBySymbolResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetMaxSellQtyBySymbol not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetMaxSellQtys(context.Context, *ExecutionGetMaxSellQtysRequest) (*ExecutionGetMaxSellQtysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetMaxSellQtys not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) mustEmbedUnimplementedBrokerGatewayServiceServer() {}
 
@@ -662,6 +690,42 @@ func _BrokerGatewayService_ExecutionGetPendingOrdersBySymbol_Handler(srv interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BrokerGatewayService_ExecutionGetMaxSellQtyBySymbol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionGetMaxSellQtyBySymbolRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetMaxSellQtyBySymbol(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/ExecutionGetMaxSellQtyBySymbol",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetMaxSellQtyBySymbol(ctx, req.(*ExecutionGetMaxSellQtyBySymbolRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_ExecutionGetMaxSellQtys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionGetMaxSellQtysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetMaxSellQtys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/ExecutionGetMaxSellQtys",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetMaxSellQtys(ctx, req.(*ExecutionGetMaxSellQtysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BrokerGatewayService_ServiceDesc is the grpc.ServiceDesc for BrokerGatewayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -744,6 +808,14 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExecutionGetPendingOrdersBySymbol",
 			Handler:    _BrokerGatewayService_ExecutionGetPendingOrdersBySymbol_Handler,
+		},
+		{
+			MethodName: "ExecutionGetMaxSellQtyBySymbol",
+			Handler:    _BrokerGatewayService_ExecutionGetMaxSellQtyBySymbol_Handler,
+		},
+		{
+			MethodName: "ExecutionGetMaxSellQtys",
+			Handler:    _BrokerGatewayService_ExecutionGetMaxSellQtys_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

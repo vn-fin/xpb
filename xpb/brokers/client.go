@@ -156,3 +156,13 @@ func (c *Client) ExecutionGetPendingOrders(ctx context.Context, req *ExecutionGe
 func (c *Client) ExecutionGetPendingOrdersBySymbol(ctx context.Context, req *ExecutionGetPendingOrdersBySymbolRequest) (*ExecutionGetPendingOrdersBySymbolResponse, error) {
 	return c.client.ExecutionGetPendingOrdersBySymbol(ctx, req)
 }
+
+// ExecutionGetMaxSellQtyBySymbol retrieves max sell quantity for a specific symbol
+func (c *Client) ExecutionGetMaxSellQtyBySymbol(ctx context.Context, req *ExecutionGetMaxSellQtyBySymbolRequest) (*ExecutionGetMaxSellQtyBySymbolResponse, error) {
+	return c.client.ExecutionGetMaxSellQtyBySymbol(ctx, req)
+}
+
+// ExecutionGetMaxSellQtys retrieves all max sell quantities
+func (c *Client) ExecutionGetMaxSellQtys(ctx context.Context, req *ExecutionGetMaxSellQtysRequest) (*ExecutionGetMaxSellQtysResponse, error) {
+	return c.client.ExecutionGetMaxSellQtys(ctx, req)
+}

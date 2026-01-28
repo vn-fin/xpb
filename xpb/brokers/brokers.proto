@@ -25,6 +25,8 @@ service BrokerGatewayService {
   rpc ExecutionCancelOrder(ExecutionCancelOrderRequest) returns (ExecutionCancelOrderResponse);
   rpc ExecutionGetPendingOrders(ExecutionGetPendingOrdersRequest) returns (ExecutionGetPendingOrdersResponse);
   rpc ExecutionGetPendingOrdersBySymbol(ExecutionGetPendingOrdersBySymbolRequest) returns (ExecutionGetPendingOrdersBySymbolResponse);
+  rpc ExecutionGetMaxSellQtyBySymbol(ExecutionGetMaxSellQtyBySymbolRequest) returns (ExecutionGetMaxSellQtyBySymbolResponse);
+  rpc ExecutionGetMaxSellQtys(ExecutionGetMaxSellQtysRequest) returns (ExecutionGetMaxSellQtysResponse);
 }
 
 message GatewayOrderAgg {
@@ -229,7 +231,8 @@ message CreateFutureOrderResponse {
 }
 
 message ExecutionGetPendingOrdersRequest {
-  string cred_id = 1;
+  string access_token = 1;
+  string cred_id = 2;
 }
 
 message ExecutionGetPendingOrdersResponse {
@@ -237,8 +240,9 @@ message ExecutionGetPendingOrdersResponse {
 }
 
 message ExecutionGetPendingOrdersBySymbolRequest {
-  string cred_id = 1;
-  string symbol = 2;
+  string access_token = 1;
+  string cred_id = 2;
+  string symbol = 3;
 }
 
 message ExecutionGetPendingOrdersBySymbolResponse {
@@ -246,7 +250,8 @@ message ExecutionGetPendingOrdersBySymbolResponse {
 }
 
 message ExecutionGetPositionsRequest {
-  string cred_id = 1;
+  string access_token = 1;
+  string cred_id = 2;
 }
 
 message ExecutionGetPositionsResponse {
@@ -254,8 +259,9 @@ message ExecutionGetPositionsResponse {
 }
 
 message ExecutionGetPositionBySymbolRequest {
-  string cred_id = 1;
-  string symbol = 2;
+  string access_token = 1;
+  string cred_id = 2;
+  string symbol = 3;
 }
 
 message ExecutionGetPositionBySymbolResponse {
@@ -263,12 +269,13 @@ message ExecutionGetPositionBySymbolResponse {
 }
 
 message ExecutionCreateOrderRequest {
-  string cred_id = 1;
-  string symbol = 2;
-  string order_side = 3;
-  string order_type = 4;
-  double price = 5;
-  double quantity = 6;
+  string access_token = 1;
+  string cred_id = 2;
+  string symbol = 3;
+  string order_side = 4;
+  string order_type = 5;
+  double price = 6;
+  double quantity = 7;
 }
 
 message ExecutionCreateOrderResponse {
@@ -279,12 +286,32 @@ message ExecutionCreateOrderResponse {
 }
 
 message ExecutionCancelOrderRequest {
-  string cred_id = 1;
-  string order_session_id = 2;
+  string access_token = 1;
+  string cred_id = 2;
+  string order_session_id = 3;
 }
 
 message ExecutionCancelOrderResponse {
   bool success = 1;
   string message = 2;
+}
+
+message ExecutionGetMaxSellQtyBySymbolRequest {
+  string access_token = 1;
+  string cred_id = 2;
+  string symbol = 3;
+}
+
+message ExecutionGetMaxSellQtyBySymbolResponse {
+  double max_sell_qty = 1;
+}
+
+message ExecutionGetMaxSellQtysRequest {
+  string access_token = 1;
+  string cred_id = 2;
+}
+
+message ExecutionGetMaxSellQtysResponse {
+  map<string, double> max_sell_qtys = 1; // symbol -> max_sell_qty
 }
 
