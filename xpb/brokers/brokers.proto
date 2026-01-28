@@ -17,6 +17,14 @@ service BrokerGatewayService {
   rpc GetPortfolio(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
   rpc GetPortfolioByGroupId(GetPortfolioRequest) returns (GetPortfolioResponse);
+
+  // Execution methods
+  rpc ExecutionGetPositions(ExecutionGetPositionsRequest) returns (ExecutionGetPositionsResponse);
+  rpc ExecutionGetPositionBySymbol(ExecutionGetPositionBySymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
+  rpc ExecutionCreateOrder(ExecutionCreateOrderRequest) returns (ExecutionCreateOrderResponse);
+  rpc ExecutionCancelOrder(ExecutionCancelOrderRequest) returns (ExecutionCancelOrderResponse);
+  rpc ExecutionGetPendingOrders(ExecutionGetPendingOrdersRequest) returns (ExecutionGetPendingOrdersResponse);
+  rpc ExecutionGetPendingOrdersBySymbol(ExecutionGetPendingOrdersBySymbolRequest) returns (ExecutionGetPendingOrdersBySymbolResponse);
 }
 
 message GatewayOrderAgg {
@@ -76,7 +84,7 @@ message OrderInputInfo {
   string symbol = 1;
   string symbol_type = 2;
   double price = 3;
-  int64 quantity = 4;
+  double quantity = 4;
   string order_type = 5;
   string order_side = 6;
 }
@@ -127,7 +135,7 @@ message CancelOrderResponse {
 /* Portfolio */
 message PortfolioItem {
   string symbol = 1;
-  int64 quantity = 2;
+  double quantity = 2;
   optional int64 t_0 = 3;
   optional int64 t_1 = 4;
   optional int64 t_2 = 5;
@@ -211,7 +219,7 @@ message CreateFutureOrderRequest {
   string order_side = 4;
   string order_type = 5;
   double price = 6;
-  int64 quantity = 7;
+  double quantity = 7;
 }
 
 message CreateFutureOrderResponse {
@@ -220,5 +228,60 @@ message CreateFutureOrderResponse {
   OrderCreatedInfo order = 4;
 }
 
+message ExecutionGetPendingOrdersRequest {
+  string cred_id = 1;
+}
 
+message ExecutionGetPendingOrdersResponse {
+  repeated string order_ids = 1;
+}
 
+message ExecutionGetPendingOrdersBySymbolRequest {
+  string cred_id = 1;
+  string symbol = 2;
+}
+
+message ExecutionGetPendingOrdersBySymbolResponse {
+  repeated string order_ids = 1;
+}
+
+message ExecutionGetPositionsRequest {
+  string cred_id = 1;
+}
+
+message ExecutionGetPositionsResponse {
+  map<string, double> positions = 1; // symbol -> quantity
+}
+
+message ExecutionGetPositionBySymbolRequest {
+  string cred_id = 1;
+  string symbol = 2;
+}
+
+message ExecutionGetPositionBySymbolResponse {
+  double position = 1;
+}
+
+message ExecutionCreateOrderRequest {
+  string cred_id = 1;
+  string symbol = 2;
+  string order_side = 3;
+  string order_type = 4;
+  double price = 5;
+  double quantity = 6;
+}
+
+message ExecutionCreateOrderResponse {
+  string original_order_id = 1;
+  string order_session_id = 2;
+}
+
+message ExecutionCancelOrderRequest {
+  string cred_id = 1;
+  string order_session_id = 2;
+}
+
+message ExecutionCancelOrderResponse {
+  bool success = 1;
+  string message = 2;
+}

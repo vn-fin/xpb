@@ -126,3 +126,33 @@ func (c *Client) GetListFutureOrders(ctx context.Context, req *GetListOrdersRequ
 func (c *Client) GetPortfolioByGroupId(ctx context.Context, req *GetPortfolioRequest) (*GetPortfolioResponse, error) {
 	return c.client.GetPortfolioByGroupId(ctx, req)
 }
+
+// ExecutionGetPositions retrieves all positions for a credential
+func (c *Client) ExecutionGetPositions(ctx context.Context, req *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error) {
+	return c.client.ExecutionGetPositions(ctx, req)
+}
+
+// ExecutionGetPositionBySymbol retrieves position for a specific symbol
+func (c *Client) ExecutionGetPositionBySymbol(ctx context.Context, req *ExecutionGetPositionBySymbolRequest) (*ExecutionGetPositionBySymbolResponse, error) {
+	return c.client.ExecutionGetPositionBySymbol(ctx, req)
+}
+
+// ExecutionCreateOrder creates a new execution order
+func (c *Client) ExecutionCreateOrder(ctx context.Context, req *ExecutionCreateOrderRequest) (*ExecutionCreateOrderResponse, error) {
+	return c.client.ExecutionCreateOrder(ctx, req)
+}
+
+// ExecutionCancelOrder cancels an execution order
+func (c *Client) ExecutionCancelOrder(ctx context.Context, req *ExecutionCancelOrderRequest) (*ExecutionCancelOrderResponse, error) {
+	return c.client.ExecutionCancelOrder(ctx, req)
+}
+
+// ExecutionGetPendingOrders retrieves all pending order IDs
+func (c *Client) ExecutionGetPendingOrders(ctx context.Context, req *ExecutionGetPendingOrdersRequest) (*ExecutionGetPendingOrdersResponse, error) {
+	return c.client.ExecutionGetPendingOrders(ctx, req)
+}
+
+// ExecutionGetPendingOrdersBySymbol retrieves pending order IDs for a specific symbol
+func (c *Client) ExecutionGetPendingOrdersBySymbol(ctx context.Context, req *ExecutionGetPendingOrdersBySymbolRequest) (*ExecutionGetPendingOrdersBySymbolResponse, error) {
+	return c.client.ExecutionGetPendingOrdersBySymbol(ctx, req)
+}

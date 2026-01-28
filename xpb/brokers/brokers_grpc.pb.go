@@ -31,6 +31,13 @@ type BrokerGatewayServiceClient interface {
 	GetPortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	GetPortfolioByGroupId(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
+	// Execution methods
+	ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error)
+	ExecutionGetPositionBySymbol(ctx context.Context, in *ExecutionGetPositionBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error)
+	ExecutionCreateOrder(ctx context.Context, in *ExecutionCreateOrderRequest, opts ...grpc.CallOption) (*ExecutionCreateOrderResponse, error)
+	ExecutionCancelOrder(ctx context.Context, in *ExecutionCancelOrderRequest, opts ...grpc.CallOption) (*ExecutionCancelOrderResponse, error)
+	ExecutionGetPendingOrders(ctx context.Context, in *ExecutionGetPendingOrdersRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersResponse, error)
+	ExecutionGetPendingOrdersBySymbol(ctx context.Context, in *ExecutionGetPendingOrdersBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersBySymbolResponse, error)
 }
 
 type brokerGatewayServiceClient struct {
@@ -158,6 +165,60 @@ func (c *brokerGatewayServiceClient) GetPortfolioByGroupId(ctx context.Context, 
 	return out, nil
 }
 
+func (c *brokerGatewayServiceClient) ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error) {
+	out := new(ExecutionGetPositionsResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) ExecutionGetPositionBySymbol(ctx context.Context, in *ExecutionGetPositionBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error) {
+	out := new(ExecutionGetPositionBySymbolResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositionBySymbol", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) ExecutionCreateOrder(ctx context.Context, in *ExecutionCreateOrderRequest, opts ...grpc.CallOption) (*ExecutionCreateOrderResponse, error) {
+	out := new(ExecutionCreateOrderResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionCreateOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) ExecutionCancelOrder(ctx context.Context, in *ExecutionCancelOrderRequest, opts ...grpc.CallOption) (*ExecutionCancelOrderResponse, error) {
+	out := new(ExecutionCancelOrderResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionCancelOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) ExecutionGetPendingOrders(ctx context.Context, in *ExecutionGetPendingOrdersRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersResponse, error) {
+	out := new(ExecutionGetPendingOrdersResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPendingOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) ExecutionGetPendingOrdersBySymbol(ctx context.Context, in *ExecutionGetPendingOrdersBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersBySymbolResponse, error) {
+	out := new(ExecutionGetPendingOrdersBySymbolResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPendingOrdersBySymbol", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BrokerGatewayServiceServer is the server API for BrokerGatewayService service.
 // All implementations must embed UnimplementedBrokerGatewayServiceServer
 // for forward compatibility
@@ -175,6 +236,13 @@ type BrokerGatewayServiceServer interface {
 	GetPortfolio(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	GetPortfolioByGroupId(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
+	// Execution methods
+	ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error)
+	ExecutionGetPositionBySymbol(context.Context, *ExecutionGetPositionBySymbolRequest) (*ExecutionGetPositionBySymbolResponse, error)
+	ExecutionCreateOrder(context.Context, *ExecutionCreateOrderRequest) (*ExecutionCreateOrderResponse, error)
+	ExecutionCancelOrder(context.Context, *ExecutionCancelOrderRequest) (*ExecutionCancelOrderResponse, error)
+	ExecutionGetPendingOrders(context.Context, *ExecutionGetPendingOrdersRequest) (*ExecutionGetPendingOrdersResponse, error)
+	ExecutionGetPendingOrdersBySymbol(context.Context, *ExecutionGetPendingOrdersBySymbolRequest) (*ExecutionGetPendingOrdersBySymbolResponse, error)
 	mustEmbedUnimplementedBrokerGatewayServiceServer()
 }
 
@@ -220,6 +288,24 @@ func (UnimplementedBrokerGatewayServiceServer) GetAccountBalance(context.Context
 }
 func (UnimplementedBrokerGatewayServiceServer) GetPortfolioByGroupId(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPortfolioByGroupId not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositions not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositionBySymbol(context.Context, *ExecutionGetPositionBySymbolRequest) (*ExecutionGetPositionBySymbolResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositionBySymbol not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) ExecutionCreateOrder(context.Context, *ExecutionCreateOrderRequest) (*ExecutionCreateOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecutionCreateOrder not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) ExecutionCancelOrder(context.Context, *ExecutionCancelOrderRequest) (*ExecutionCancelOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecutionCancelOrder not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPendingOrders(context.Context, *ExecutionGetPendingOrdersRequest) (*ExecutionGetPendingOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPendingOrders not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPendingOrdersBySymbol(context.Context, *ExecutionGetPendingOrdersBySymbolRequest) (*ExecutionGetPendingOrdersBySymbolResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPendingOrdersBySymbol not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) mustEmbedUnimplementedBrokerGatewayServiceServer() {}
 
@@ -468,6 +554,114 @@ func _BrokerGatewayService_GetPortfolioByGroupId_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BrokerGatewayService_ExecutionGetPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionGetPositionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetPositions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/ExecutionGetPositions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetPositions(ctx, req.(*ExecutionGetPositionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_ExecutionGetPositionBySymbol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionGetPositionBySymbolRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetPositionBySymbol(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/ExecutionGetPositionBySymbol",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetPositionBySymbol(ctx, req.(*ExecutionGetPositionBySymbolRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_ExecutionCreateOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionCreateOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).ExecutionCreateOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/ExecutionCreateOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).ExecutionCreateOrder(ctx, req.(*ExecutionCreateOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_ExecutionCancelOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionCancelOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).ExecutionCancelOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/ExecutionCancelOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).ExecutionCancelOrder(ctx, req.(*ExecutionCancelOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_ExecutionGetPendingOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionGetPendingOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetPendingOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/ExecutionGetPendingOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetPendingOrders(ctx, req.(*ExecutionGetPendingOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_ExecutionGetPendingOrdersBySymbol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionGetPendingOrdersBySymbolRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetPendingOrdersBySymbol(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/ExecutionGetPendingOrdersBySymbol",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).ExecutionGetPendingOrdersBySymbol(ctx, req.(*ExecutionGetPendingOrdersBySymbolRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BrokerGatewayService_ServiceDesc is the grpc.ServiceDesc for BrokerGatewayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -526,6 +720,30 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPortfolioByGroupId",
 			Handler:    _BrokerGatewayService_GetPortfolioByGroupId_Handler,
+		},
+		{
+			MethodName: "ExecutionGetPositions",
+			Handler:    _BrokerGatewayService_ExecutionGetPositions_Handler,
+		},
+		{
+			MethodName: "ExecutionGetPositionBySymbol",
+			Handler:    _BrokerGatewayService_ExecutionGetPositionBySymbol_Handler,
+		},
+		{
+			MethodName: "ExecutionCreateOrder",
+			Handler:    _BrokerGatewayService_ExecutionCreateOrder_Handler,
+		},
+		{
+			MethodName: "ExecutionCancelOrder",
+			Handler:    _BrokerGatewayService_ExecutionCancelOrder_Handler,
+		},
+		{
+			MethodName: "ExecutionGetPendingOrders",
+			Handler:    _BrokerGatewayService_ExecutionGetPendingOrders_Handler,
+		},
+		{
+			MethodName: "ExecutionGetPendingOrdersBySymbol",
+			Handler:    _BrokerGatewayService_ExecutionGetPendingOrdersBySymbol_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
