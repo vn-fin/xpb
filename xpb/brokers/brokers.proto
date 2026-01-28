@@ -274,6 +274,8 @@ message ExecutionCreateOrderRequest {
 message ExecutionCreateOrderResponse {
   string original_order_id = 1;
   string order_session_id = 2;
+  repeated OrderCreatedInfo orders = 3;
+
 }
 
 message ExecutionCancelOrderRequest {
