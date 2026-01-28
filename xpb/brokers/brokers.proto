@@ -37,7 +37,7 @@ message GatewayOrderAgg {
   double filled_qty = 7;
   double remaining_qty = 8;
   double matched_price = 9;
-  optional double avg_price = 10;
+  double avg_price = 10;
   double cash = 11;
   string status = 12; // "pending" | "p_filled" | "filled" | "rejected"
   int64 created_at = 13;
@@ -84,7 +84,7 @@ message OrderInputInfo {
   string symbol = 1;
   string symbol_type = 2;
   double price = 3;
-  double quantity = 4;
+  int64 quantity = 4;
   string order_type = 5;
   string order_side = 6;
 }
@@ -135,7 +135,7 @@ message CancelOrderResponse {
 /* Portfolio */
 message PortfolioItem {
   string symbol = 1;
-  double quantity = 2;
+  int64 quantity = 2;
   optional int64 t_0 = 3;
   optional int64 t_1 = 4;
   optional int64 t_2 = 5;
@@ -219,7 +219,7 @@ message CreateFutureOrderRequest {
   string order_side = 4;
   string order_type = 5;
   double price = 6;
-  double quantity = 7;
+  int64 quantity = 7;
 }
 
 message CreateFutureOrderResponse {
@@ -285,3 +285,4 @@ message ExecutionCancelOrderResponse {
   bool success = 1;
   string message = 2;
 }
+
