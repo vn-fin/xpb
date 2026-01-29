@@ -66,11 +66,12 @@ message OrderInfo {
 
 message GetPendingOrderInfo{
   string order_session_id = 1;
-  double quantity = 2;
-  double filled = 3;
-  double  remaining = 4;
-  double sellable = 5;
-  int64 created_at =6;
+  string symbol = 2;
+  double quantity = 3;
+  double filled = 4;
+  double  remaining = 5;
+  double sellable = 6;
+  int64 created_at =7;
 }
 message OrderCreatedInfo{
   string symbol = 1;
