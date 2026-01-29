@@ -68,9 +68,8 @@ message GetPendingOrderInfo{
   string order_session_id = 1;
   string symbol = 2;
   double quantity = 3;
-  double filled = 4;
-  double  remaining = 5;
-  double sellable = 6;
+  optional double filled = 4;
+  optional double remaining = 5;
   int64 created_at =7;
 }
 message OrderCreatedInfo{
@@ -263,8 +262,13 @@ message ExecutionGetPositionsRequest {
   string cred_id = 2;
 }
 
+message PositionInfo {
+  double position = 1;
+  optional double sellable = 2;
+}
+
 message ExecutionGetPositionsResponse {
-  map<string, double> positions = 1; // symbol -> quantity
+  map<string, PositionInfo> positions = 1; // symbol -> PositionInfo
 }
 
 message ExecutionGetPositionBySymbolRequest {
@@ -275,6 +279,7 @@ message ExecutionGetPositionBySymbolRequest {
 
 message ExecutionGetPositionBySymbolResponse {
   double position = 1;
+  optional double sellable = 2;
 }
 
 message ExecutionCreateOrderRequest {
