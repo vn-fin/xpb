@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BrokerGatewayServiceClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	SendEmailOTP(ctx context.Context, in *SendEmailOTPRequest, opts ...grpc.CallOption) (*SendEmailOTPResponse, error)
 	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error)
 	CreateFutureOrder(ctx context.Context, in *CreateFutureOrderRequest, opts ...grpc.CallOption) (*CreateFutureOrderResponse, error)
 	GetOrderById(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*GetOrderResponse, error)
@@ -53,6 +54,15 @@ func NewBrokerGatewayServiceClient(cc grpc.ClientConnInterface) BrokerGatewaySer
 func (c *brokerGatewayServiceClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) SendEmailOTP(ctx context.Context, in *SendEmailOTPRequest, opts ...grpc.CallOption) (*SendEmailOTPResponse, error) {
+	out := new(SendEmailOTPResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/SendEmailOTP", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -244,6 +254,7 @@ func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtys(ctx context.Context
 // for forward compatibility
 type BrokerGatewayServiceServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	SendEmailOTP(context.Context, *SendEmailOTPRequest) (*SendEmailOTPResponse, error)
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error)
 	CreateFutureOrder(context.Context, *CreateFutureOrderRequest) (*CreateFutureOrderResponse, error)
 	GetOrderById(context.Context, *GetOrderRequest) (*GetOrderResponse, error)
@@ -274,6 +285,9 @@ type UnimplementedBrokerGatewayServiceServer struct {
 
 func (UnimplementedBrokerGatewayServiceServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) SendEmailOTP(context.Context, *SendEmailOTPRequest) (*SendEmailOTPResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEmailOTP not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
@@ -362,6 +376,24 @@ func _BrokerGatewayService_Login_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BrokerGatewayServiceServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_SendEmailOTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendEmailOTPRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).SendEmailOTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/SendEmailOTP",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).SendEmailOTP(ctx, req.(*SendEmailOTPRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -736,6 +768,10 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _BrokerGatewayService_Login_Handler,
+		},
+		{
+			MethodName: "SendEmailOTP",
+			Handler:    _BrokerGatewayService_SendEmailOTP_Handler,
 		},
 		{
 			MethodName: "CreateOrder",

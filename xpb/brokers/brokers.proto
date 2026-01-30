@@ -5,6 +5,7 @@ option go_package = "xpb/brokers";
 
 service BrokerGatewayService {
   rpc Login(LoginRequest) returns (LoginResponse);
+  rpc SendEmailOTP(SendEmailOTPRequest) returns (SendEmailOTPResponse);
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
   rpc CreateFutureOrder(CreateFutureOrderRequest) returns (CreateFutureOrderResponse);
   rpc GetOrderById(GetOrderRequest) returns (GetOrderResponse);
@@ -334,3 +335,14 @@ message ExecutionGetMaxSellQtysResponse {
   map<string, MaxSellInfo> MaxSellInfos = 1; // symbol -> max_sell_qty
 }
 
+// Send email OTP DNSE
+message SendEmailOTPRequest{
+  string access_token = 1;
+  string credential_id = 2;
+}
+
+message SendEmailOTPResponse{
+  bool success = 1;
+  string message = 2;
+  string otp = 3;
+}

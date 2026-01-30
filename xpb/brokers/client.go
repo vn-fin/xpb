@@ -70,6 +70,11 @@ func (c *Client) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, 
 	return c.client.Login(ctx, req)
 }
 
+// SendEmailOTP
+func (c *Client) SendEmailOTP(ctx context.Context, req *SendEmailOTPRequest) (*SendEmailOTPResponse, error) {
+	return c.client.SendEmailOTP(ctx, req)
+}
+
 // CreateOrder creates a new order
 func (c *Client) CreateOrder(ctx context.Context, req *CreateOrderRequest) (*CreateOrderResponse, error) {
 	return c.client.CreateOrder(ctx, req)
