@@ -69,10 +69,11 @@ message GetPendingOrderInfo{
   string order_session_id = 1;
   string original_id = 2;
   string symbol = 3;
-  double quantity = 4;
-  optional double filled = 5;
-  optional double remaining = 6;
-  int64 created_at =7;
+  string side =4;
+  double quantity = 5;
+  optional double filled = 6;
+  optional double remaining = 7;
+  int64 created_at =8;
 }
 message OrderCreatedInfo{
   string symbol = 1;
@@ -188,7 +189,7 @@ message GetPendingOrdersRequest {
 }
 
 message GetPendingOrdersResponse {
-  repeated OrderInfo pending_orders = 1;
+  repeated GetPendingOrderInfo pending_orders = 1;
 }
 
 message GetOrdersBySessionRequest{
