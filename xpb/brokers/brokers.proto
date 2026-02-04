@@ -171,6 +171,7 @@ message GetPortfolioResponse {
 message GetAccountBalanceRequest {
   string access_token = 1;
   string group_id = 2;
+  string account_type = 3;
 }
 
 message GetAccountBalanceResponse {
