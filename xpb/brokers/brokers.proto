@@ -180,6 +180,7 @@ message GetAccountBalanceResponse {
   string message = 2;
   double cash = 3;
   double equity = 4;
+  double balance = 5;
 }
 
 /* Pending Orders - matches models.GetPendingOrdersRequest */
