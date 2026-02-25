@@ -354,12 +354,17 @@ message SendEmailOTPResponse{
 message GetTradingSummaryRequest {
   string UserId = 1;
 }
-
+message TradingSummaryInfo {
+  double total_buy = 1;
+  double total_sell = 2;
+  double pending_buy = 3;
+  double pending_sell = 4;
+  double net_filled =5;
+  double net_pending =6;
+}
 message GetTradingSummaryResponse {
   bool success = 1;
   string message = 2;
-  double total_buy = 3;
-  double total_sell = 4;
-  double pending_buy = 5;
-  double pending_sell = 6;
+  TradingSummaryInfo TradingSummaryInfo = 3;
 }
+
