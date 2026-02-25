@@ -4,7 +4,6 @@ package brokers
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -33,6 +32,7 @@ type BrokerGatewayServiceClient interface {
 	GetPortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	GetPortfolioByGroupId(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
+	GetTradingSummary(ctx context.Context, in *GetTradingSummaryRequest, opts ...grpc.CallOption) (*GetTradingSummaryResponse, error)
 	// Execution methods
 	ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(ctx context.Context, in *ExecutionGetPositionBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error)
@@ -178,6 +178,15 @@ func (c *brokerGatewayServiceClient) GetPortfolioByGroupId(ctx context.Context, 
 	return out, nil
 }
 
+func (c *brokerGatewayServiceClient) GetTradingSummary(ctx context.Context, in *GetTradingSummaryRequest, opts ...grpc.CallOption) (*GetTradingSummaryResponse, error) {
+	out := new(GetTradingSummaryResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetTradingSummary", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *brokerGatewayServiceClient) ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error) {
 	out := new(ExecutionGetPositionsResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositions", in, out, opts...)
@@ -268,6 +277,7 @@ type BrokerGatewayServiceServer interface {
 	GetPortfolio(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	GetPortfolioByGroupId(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
+	GetTradingSummary(context.Context, *GetTradingSummaryRequest) (*GetTradingSummaryResponse, error)
 	// Execution methods
 	ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(context.Context, *ExecutionGetPositionBySymbolRequest) (*ExecutionGetPositionBySymbolResponse, error)
@@ -325,6 +335,9 @@ func (UnimplementedBrokerGatewayServiceServer) GetAccountBalance(context.Context
 }
 func (UnimplementedBrokerGatewayServiceServer) GetPortfolioByGroupId(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPortfolioByGroupId not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) GetTradingSummary(context.Context, *GetTradingSummaryRequest) (*GetTradingSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTradingSummary not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositions not implemented")
@@ -615,6 +628,24 @@ func _BrokerGatewayService_GetPortfolioByGroupId_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BrokerGatewayService_GetTradingSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTradingSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).GetTradingSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/GetTradingSummary",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).GetTradingSummary(ctx, req.(*GetTradingSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BrokerGatewayService_ExecutionGetPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ExecutionGetPositionsRequest)
 	if err := dec(in); err != nil {
@@ -823,6 +854,10 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BrokerGatewayService_GetPortfolioByGroupId_Handler,
 		},
 		{
+			MethodName: "GetTradingSummary",
+			Handler:    _BrokerGatewayService_GetTradingSummary_Handler,
+		},
+		{
 			MethodName: "ExecutionGetPositions",
 			Handler:    _BrokerGatewayService_ExecutionGetPositions_Handler,
 		},
@@ -856,5 +891,5 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "brokers.proto",
+	Metadata: "xpb/brokers/brokers.proto",
 }

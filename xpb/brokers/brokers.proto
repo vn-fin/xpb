@@ -18,7 +18,7 @@ service BrokerGatewayService {
   rpc GetPortfolio(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
   rpc GetPortfolioByGroupId(GetPortfolioRequest) returns (GetPortfolioResponse);
-
+  rpc GetTradingSummary(GetTradingSummaryRequest) returns (GetTradingSummaryResponse);
   // Execution methods
   rpc ExecutionGetPositions(ExecutionGetPositionsRequest) returns (ExecutionGetPositionsResponse);
   rpc ExecutionGetPositionBySymbol(ExecutionGetPositionBySymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
@@ -348,4 +348,18 @@ message SendEmailOTPResponse{
   bool success = 1;
   string message = 2;
   string otp = 3;
+}
+
+
+message GetTradingSummaryRequest {
+  string UserId = 1;
+}
+
+message GetTradingSummaryResponse {
+  bool success = 1;
+  string message = 2;
+  double total_buy = 3;
+  double total_sell = 4;
+  double pending_buy = 5;
+  double pending_sell = 6;
 }

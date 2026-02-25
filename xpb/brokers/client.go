@@ -171,3 +171,8 @@ func (c *Client) ExecutionGetMaxSellQtyBySymbol(ctx context.Context, req *Execut
 func (c *Client) ExecutionGetMaxSellQtys(ctx context.Context, req *ExecutionGetMaxSellQtysRequest) (*ExecutionGetMaxSellQtysResponse, error) {
 	return c.client.ExecutionGetMaxSellQtys(ctx, req)
 }
+
+// GetTradingSummary retrieves all max sell quantities
+func (c *Client) GetTradingSummary(ctx context.Context, req *GetTradingSummaryRequest) (*GetTradingSummaryResponse, error) {
+	return c.client.GetTradingSummary(ctx, req)
+}
