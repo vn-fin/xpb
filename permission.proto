@@ -24,6 +24,8 @@ service PermissionService {
   rpc GetUserIDFromToken(CheckAuthRequest) returns (GetUserIDFromTokenResponse);
   // Get audience (aud) from token
   rpc GetAudFromToken(CheckAuthRequest) returns (GetAudFromTokenResponse);
+  // Get user scopes from token
+  rpc GetUserScopesFromToken(CheckAuthRequest) returns (GetUserScopesResponse);
 }
 
 message PingRequest {
@@ -141,3 +143,7 @@ message GetAudFromTokenResponse {
   string aud = 1;
 }
 
+message GetUserScopesResponse {
+  string user_id = 1;
+  repeated string scopes = 2;
+}

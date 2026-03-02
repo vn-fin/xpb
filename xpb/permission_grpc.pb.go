@@ -28,7 +28,7 @@ type PermissionServiceClient interface {
 	CheckAuthToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*CheckAuthResponse, error)
 	// Force-update the rate-limit with Slicing-Window algorithm
 	UpdateRateLimit(ctx context.Context, in *UpdateRateLimitRequest, opts ...grpc.CallOption) (*UpdateRateLimitResponse, error)
-	//Check auth firebase token
+	// Check auth firebase token
 	CheckAuthFirebaseToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*CheckAuthResponse, error)
 	// Get user ID from Firebase token
 	GetUserIDFromFirebase(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetUserIDFromFirebaseResponse, error)
@@ -36,6 +36,8 @@ type PermissionServiceClient interface {
 	GetUserIDFromToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetUserIDFromTokenResponse, error)
 	// Get audience (aud) from token
 	GetAudFromToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetAudFromTokenResponse, error)
+	// Get user scopes from token
+	GetUserScopesFromToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetUserScopesResponse, error)
 }
 
 type permissionServiceClient struct {
@@ -127,6 +129,15 @@ func (c *permissionServiceClient) GetAudFromToken(ctx context.Context, in *Check
 	return out, nil
 }
 
+func (c *permissionServiceClient) GetUserScopesFromToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetUserScopesResponse, error) {
+	out := new(GetUserScopesResponse)
+	err := c.cc.Invoke(ctx, "/permission.PermissionService/GetUserScopesFromToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PermissionServiceServer is the server API for PermissionService service.
 // All implementations must embed UnimplementedPermissionServiceServer
 // for forward compatibility
@@ -141,7 +152,7 @@ type PermissionServiceServer interface {
 	CheckAuthToken(context.Context, *CheckAuthRequest) (*CheckAuthResponse, error)
 	// Force-update the rate-limit with Slicing-Window algorithm
 	UpdateRateLimit(context.Context, *UpdateRateLimitRequest) (*UpdateRateLimitResponse, error)
-	//Check auth firebase token
+	// Check auth firebase token
 	CheckAuthFirebaseToken(context.Context, *CheckAuthRequest) (*CheckAuthResponse, error)
 	// Get user ID from Firebase token
 	GetUserIDFromFirebase(context.Context, *CheckAuthRequest) (*GetUserIDFromFirebaseResponse, error)
@@ -149,6 +160,8 @@ type PermissionServiceServer interface {
 	GetUserIDFromToken(context.Context, *CheckAuthRequest) (*GetUserIDFromTokenResponse, error)
 	// Get audience (aud) from token
 	GetAudFromToken(context.Context, *CheckAuthRequest) (*GetAudFromTokenResponse, error)
+	// Get user scopes from token
+	GetUserScopesFromToken(context.Context, *CheckAuthRequest) (*GetUserScopesResponse, error)
 	mustEmbedUnimplementedPermissionServiceServer()
 }
 
@@ -182,6 +195,9 @@ func (UnimplementedPermissionServiceServer) GetUserIDFromToken(context.Context, 
 }
 func (UnimplementedPermissionServiceServer) GetAudFromToken(context.Context, *CheckAuthRequest) (*GetAudFromTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAudFromToken not implemented")
+}
+func (UnimplementedPermissionServiceServer) GetUserScopesFromToken(context.Context, *CheckAuthRequest) (*GetUserScopesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserScopesFromToken not implemented")
 }
 func (UnimplementedPermissionServiceServer) mustEmbedUnimplementedPermissionServiceServer() {}
 
@@ -358,6 +374,24 @@ func _PermissionService_GetAudFromToken_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PermissionService_GetUserScopesFromToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckAuthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermissionServiceServer).GetUserScopesFromToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/permission.PermissionService/GetUserScopesFromToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermissionServiceServer).GetUserScopesFromToken(ctx, req.(*CheckAuthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PermissionService_ServiceDesc is the grpc.ServiceDesc for PermissionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -400,6 +434,10 @@ var PermissionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAudFromToken",
 			Handler:    _PermissionService_GetAudFromToken_Handler,
+		},
+		{
+			MethodName: "GetUserScopesFromToken",
+			Handler:    _PermissionService_GetUserScopesFromToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

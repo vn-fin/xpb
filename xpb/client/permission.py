@@ -66,6 +66,17 @@ class PermissionClient:
         except Exception as e:
             raise ValueError(f"Error: {e}")
 
+    def get_user_scopes(self, access_token: str) -> Dict:
+        """Get user_id and scopes from access token."""
+        self._ensure_stub()
+        request = permission_pb2.CheckAuthRequest(token=access_token)
+        try:
+            response = self.stub.GetUserScopesFromToken(request, metadata=self._get_metadata())
+            return response
+        except Exception as e:
+            raise ValueError(f"Error: {e}")
+
+
 
 # ----------------- Singleton ----------------- #
 _permission_client_instance: Optional[PermissionClient] = None
