@@ -237,6 +237,7 @@ message CreateFutureOrderRequest {
   string order_type = 5;
   double price = 6;
   int64 quantity = 7;
+  string remark = 8;
 }
 
 message CreateFutureOrderResponse {
