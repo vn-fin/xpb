@@ -38,6 +38,8 @@ type PermissionServiceClient interface {
 	GetAudFromToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetAudFromTokenResponse, error)
 	// Get user scopes from token
 	GetUserScopesFromToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetUserScopesResponse, error)
+	// Get picture from token
+	GetPictureFromToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetPictureFromTokenResponse, error)
 }
 
 type permissionServiceClient struct {
@@ -138,6 +140,15 @@ func (c *permissionServiceClient) GetUserScopesFromToken(ctx context.Context, in
 	return out, nil
 }
 
+func (c *permissionServiceClient) GetPictureFromToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*GetPictureFromTokenResponse, error) {
+	out := new(GetPictureFromTokenResponse)
+	err := c.cc.Invoke(ctx, "/permission.PermissionService/GetPictureFromToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PermissionServiceServer is the server API for PermissionService service.
 // All implementations must embed UnimplementedPermissionServiceServer
 // for forward compatibility
@@ -162,6 +173,8 @@ type PermissionServiceServer interface {
 	GetAudFromToken(context.Context, *CheckAuthRequest) (*GetAudFromTokenResponse, error)
 	// Get user scopes from token
 	GetUserScopesFromToken(context.Context, *CheckAuthRequest) (*GetUserScopesResponse, error)
+	// Get picture from token
+	GetPictureFromToken(context.Context, *CheckAuthRequest) (*GetPictureFromTokenResponse, error)
 	mustEmbedUnimplementedPermissionServiceServer()
 }
 
@@ -198,6 +211,9 @@ func (UnimplementedPermissionServiceServer) GetAudFromToken(context.Context, *Ch
 }
 func (UnimplementedPermissionServiceServer) GetUserScopesFromToken(context.Context, *CheckAuthRequest) (*GetUserScopesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserScopesFromToken not implemented")
+}
+func (UnimplementedPermissionServiceServer) GetPictureFromToken(context.Context, *CheckAuthRequest) (*GetPictureFromTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPictureFromToken not implemented")
 }
 func (UnimplementedPermissionServiceServer) mustEmbedUnimplementedPermissionServiceServer() {}
 
@@ -392,6 +408,24 @@ func _PermissionService_GetUserScopesFromToken_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PermissionService_GetPictureFromToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckAuthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermissionServiceServer).GetPictureFromToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/permission.PermissionService/GetPictureFromToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermissionServiceServer).GetPictureFromToken(ctx, req.(*CheckAuthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PermissionService_ServiceDesc is the grpc.ServiceDesc for PermissionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -438,6 +472,10 @@ var PermissionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserScopesFromToken",
 			Handler:    _PermissionService_GetUserScopesFromToken_Handler,
+		},
+		{
+			MethodName: "GetPictureFromToken",
+			Handler:    _PermissionService_GetPictureFromToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

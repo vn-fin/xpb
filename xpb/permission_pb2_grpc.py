@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import xpb.permission_pb2 as permission__pb2
+import permission_pb2 as permission__pb2
 
 GRPC_GENERATED_VERSION = '1.76.0'
 GRPC_VERSION = grpc.__version__
@@ -80,6 +80,11 @@ class PermissionServiceStub(object):
                 request_serializer=permission__pb2.CheckAuthRequest.SerializeToString,
                 response_deserializer=permission__pb2.GetAudFromTokenResponse.FromString,
                 _registered_method=True)
+        self.GetUserScopesFromToken = channel.unary_unary(
+                '/permission.PermissionService/GetUserScopesFromToken',
+                request_serializer=permission__pb2.CheckAuthRequest.SerializeToString,
+                response_deserializer=permission__pb2.GetUserScopesResponse.FromString,
+                _registered_method=True)
 
 
 class PermissionServiceServicer(object):
@@ -149,6 +154,13 @@ class PermissionServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetUserScopesFromToken(self, request, context):
+        """Get user scopes from token
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PermissionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -196,6 +208,11 @@ def add_PermissionServiceServicer_to_server(servicer, server):
                     servicer.GetAudFromToken,
                     request_deserializer=permission__pb2.CheckAuthRequest.FromString,
                     response_serializer=permission__pb2.GetAudFromTokenResponse.SerializeToString,
+            ),
+            'GetUserScopesFromToken': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserScopesFromToken,
+                    request_deserializer=permission__pb2.CheckAuthRequest.FromString,
+                    response_serializer=permission__pb2.GetUserScopesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -442,6 +459,33 @@ class PermissionService(object):
             '/permission.PermissionService/GetAudFromToken',
             permission__pb2.CheckAuthRequest.SerializeToString,
             permission__pb2.GetAudFromTokenResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetUserScopesFromToken(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/permission.PermissionService/GetUserScopesFromToken',
+            permission__pb2.CheckAuthRequest.SerializeToString,
+            permission__pb2.GetUserScopesResponse.FromString,
             options,
             channel_credentials,
             insecure,
