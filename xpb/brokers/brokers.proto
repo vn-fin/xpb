@@ -153,10 +153,17 @@ message PortfolioItem {
   optional int64 t_0 = 3;
   optional int64 t_1 = 4;
   optional int64 t_2 = 5;
-  optional int64 t_3 =6;
-  optional int64 max_sell_qty = 7;
-  double avg_price = 8;
-  double market_price = 9;
+  optional int64 blocked = 6;
+  optional int64 sell_remain = 7;
+  optional int64 exercised_ca = 8;
+  optional int64 unexercised_ca = 9;
+  optional int64  stock_dividend = 10;
+  optional int64  cash_dividend = 11;
+  optional int64  sell_exec = 12;
+  optional int64  on_hold = 13;
+  optional int64 available_trading = 14;
+  double avg_price = 15;
+  double market_price = 16;
 }
 
 message GetPortfolioRequest {
