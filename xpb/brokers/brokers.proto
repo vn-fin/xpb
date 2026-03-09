@@ -180,25 +180,20 @@ message GetPortfolioResponse {
 /* Future Portfolio */
 message FuturePortfolioItem {
   string symbol = 1;
-  string im = 2;
-  int64 deliver = 3;
-  int64 receive = 4;
-  int64 net = 5;
-  string side = 6;
-  string account = 7;
-  double wasp = 8;
-  double wapb = 9;
-  double last_price = 10;
-  double im_value = 11;
-  double vm_value = 12;
-  double mr_value = 13;
-  string due_date = 14;
-  int64 net_off_vol = 15;
-  double avg_remain = 16;
-  double vm_remain = 17;
-  double pc_remain = 18;
-  string stop_loss = 19;
-  string take_profit = 20;
+  optional double long = 3;
+  optional double short = 4;
+  optional double net = 5;
+  string account_id = 6;
+  double wasp = 7;
+  double wapb = 8;
+  int64 net_off_vol = 9;
+  double avg_remain = 10;
+  optional double pending_buy = 11;
+  optional double pending_sell = 12;
+  optional double filled_buy = 13;
+  optional double filled_sell = 14;
+  optional double bonus = 15;
+  string due_date = 16;
 }
 
 message GetFuturePortfolioResponse {
