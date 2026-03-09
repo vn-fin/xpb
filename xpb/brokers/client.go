@@ -105,6 +105,10 @@ func (c *Client) GetPortfolio(ctx context.Context, req *GetPortfolioRequest) (*G
 	return c.client.GetPortfolio(ctx, req)
 }
 
+func (c *Client) GetFuturePortfolio(ctx context.Context, req *GetPortfolioRequest) (*GetFuturePortfolioResponse, error) {
+	return c.client.GetFuturePortfolio(ctx, req)
+}
+
 // GetAccountBalance retrieves the account balance
 func (c *Client) GetAccountBalance(ctx context.Context, req *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
 	return c.client.GetAccountBalance(ctx, req)
