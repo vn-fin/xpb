@@ -192,13 +192,13 @@ message FuturePortfolioItem {
   double im_value = 11;
   double vm_value = 12;
   double mr_value = 13;
-  string duedate = 14;
-  int64 netoffvol = 15;
+  string due_date = 14;
+  int64 net_off_vol = 15;
   double avg_remain = 16;
   double vm_remain = 17;
   double pc_remain = 18;
-  string stoploss = 19;
-  string takeprofit = 20;
+  string stop_loss = 19;
+  string take_profit = 20;
 }
 
 message GetFuturePortfolioResponse {
