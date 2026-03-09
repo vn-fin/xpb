@@ -17,6 +17,7 @@ service BrokerGatewayService {
   rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
   rpc GetPortfolio(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse);
+  rpc GetFuturePortfolio(GetPortfolioRequest) returns (GetFuturePortfolioResponse);
   rpc GetPortfolioByGroupId(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetTradingSummary(GetTradingSummaryRequest) returns (GetTradingSummaryResponse);
   // Execution methods
@@ -174,6 +175,36 @@ message GetPortfolioResponse {
   bool success = 1;
   string message = 2;
   repeated PortfolioItem items = 3;
+}
+
+/* Future Portfolio */
+message FuturePortfolioItem {
+  string symbol = 1;
+  string im = 2;
+  int64 deliver = 3;
+  int64 receive = 4;
+  int64 net = 5;
+  string side = 6;
+  string account = 7;
+  double wasp = 8;
+  double wapb = 9;
+  double last_price = 10;
+  double im_value = 11;
+  double vm_value = 12;
+  double mr_value = 13;
+  string duedate = 14;
+  int64 netoffvol = 15;
+  double avg_remain = 16;
+  double vm_remain = 17;
+  double pc_remain = 18;
+  string stoploss = 19;
+  string takeprofit = 20;
+}
+
+message GetFuturePortfolioResponse {
+  bool success = 1;
+  string message = 2;
+  repeated FuturePortfolioItem items = 3;
 }
 
 /* Account Balance - matches models.GetAccountBalanceRequest */

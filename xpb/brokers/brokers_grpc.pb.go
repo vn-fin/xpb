@@ -31,6 +31,7 @@ type BrokerGatewayServiceClient interface {
 	UpdateOrder(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*UpdateOrderResponse, error)
 	GetPortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
+	GetFuturePortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetFuturePortfolioResponse, error)
 	GetPortfolioByGroupId(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
 	GetTradingSummary(ctx context.Context, in *GetTradingSummaryRequest, opts ...grpc.CallOption) (*GetTradingSummaryResponse, error)
 	// Execution methods
@@ -169,6 +170,15 @@ func (c *brokerGatewayServiceClient) GetAccountBalance(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *brokerGatewayServiceClient) GetFuturePortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetFuturePortfolioResponse, error) {
+	out := new(GetFuturePortfolioResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetFuturePortfolio", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *brokerGatewayServiceClient) GetPortfolioByGroupId(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error) {
 	out := new(GetPortfolioResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetPortfolioByGroupId", in, out, opts...)
@@ -276,6 +286,7 @@ type BrokerGatewayServiceServer interface {
 	UpdateOrder(context.Context, *UpdateOrderRequest) (*UpdateOrderResponse, error)
 	GetPortfolio(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
+	GetFuturePortfolio(context.Context, *GetPortfolioRequest) (*GetFuturePortfolioResponse, error)
 	GetPortfolioByGroupId(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
 	GetTradingSummary(context.Context, *GetTradingSummaryRequest) (*GetTradingSummaryResponse, error)
 	// Execution methods
@@ -332,6 +343,9 @@ func (UnimplementedBrokerGatewayServiceServer) GetPortfolio(context.Context, *Ge
 }
 func (UnimplementedBrokerGatewayServiceServer) GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalance not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) GetFuturePortfolio(context.Context, *GetPortfolioRequest) (*GetFuturePortfolioResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFuturePortfolio not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) GetPortfolioByGroupId(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPortfolioByGroupId not implemented")
@@ -610,6 +624,24 @@ func _BrokerGatewayService_GetAccountBalance_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BrokerGatewayService_GetFuturePortfolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPortfolioRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).GetFuturePortfolio(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/GetFuturePortfolio",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).GetFuturePortfolio(ctx, req.(*GetPortfolioRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BrokerGatewayService_GetPortfolioByGroupId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPortfolioRequest)
 	if err := dec(in); err != nil {
@@ -848,6 +880,10 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAccountBalance",
 			Handler:    _BrokerGatewayService_GetAccountBalance_Handler,
+		},
+		{
+			MethodName: "GetFuturePortfolio",
+			Handler:    _BrokerGatewayService_GetFuturePortfolio_Handler,
 		},
 		{
 			MethodName: "GetPortfolioByGroupId",
