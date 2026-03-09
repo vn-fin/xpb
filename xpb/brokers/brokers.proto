@@ -161,8 +161,8 @@ message PortfolioItem {
   optional int64 pending_sell = 10;
   optional int64 bonus = 11;
   optional int64 available_trading = 12;
-  double avg_price = 15;
-  double market_price = 16;
+  double avg_price = 13;
+  double market_price = 14;
 }
 
 message GetPortfolioRequest {
