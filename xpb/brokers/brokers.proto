@@ -163,6 +163,7 @@ message PortfolioItem {
   optional int64 available_trading = 12;
   double avg_price = 13;
   double market_price = 14;
+  double fee = 15;
 }
 
 message GetPortfolioRequest {
