@@ -183,8 +183,8 @@ message FuturePortfolioItem {
   optional double short = 4;
   optional double net = 5;
   string account_id = 6;
-  double wasp = 7;
-  double wapb = 8;
+  optional double wasp = 7;
+  optional double wapb = 8;
   int64 net_off_vol = 9;
   optional double pending_buy = 10;
   optional double pending_sell = 11;
