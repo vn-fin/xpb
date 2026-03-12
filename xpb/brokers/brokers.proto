@@ -282,7 +282,9 @@ message ExecutionGetPendingOrdersRequest {
 }
 
 message ExecutionGetPendingOrdersResponse {
-  repeated GetPendingOrderInfo pending_orders = 1;
+  bool success = 1;
+  string message = 2;
+  repeated GetPendingOrderInfo pending_orders = 3;
 }
 
 message ExecutionGetPendingOrdersBySymbolRequest {
@@ -292,7 +294,9 @@ message ExecutionGetPendingOrdersBySymbolRequest {
 }
 
 message ExecutionGetPendingOrdersBySymbolResponse {
-  repeated GetPendingOrderInfo pending_orders = 1;
+  bool success = 1;
+  string message = 2;
+  repeated GetPendingOrderInfo pending_orders = 3;
 }
 
 message ExecutionGetPositionsRequest {
@@ -307,7 +311,9 @@ message PositionInfo {
 }
 
 message ExecutionGetPositionsResponse {
-  map<string, PositionInfo> positions = 1; // symbol -> PositionInfo
+  bool success = 1;
+  string message = 2;
+  map<string, PositionInfo> positions = 3; // symbol -> PositionInfo
 }
 
 message ExecutionGetPositionBySymbolRequest {
@@ -317,8 +323,10 @@ message ExecutionGetPositionBySymbolRequest {
 }
 
 message ExecutionGetPositionBySymbolResponse {
-  double position = 1;
-  optional double sellable = 2;
+  bool success = 1;
+  string message = 2;
+  double position = 3;
+  optional double sellable = 4;
 }
 
 message ExecutionCreateOrderRequest {
@@ -332,10 +340,11 @@ message ExecutionCreateOrderRequest {
 }
 
 message ExecutionCreateOrderResponse {
-  string original_order_id = 1;
-  string order_session_id = 2;
-  repeated OrderCreatedInfo orders = 3;
-
+  bool success = 1;
+  string message = 2;
+  string original_order_id = 3;
+  string order_session_id = 4;
+  repeated OrderCreatedInfo orders = 5;
 }
 
 message ExecutionCancelOrderRequest {
@@ -356,7 +365,9 @@ message ExecutionGetMaxSellQtyBySymbolRequest {
 }
 
 message ExecutionGetMaxSellQtyBySymbolResponse {
-  double max_sell_qty = 1;
+  bool success = 1;
+  string message = 2;
+  double max_sell_qty = 3;
 }
 
 message ExecutionGetMaxSellQtysRequest {
@@ -368,7 +379,9 @@ message MaxSellInfo {
   optional double max_sell_qtys = 2;
 }
 message ExecutionGetMaxSellQtysResponse {
-  map<string, MaxSellInfo> MaxSellInfos = 1; // symbol -> max_sell_qty
+  bool success = 1;
+  string message = 2;
+  map<string, MaxSellInfo> MaxSellInfos = 3; // symbol -> max_sell_qty
 }
 
 // Send email OTP DNSE
