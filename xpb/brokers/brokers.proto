@@ -150,7 +150,7 @@ message CancelOrderResponse {
 /* Portfolio */
 message PortfolioItem {
   string symbol = 1;
-  int64 quantity = 2;
+  optional int64 quantity = 2;
   optional int64 t_0_buy = 3;
   optional int64 t_1_buy = 4;
   optional int64 t_2_buy = 5;
@@ -185,7 +185,7 @@ message FuturePortfolioItem {
   string account_id = 6;
   optional double wasp = 7;
   optional double wapb = 8;
-  int64 net_off_vol = 9;
+  optional int64 net_off_vol = 9;
   optional double pending_buy = 10;
   optional double pending_sell = 11;
   optional double filled_buy = 12;
