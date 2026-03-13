@@ -20,7 +20,7 @@ service BrokerGatewayService {
   rpc GetFuturePortfolio(GetPortfolioRequest) returns (GetFuturePortfolioResponse);
   rpc GetPortfolioByGroupId(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetTradingSummary(GetTradingSummaryRequest) returns (GetTradingSummaryResponse);
-  // Execution methods
+  // Execution methods (by cred_id)
   rpc ExecutionGetPositions(ExecutionGetPositionsRequest) returns (ExecutionGetPositionsResponse);
   rpc ExecutionGetPositionBySymbol(ExecutionGetPositionBySymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
   rpc ExecutionCreateOrder(ExecutionCreateOrderRequest) returns (ExecutionCreateOrderResponse);
@@ -29,6 +29,15 @@ service BrokerGatewayService {
   rpc ExecutionGetPendingOrdersBySymbol(ExecutionGetPendingOrdersBySymbolRequest) returns (ExecutionGetPendingOrdersBySymbolResponse);
   rpc ExecutionGetMaxSellQtyBySymbol(ExecutionGetMaxSellQtyBySymbolRequest) returns (ExecutionGetMaxSellQtyBySymbolResponse);
   rpc ExecutionGetMaxSellQtys(ExecutionGetMaxSellQtysRequest) returns (ExecutionGetMaxSellQtysResponse);
+  // Execution methods (by account_id)
+  rpc ExecutionGetPositionsByAccount(ExecutionGetPositionsByAccountRequest) returns (ExecutionGetPositionsResponse);
+  rpc ExecutionGetPositionByAccountSymbol(ExecutionGetPositionByAccountSymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
+  rpc ExecutionCreateOrderByAccount(ExecutionCreateOrderByAccountRequest) returns (ExecutionCreateOrderResponse);
+  rpc ExecutionCancelOrderByAccount(ExecutionCancelOrderByAccountRequest) returns (ExecutionCancelOrderResponse);
+  rpc ExecutionGetPendingOrdersByAccount(ExecutionGetPendingOrdersByAccountRequest) returns (ExecutionGetPendingOrdersResponse);
+  rpc ExecutionGetPendingOrdersByAccountSymbol(ExecutionGetPendingOrdersByAccountSymbolRequest) returns (ExecutionGetPendingOrdersBySymbolResponse);
+  rpc ExecutionGetMaxSellQtyByAccountSymbol(ExecutionGetMaxSellQtyByAccountSymbolRequest) returns (ExecutionGetMaxSellQtyBySymbolResponse);
+  rpc ExecutionGetMaxSellQtysByAccount(ExecutionGetMaxSellQtysByAccountRequest) returns (ExecutionGetMaxSellQtysResponse);
 }
 
 message GatewayOrderAgg {
@@ -412,5 +421,55 @@ message GetTradingSummaryResponse {
   bool success = 1;
   string message = 2;
   TradingSummaryInfo TradingSummaryInfo = 3;
+}
+
+// Execution by account_id
+message ExecutionGetPositionsByAccountRequest {
+  string access_token = 1;
+  string account_id = 2;
+}
+
+message ExecutionGetPositionByAccountSymbolRequest {
+  string access_token = 1;
+  string account_id = 2;
+  string symbol = 3;
+}
+
+message ExecutionCreateOrderByAccountRequest {
+  string access_token = 1;
+  string account_id = 2;
+  string symbol = 3;
+  string order_side = 4;
+  string order_type = 5;
+  double price = 6;
+  double quantity = 7;
+}
+
+message ExecutionCancelOrderByAccountRequest {
+  string access_token = 1;
+  string account_id = 2;
+  string order_session_id = 3;
+}
+
+message ExecutionGetPendingOrdersByAccountRequest {
+  string access_token = 1;
+  string account_id = 2;
+}
+
+message ExecutionGetPendingOrdersByAccountSymbolRequest {
+  string access_token = 1;
+  string account_id = 2;
+  string symbol = 3;
+}
+
+message ExecutionGetMaxSellQtyByAccountSymbolRequest {
+  string access_token = 1;
+  string account_id = 2;
+  string symbol = 3;
+}
+
+message ExecutionGetMaxSellQtysByAccountRequest {
+  string access_token = 1;
+  string account_id = 2;
 }
 
