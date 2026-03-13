@@ -180,3 +180,35 @@ func (c *Client) ExecutionGetMaxSellQtys(ctx context.Context, req *ExecutionGetM
 func (c *Client) GetTradingSummary(ctx context.Context, req *GetTradingSummaryRequest) (*GetTradingSummaryResponse, error) {
 	return c.client.GetTradingSummary(ctx, req)
 }
+
+func (c *Client) ExecutionGetPositionsByAccount(ctx context.Context, req *ExecutionGetPositionsByAccountRequest) (*ExecutionGetPositionsByAccountResponse, error) {
+	return c.client.ExecutionGetPositionsByAccount(ctx, req)
+}
+
+func (c *Client) ExecutionGetPositionByAccountSymbol(ctx context.Context, req *ExecutionGetPositionByAccountSymbolRequest) (*ExecutionGetPositionByAccountSymbolResponse, error) {
+	return c.client.ExecutionGetPositionByAccountSymbol(ctx, req)
+}
+
+func (c *Client) ExecutionCreateOrderByAccount(ctx context.Context, req *ExecutionCreateOrderByAccountRequest) (*ExecutionCreateOrderByAccountResponse, error) {
+	return c.client.ExecutionCreateOrderByAccount(ctx, req)
+}
+
+func (c *Client) ExecutionCancelOrderByAccount(ctx context.Context, req *ExecutionCancelOrderByAccountRequest) (*ExecutionCancelOrderByAccountResponse, error) {
+	return c.client.ExecutionCancelOrderByAccount(ctx, req)
+}
+
+func (c *Client) ExecutionGetPendingOrdersByAccount(ctx context.Context, req *ExecutionGetPendingOrdersByAccountRequest) (*ExecutionGetPendingOrdersByAccountResponse, error) {
+	return c.client.ExecutionGetPendingOrdersByAccount(ctx, req)
+}
+
+func (c *Client) ExecutionGetPendingOrdersByAccountSymbol(ctx context.Context, req *ExecutionGetPendingOrdersByAccountSymbolRequest) (*ExecutionGetPendingOrdersByAccountSymbolResponse, error) {
+	return c.client.ExecutionGetPendingOrdersByAccountSymbol(ctx, req)
+}
+
+func (c *Client) ExecutionGetMaxSellQtyByAccountSymbol(ctx context.Context, req *ExecutionGetMaxSellQtyByAccountSymbolRequest) (*ExecutionGetMaxSellQtyByAccountSymbolResponse, error) {
+	return c.client.ExecutionGetMaxSellQtyByAccountSymbol(ctx, req)
+}
+
+func (c *Client) ExecutionGetMaxSellQtysByAccount(ctx context.Context, req *ExecutionGetMaxSellQtysByAccountRequest) (*ExecutionGetMaxSellQtysByAccountResponse, error) {
+	return c.client.ExecutionGetMaxSellQtysByAccount(ctx, req)
+}

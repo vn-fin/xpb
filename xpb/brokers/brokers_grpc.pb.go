@@ -44,14 +44,14 @@ type BrokerGatewayServiceClient interface {
 	ExecutionGetMaxSellQtyBySymbol(ctx context.Context, in *ExecutionGetMaxSellQtyBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtyBySymbolResponse, error)
 	ExecutionGetMaxSellQtys(ctx context.Context, in *ExecutionGetMaxSellQtysRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtysResponse, error)
 	// Execution methods (by account_id)
-	ExecutionGetPositionsByAccount(ctx context.Context, in *ExecutionGetPositionsByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error)
-	ExecutionGetPositionByAccountSymbol(ctx context.Context, in *ExecutionGetPositionByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error)
-	ExecutionCreateOrderByAccount(ctx context.Context, in *ExecutionCreateOrderByAccountRequest, opts ...grpc.CallOption) (*ExecutionCreateOrderResponse, error)
-	ExecutionCancelOrderByAccount(ctx context.Context, in *ExecutionCancelOrderByAccountRequest, opts ...grpc.CallOption) (*ExecutionCancelOrderResponse, error)
-	ExecutionGetPendingOrdersByAccount(ctx context.Context, in *ExecutionGetPendingOrdersByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersResponse, error)
-	ExecutionGetPendingOrdersByAccountSymbol(ctx context.Context, in *ExecutionGetPendingOrdersByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersBySymbolResponse, error)
-	ExecutionGetMaxSellQtyByAccountSymbol(ctx context.Context, in *ExecutionGetMaxSellQtyByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtyBySymbolResponse, error)
-	ExecutionGetMaxSellQtysByAccount(ctx context.Context, in *ExecutionGetMaxSellQtysByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtysResponse, error)
+	ExecutionGetPositionsByAccount(ctx context.Context, in *ExecutionGetPositionsByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsByAccountResponse, error)
+	ExecutionGetPositionByAccountSymbol(ctx context.Context, in *ExecutionGetPositionByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionByAccountSymbolResponse, error)
+	ExecutionCreateOrderByAccount(ctx context.Context, in *ExecutionCreateOrderByAccountRequest, opts ...grpc.CallOption) (*ExecutionCreateOrderByAccountResponse, error)
+	ExecutionCancelOrderByAccount(ctx context.Context, in *ExecutionCancelOrderByAccountRequest, opts ...grpc.CallOption) (*ExecutionCancelOrderByAccountResponse, error)
+	ExecutionGetPendingOrdersByAccount(ctx context.Context, in *ExecutionGetPendingOrdersByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersByAccountResponse, error)
+	ExecutionGetPendingOrdersByAccountSymbol(ctx context.Context, in *ExecutionGetPendingOrdersByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersByAccountSymbolResponse, error)
+	ExecutionGetMaxSellQtyByAccountSymbol(ctx context.Context, in *ExecutionGetMaxSellQtyByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtyByAccountSymbolResponse, error)
+	ExecutionGetMaxSellQtysByAccount(ctx context.Context, in *ExecutionGetMaxSellQtysByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtysByAccountResponse, error)
 }
 
 type brokerGatewayServiceClient struct {
@@ -278,8 +278,8 @@ func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtys(ctx context.Context
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) ExecutionGetPositionsByAccount(ctx context.Context, in *ExecutionGetPositionsByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error) {
-	out := new(ExecutionGetPositionsResponse)
+func (c *brokerGatewayServiceClient) ExecutionGetPositionsByAccount(ctx context.Context, in *ExecutionGetPositionsByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsByAccountResponse, error) {
+	out := new(ExecutionGetPositionsByAccountResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositionsByAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -287,8 +287,8 @@ func (c *brokerGatewayServiceClient) ExecutionGetPositionsByAccount(ctx context.
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) ExecutionGetPositionByAccountSymbol(ctx context.Context, in *ExecutionGetPositionByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error) {
-	out := new(ExecutionGetPositionBySymbolResponse)
+func (c *brokerGatewayServiceClient) ExecutionGetPositionByAccountSymbol(ctx context.Context, in *ExecutionGetPositionByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionByAccountSymbolResponse, error) {
+	out := new(ExecutionGetPositionByAccountSymbolResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositionByAccountSymbol", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -296,8 +296,8 @@ func (c *brokerGatewayServiceClient) ExecutionGetPositionByAccountSymbol(ctx con
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) ExecutionCreateOrderByAccount(ctx context.Context, in *ExecutionCreateOrderByAccountRequest, opts ...grpc.CallOption) (*ExecutionCreateOrderResponse, error) {
-	out := new(ExecutionCreateOrderResponse)
+func (c *brokerGatewayServiceClient) ExecutionCreateOrderByAccount(ctx context.Context, in *ExecutionCreateOrderByAccountRequest, opts ...grpc.CallOption) (*ExecutionCreateOrderByAccountResponse, error) {
+	out := new(ExecutionCreateOrderByAccountResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionCreateOrderByAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -305,8 +305,8 @@ func (c *brokerGatewayServiceClient) ExecutionCreateOrderByAccount(ctx context.C
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) ExecutionCancelOrderByAccount(ctx context.Context, in *ExecutionCancelOrderByAccountRequest, opts ...grpc.CallOption) (*ExecutionCancelOrderResponse, error) {
-	out := new(ExecutionCancelOrderResponse)
+func (c *brokerGatewayServiceClient) ExecutionCancelOrderByAccount(ctx context.Context, in *ExecutionCancelOrderByAccountRequest, opts ...grpc.CallOption) (*ExecutionCancelOrderByAccountResponse, error) {
+	out := new(ExecutionCancelOrderByAccountResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionCancelOrderByAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -314,8 +314,8 @@ func (c *brokerGatewayServiceClient) ExecutionCancelOrderByAccount(ctx context.C
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) ExecutionGetPendingOrdersByAccount(ctx context.Context, in *ExecutionGetPendingOrdersByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersResponse, error) {
-	out := new(ExecutionGetPendingOrdersResponse)
+func (c *brokerGatewayServiceClient) ExecutionGetPendingOrdersByAccount(ctx context.Context, in *ExecutionGetPendingOrdersByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersByAccountResponse, error) {
+	out := new(ExecutionGetPendingOrdersByAccountResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPendingOrdersByAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -323,8 +323,8 @@ func (c *brokerGatewayServiceClient) ExecutionGetPendingOrdersByAccount(ctx cont
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) ExecutionGetPendingOrdersByAccountSymbol(ctx context.Context, in *ExecutionGetPendingOrdersByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersBySymbolResponse, error) {
-	out := new(ExecutionGetPendingOrdersBySymbolResponse)
+func (c *brokerGatewayServiceClient) ExecutionGetPendingOrdersByAccountSymbol(ctx context.Context, in *ExecutionGetPendingOrdersByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPendingOrdersByAccountSymbolResponse, error) {
+	out := new(ExecutionGetPendingOrdersByAccountSymbolResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPendingOrdersByAccountSymbol", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -332,8 +332,8 @@ func (c *brokerGatewayServiceClient) ExecutionGetPendingOrdersByAccountSymbol(ct
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtyByAccountSymbol(ctx context.Context, in *ExecutionGetMaxSellQtyByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtyBySymbolResponse, error) {
-	out := new(ExecutionGetMaxSellQtyBySymbolResponse)
+func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtyByAccountSymbol(ctx context.Context, in *ExecutionGetMaxSellQtyByAccountSymbolRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtyByAccountSymbolResponse, error) {
+	out := new(ExecutionGetMaxSellQtyByAccountSymbolResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetMaxSellQtyByAccountSymbol", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -341,8 +341,8 @@ func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtyByAccountSymbol(ctx c
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtysByAccount(ctx context.Context, in *ExecutionGetMaxSellQtysByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtysResponse, error) {
-	out := new(ExecutionGetMaxSellQtysResponse)
+func (c *brokerGatewayServiceClient) ExecutionGetMaxSellQtysByAccount(ctx context.Context, in *ExecutionGetMaxSellQtysByAccountRequest, opts ...grpc.CallOption) (*ExecutionGetMaxSellQtysByAccountResponse, error) {
+	out := new(ExecutionGetMaxSellQtysByAccountResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetMaxSellQtysByAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -380,14 +380,14 @@ type BrokerGatewayServiceServer interface {
 	ExecutionGetMaxSellQtyBySymbol(context.Context, *ExecutionGetMaxSellQtyBySymbolRequest) (*ExecutionGetMaxSellQtyBySymbolResponse, error)
 	ExecutionGetMaxSellQtys(context.Context, *ExecutionGetMaxSellQtysRequest) (*ExecutionGetMaxSellQtysResponse, error)
 	// Execution methods (by account_id)
-	ExecutionGetPositionsByAccount(context.Context, *ExecutionGetPositionsByAccountRequest) (*ExecutionGetPositionsResponse, error)
-	ExecutionGetPositionByAccountSymbol(context.Context, *ExecutionGetPositionByAccountSymbolRequest) (*ExecutionGetPositionBySymbolResponse, error)
-	ExecutionCreateOrderByAccount(context.Context, *ExecutionCreateOrderByAccountRequest) (*ExecutionCreateOrderResponse, error)
-	ExecutionCancelOrderByAccount(context.Context, *ExecutionCancelOrderByAccountRequest) (*ExecutionCancelOrderResponse, error)
-	ExecutionGetPendingOrdersByAccount(context.Context, *ExecutionGetPendingOrdersByAccountRequest) (*ExecutionGetPendingOrdersResponse, error)
-	ExecutionGetPendingOrdersByAccountSymbol(context.Context, *ExecutionGetPendingOrdersByAccountSymbolRequest) (*ExecutionGetPendingOrdersBySymbolResponse, error)
-	ExecutionGetMaxSellQtyByAccountSymbol(context.Context, *ExecutionGetMaxSellQtyByAccountSymbolRequest) (*ExecutionGetMaxSellQtyBySymbolResponse, error)
-	ExecutionGetMaxSellQtysByAccount(context.Context, *ExecutionGetMaxSellQtysByAccountRequest) (*ExecutionGetMaxSellQtysResponse, error)
+	ExecutionGetPositionsByAccount(context.Context, *ExecutionGetPositionsByAccountRequest) (*ExecutionGetPositionsByAccountResponse, error)
+	ExecutionGetPositionByAccountSymbol(context.Context, *ExecutionGetPositionByAccountSymbolRequest) (*ExecutionGetPositionByAccountSymbolResponse, error)
+	ExecutionCreateOrderByAccount(context.Context, *ExecutionCreateOrderByAccountRequest) (*ExecutionCreateOrderByAccountResponse, error)
+	ExecutionCancelOrderByAccount(context.Context, *ExecutionCancelOrderByAccountRequest) (*ExecutionCancelOrderByAccountResponse, error)
+	ExecutionGetPendingOrdersByAccount(context.Context, *ExecutionGetPendingOrdersByAccountRequest) (*ExecutionGetPendingOrdersByAccountResponse, error)
+	ExecutionGetPendingOrdersByAccountSymbol(context.Context, *ExecutionGetPendingOrdersByAccountSymbolRequest) (*ExecutionGetPendingOrdersByAccountSymbolResponse, error)
+	ExecutionGetMaxSellQtyByAccountSymbol(context.Context, *ExecutionGetMaxSellQtyByAccountSymbolRequest) (*ExecutionGetMaxSellQtyByAccountSymbolResponse, error)
+	ExecutionGetMaxSellQtysByAccount(context.Context, *ExecutionGetMaxSellQtysByAccountRequest) (*ExecutionGetMaxSellQtysByAccountResponse, error)
 	mustEmbedUnimplementedBrokerGatewayServiceServer()
 }
 
@@ -467,28 +467,28 @@ func (UnimplementedBrokerGatewayServiceServer) ExecutionGetMaxSellQtyBySymbol(co
 func (UnimplementedBrokerGatewayServiceServer) ExecutionGetMaxSellQtys(context.Context, *ExecutionGetMaxSellQtysRequest) (*ExecutionGetMaxSellQtysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetMaxSellQtys not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositionsByAccount(context.Context, *ExecutionGetPositionsByAccountRequest) (*ExecutionGetPositionsResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositionsByAccount(context.Context, *ExecutionGetPositionsByAccountRequest) (*ExecutionGetPositionsByAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositionsByAccount not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositionByAccountSymbol(context.Context, *ExecutionGetPositionByAccountSymbolRequest) (*ExecutionGetPositionBySymbolResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositionByAccountSymbol(context.Context, *ExecutionGetPositionByAccountSymbolRequest) (*ExecutionGetPositionByAccountSymbolResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositionByAccountSymbol not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) ExecutionCreateOrderByAccount(context.Context, *ExecutionCreateOrderByAccountRequest) (*ExecutionCreateOrderResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) ExecutionCreateOrderByAccount(context.Context, *ExecutionCreateOrderByAccountRequest) (*ExecutionCreateOrderByAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionCreateOrderByAccount not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) ExecutionCancelOrderByAccount(context.Context, *ExecutionCancelOrderByAccountRequest) (*ExecutionCancelOrderResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) ExecutionCancelOrderByAccount(context.Context, *ExecutionCancelOrderByAccountRequest) (*ExecutionCancelOrderByAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionCancelOrderByAccount not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPendingOrdersByAccount(context.Context, *ExecutionGetPendingOrdersByAccountRequest) (*ExecutionGetPendingOrdersResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPendingOrdersByAccount(context.Context, *ExecutionGetPendingOrdersByAccountRequest) (*ExecutionGetPendingOrdersByAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPendingOrdersByAccount not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPendingOrdersByAccountSymbol(context.Context, *ExecutionGetPendingOrdersByAccountSymbolRequest) (*ExecutionGetPendingOrdersBySymbolResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPendingOrdersByAccountSymbol(context.Context, *ExecutionGetPendingOrdersByAccountSymbolRequest) (*ExecutionGetPendingOrdersByAccountSymbolResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPendingOrdersByAccountSymbol not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) ExecutionGetMaxSellQtyByAccountSymbol(context.Context, *ExecutionGetMaxSellQtyByAccountSymbolRequest) (*ExecutionGetMaxSellQtyBySymbolResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetMaxSellQtyByAccountSymbol(context.Context, *ExecutionGetMaxSellQtyByAccountSymbolRequest) (*ExecutionGetMaxSellQtyByAccountSymbolResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetMaxSellQtyByAccountSymbol not implemented")
 }
-func (UnimplementedBrokerGatewayServiceServer) ExecutionGetMaxSellQtysByAccount(context.Context, *ExecutionGetMaxSellQtysByAccountRequest) (*ExecutionGetMaxSellQtysResponse, error) {
+func (UnimplementedBrokerGatewayServiceServer) ExecutionGetMaxSellQtysByAccount(context.Context, *ExecutionGetMaxSellQtysByAccountRequest) (*ExecutionGetMaxSellQtysByAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetMaxSellQtysByAccount not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) mustEmbedUnimplementedBrokerGatewayServiceServer() {}

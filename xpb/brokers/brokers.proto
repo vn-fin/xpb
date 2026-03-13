@@ -30,14 +30,14 @@ service BrokerGatewayService {
   rpc ExecutionGetMaxSellQtyBySymbol(ExecutionGetMaxSellQtyBySymbolRequest) returns (ExecutionGetMaxSellQtyBySymbolResponse);
   rpc ExecutionGetMaxSellQtys(ExecutionGetMaxSellQtysRequest) returns (ExecutionGetMaxSellQtysResponse);
   // Execution methods (by account_id)
-  rpc ExecutionGetPositionsByAccount(ExecutionGetPositionsByAccountRequest) returns (ExecutionGetPositionsResponse);
-  rpc ExecutionGetPositionByAccountSymbol(ExecutionGetPositionByAccountSymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
-  rpc ExecutionCreateOrderByAccount(ExecutionCreateOrderByAccountRequest) returns (ExecutionCreateOrderResponse);
-  rpc ExecutionCancelOrderByAccount(ExecutionCancelOrderByAccountRequest) returns (ExecutionCancelOrderResponse);
-  rpc ExecutionGetPendingOrdersByAccount(ExecutionGetPendingOrdersByAccountRequest) returns (ExecutionGetPendingOrdersResponse);
-  rpc ExecutionGetPendingOrdersByAccountSymbol(ExecutionGetPendingOrdersByAccountSymbolRequest) returns (ExecutionGetPendingOrdersBySymbolResponse);
-  rpc ExecutionGetMaxSellQtyByAccountSymbol(ExecutionGetMaxSellQtyByAccountSymbolRequest) returns (ExecutionGetMaxSellQtyBySymbolResponse);
-  rpc ExecutionGetMaxSellQtysByAccount(ExecutionGetMaxSellQtysByAccountRequest) returns (ExecutionGetMaxSellQtysResponse);
+  rpc ExecutionGetPositionsByAccount(ExecutionGetPositionsByAccountRequest) returns (ExecutionGetPositionsByAccountResponse);
+  rpc ExecutionGetPositionByAccountSymbol(ExecutionGetPositionByAccountSymbolRequest) returns (ExecutionGetPositionByAccountSymbolResponse);
+  rpc ExecutionCreateOrderByAccount(ExecutionCreateOrderByAccountRequest) returns (ExecutionCreateOrderByAccountResponse);
+  rpc ExecutionCancelOrderByAccount(ExecutionCancelOrderByAccountRequest) returns (ExecutionCancelOrderByAccountResponse);
+  rpc ExecutionGetPendingOrdersByAccount(ExecutionGetPendingOrdersByAccountRequest) returns (ExecutionGetPendingOrdersByAccountResponse);
+  rpc ExecutionGetPendingOrdersByAccountSymbol(ExecutionGetPendingOrdersByAccountSymbolRequest) returns (ExecutionGetPendingOrdersByAccountSymbolResponse);
+  rpc ExecutionGetMaxSellQtyByAccountSymbol(ExecutionGetMaxSellQtyByAccountSymbolRequest) returns (ExecutionGetMaxSellQtyByAccountSymbolResponse);
+  rpc ExecutionGetMaxSellQtysByAccount(ExecutionGetMaxSellQtysByAccountRequest) returns (ExecutionGetMaxSellQtysByAccountResponse);
 }
 
 message GatewayOrderAgg {
@@ -471,5 +471,54 @@ message ExecutionGetMaxSellQtyByAccountSymbolRequest {
 message ExecutionGetMaxSellQtysByAccountRequest {
   string access_token = 1;
   string account_id = 2;
+}
+
+// Execution by account_id responses
+message ExecutionGetPositionsByAccountResponse {
+  bool success = 1;
+  string message = 2;
+  map<string, PositionInfo> positions = 3;
+}
+
+message ExecutionGetPositionByAccountSymbolResponse {
+  bool success = 1;
+  string message = 2;
+  double position = 3;
+  optional double sellable = 4;
+}
+
+message ExecutionCreateOrderByAccountResponse {
+  bool success = 1;
+  string message = 2;
+  string order_id = 3;
+}
+
+message ExecutionCancelOrderByAccountResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message ExecutionGetPendingOrdersByAccountResponse {
+  bool success = 1;
+  string message = 2;
+  repeated GetPendingOrderInfo pending_orders = 3;
+}
+
+message ExecutionGetPendingOrdersByAccountSymbolResponse {
+  bool success = 1;
+  string message = 2;
+  repeated GetPendingOrderInfo pending_orders = 3;
+}
+
+message ExecutionGetMaxSellQtyByAccountSymbolResponse {
+  bool success = 1;
+  string message = 2;
+  double max_sell_qty = 3;
+}
+
+message ExecutionGetMaxSellQtysByAccountResponse {
+  bool success = 1;
+  string message = 2;
+  map<string, MaxSellInfo> max_sell_infos = 3;
 }
 
