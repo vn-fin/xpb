@@ -448,7 +448,7 @@ message ExecutionCreateOrderByAccountRequest {
 message ExecutionCancelOrderByAccountRequest {
   string access_token = 1;
   string account_id = 2;
-  string order_session_id = 3;
+  string order_id = 3;
 }
 
 message ExecutionGetPendingOrdersByAccountRequest {
