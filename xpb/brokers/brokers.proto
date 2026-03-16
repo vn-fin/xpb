@@ -85,6 +85,19 @@ message GetPendingOrderInfo{
   optional double remaining = 7;
   int64 created_at =8;
 }
+
+message GetPendingOrderPaperTradeInfo{
+  string order_id = 1;
+  string symbol = 2;
+  string side =3;
+  double quantity = 4;
+  optional double filled = 5;
+  optional double remaining = 6;
+  int64 created_at =7;
+}
+
+
+
 message OrderCreatedInfo{
   string symbol = 1;
   string order_session_id = 2;
@@ -501,13 +514,13 @@ message ExecutionCancelOrderByAccountResponse {
 message ExecutionGetPendingOrdersByAccountResponse {
   bool success = 1;
   string message = 2;
-  repeated GetPendingOrderInfo pending_orders = 3;
+  repeated GetPendingOrderPaperTradeInfo pending_orders = 3;
 }
 
 message ExecutionGetPendingOrdersByAccountSymbolResponse {
   bool success = 1;
   string message = 2;
-  repeated GetPendingOrderInfo pending_orders = 3;
+  repeated GetPendingOrderPaperTradeInfo pending_orders = 3;
 }
 
 message ExecutionGetMaxSellQtyByAccountSymbolResponse {
