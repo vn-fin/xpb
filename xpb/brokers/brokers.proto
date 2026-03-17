@@ -359,6 +359,7 @@ message ExecutionCreateOrderRequest {
   string order_type = 5;
   double price = 6;
   double quantity = 7;
+  string remark = 8;
 }
 
 message ExecutionCreateOrderResponse {
