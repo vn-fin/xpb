@@ -85,6 +85,11 @@ func (c *Client) GetOrderById(ctx context.Context, req *GetOrderRequest) (*GetOr
 	return c.client.GetOrderById(ctx, req)
 }
 
+// GetPnLSeries retrieves an order by its ID
+func (c *Client) GetPnLSeries(ctx context.Context, req *GetPnLSeriesRequests) (*GetPnLSeriesResponse, error) {
+	return c.client.GetPnLSeries(ctx, req)
+}
+
 // GetPendingOrders retrieves all pending orders
 func (c *Client) GetPendingOrders(ctx context.Context, req *GetPendingOrdersRequest) (*GetPendingOrdersResponse, error) {
 	return c.client.GetPendingOrders(ctx, req)

@@ -20,6 +20,7 @@ service BrokerGatewayService {
   rpc GetFuturePortfolio(GetPortfolioRequest) returns (GetFuturePortfolioResponse);
   rpc GetPortfolioByGroupId(GetPortfolioRequest) returns (GetPortfolioResponse);
   rpc GetTradingSummary(GetTradingSummaryRequest) returns (GetTradingSummaryResponse);
+  rpc GetPnLSeries(GetPnLSeriesRequests)  returns (GetPnLSeriesResponse);
   // Execution methods (by cred_id)
   rpc ExecutionGetPositions(ExecutionGetPositionsRequest) returns (ExecutionGetPositionsResponse);
   rpc ExecutionGetPositionBySymbol(ExecutionGetPositionBySymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
@@ -38,6 +39,25 @@ service BrokerGatewayService {
   rpc ExecutionGetPendingOrdersByAccountSymbol(ExecutionGetPendingOrdersByAccountSymbolRequest) returns (ExecutionGetPendingOrdersByAccountSymbolResponse);
   rpc ExecutionGetMaxSellQtyByAccountSymbol(ExecutionGetMaxSellQtyByAccountSymbolRequest) returns (ExecutionGetMaxSellQtyByAccountSymbolResponse);
   rpc ExecutionGetMaxSellQtysByAccount(ExecutionGetMaxSellQtysByAccountRequest) returns (ExecutionGetMaxSellQtysByAccountResponse);
+}
+message PnlSeriesItems{
+  string date = 1;
+  optional double daily_pnl = 2;
+  optional double total_profit_amount = 3;
+  optional double total_interes_amount = 4;
+  optional double total_loss_amount = 5;
+}
+
+message GetPnLSeriesRequests{
+  string group_id = 1;
+  optional string account_type = 2;
+  string range_time = 3;
+}
+
+message GetPnLSeriesResponse{
+  bool success = 1;
+  string message = 2;
+  repeated PnlSeriesItems PnlSeriesItem = 3;
 }
 
 message GatewayOrderAgg {

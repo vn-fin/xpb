@@ -34,6 +34,7 @@ type BrokerGatewayServiceClient interface {
 	GetFuturePortfolio(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetFuturePortfolioResponse, error)
 	GetPortfolioByGroupId(ctx context.Context, in *GetPortfolioRequest, opts ...grpc.CallOption) (*GetPortfolioResponse, error)
 	GetTradingSummary(ctx context.Context, in *GetTradingSummaryRequest, opts ...grpc.CallOption) (*GetTradingSummaryResponse, error)
+	GetPnLSeries(ctx context.Context, in *GetPnLSeriesRequests, opts ...grpc.CallOption) (*GetPnLSeriesResponse, error)
 	// Execution methods (by cred_id)
 	ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(ctx context.Context, in *ExecutionGetPositionBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error)
@@ -206,6 +207,15 @@ func (c *brokerGatewayServiceClient) GetTradingSummary(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *brokerGatewayServiceClient) GetPnLSeries(ctx context.Context, in *GetPnLSeriesRequests, opts ...grpc.CallOption) (*GetPnLSeriesResponse, error) {
+	out := new(GetPnLSeriesResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetPnLSeries", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *brokerGatewayServiceClient) ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error) {
 	out := new(ExecutionGetPositionsResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositions", in, out, opts...)
@@ -370,6 +380,7 @@ type BrokerGatewayServiceServer interface {
 	GetFuturePortfolio(context.Context, *GetPortfolioRequest) (*GetFuturePortfolioResponse, error)
 	GetPortfolioByGroupId(context.Context, *GetPortfolioRequest) (*GetPortfolioResponse, error)
 	GetTradingSummary(context.Context, *GetTradingSummaryRequest) (*GetTradingSummaryResponse, error)
+	GetPnLSeries(context.Context, *GetPnLSeriesRequests) (*GetPnLSeriesResponse, error)
 	// Execution methods (by cred_id)
 	ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(context.Context, *ExecutionGetPositionBySymbolRequest) (*ExecutionGetPositionBySymbolResponse, error)
@@ -442,6 +453,9 @@ func (UnimplementedBrokerGatewayServiceServer) GetPortfolioByGroupId(context.Con
 }
 func (UnimplementedBrokerGatewayServiceServer) GetTradingSummary(context.Context, *GetTradingSummaryRequest) (*GetTradingSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTradingSummary not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) GetPnLSeries(context.Context, *GetPnLSeriesRequests) (*GetPnLSeriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPnLSeries not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositions not implemented")
@@ -788,6 +802,24 @@ func _BrokerGatewayService_GetTradingSummary_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BrokerGatewayServiceServer).GetTradingSummary(ctx, req.(*GetTradingSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_GetPnLSeries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPnLSeriesRequests)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).GetPnLSeries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/GetPnLSeries",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).GetPnLSeries(ctx, req.(*GetPnLSeriesRequests))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1150,6 +1182,10 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTradingSummary",
 			Handler:    _BrokerGatewayService_GetTradingSummary_Handler,
+		},
+		{
+			MethodName: "GetPnLSeries",
+			Handler:    _BrokerGatewayService_GetPnLSeries_Handler,
 		},
 		{
 			MethodName: "ExecutionGetPositions",
