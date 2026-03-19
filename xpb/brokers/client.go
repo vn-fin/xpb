@@ -119,6 +119,11 @@ func (c *Client) GetAccountBalance(ctx context.Context, req *GetAccountBalanceRe
 	return c.client.GetAccountBalance(ctx, req)
 }
 
+// GetCredentialBalance retrieves the credential balance
+func (c *Client) GetCredentialBalance(ctx context.Context, req *GetCredentialBalanceRequest) (*GetCredentialBalanceResponse, error) {
+	return c.client.GetCredentialBalance(ctx, req)
+}
+
 func (c *Client) GetOrdersBySession(ctx context.Context, req *GetOrdersBySessionRequest) (*GetOrdersBySessionResponse, error) {
 	return c.client.GetOrdersBySession(ctx, req)
 }
