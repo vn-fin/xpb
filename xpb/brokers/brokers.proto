@@ -258,15 +258,15 @@ message GetCredentialBalanceRequest{
 message GetAccountBalanceResponse {
   bool success = 1;
   string message = 2;
-  double balance = 3;
+  double cash = 3;
+  double equity = 4;
+  double balance = 5;
 }
 
 message GetCredentialBalanceResponse{
   bool success = 1;
   string message = 2;
-  double cash = 3;
-  double equity = 4;
-  double balance = 5;
+  double balance = 3;
 }
 /* Pending Orders - matches models.GetPendingOrdersRequest */
 message GetPendingOrdersRequest {
