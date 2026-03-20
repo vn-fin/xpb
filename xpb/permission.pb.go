@@ -173,23 +173,23 @@ type UserInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserId              string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Email               string `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Phone               string `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
-	Username            string `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
-	Fullname            string `protobuf:"bytes,5,opt,name=fullname,proto3" json:"fullname,omitempty"`
-	Subscription        string `protobuf:"bytes,6,opt,name=subscription,proto3" json:"subscription,omitempty"`
-	SubscriptionDisplay string `protobuf:"bytes,7,opt,name=subscription_display,json=subscriptionDisplay,proto3" json:"subscription_display,omitempty"`
-	SubscriptionStart   int64  `protobuf:"varint,8,opt,name=subscription_start,json=subscriptionStart,proto3" json:"subscription_start,omitempty"`
-	SubscriptionEnd     int64  `protobuf:"varint,9,opt,name=subscription_end,json=subscriptionEnd,proto3" json:"subscription_end,omitempty"`
-	AccessServices      string `protobuf:"bytes,10,opt,name=access_services,json=accessServices,proto3" json:"access_services,omitempty"` // JSON string
-	Picture             string `protobuf:"bytes,11,opt,name=picture,proto3" json:"picture,omitempty"`
-	Info                string `protobuf:"bytes,12,opt,name=info,proto3" json:"info,omitempty"` // JSON string
-	EmailVerified       bool   `protobuf:"varint,13,opt,name=email_verified,json=emailVerified,proto3" json:"email_verified,omitempty"`
-	Aud                 string `protobuf:"bytes,14,opt,name=aud,proto3" json:"aud,omitempty"`
-	Exp                 int64  `protobuf:"varint,15,opt,name=exp,proto3" json:"exp,omitempty"`
-	LastLogin           int64  `protobuf:"varint,16,opt,name=last_login,json=lastLogin,proto3" json:"last_login,omitempty"`
-	Roles               int64  `protobuf:"varint,17,opt,name=roles,proto3" json:"roles,omitempty"`
+	UserId              string   `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Email               string   `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Phone               string   `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	Username            string   `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
+	Fullname            string   `protobuf:"bytes,5,opt,name=fullname,proto3" json:"fullname,omitempty"`
+	Subscription        string   `protobuf:"bytes,6,opt,name=subscription,proto3" json:"subscription,omitempty"`
+	SubscriptionDisplay string   `protobuf:"bytes,7,opt,name=subscription_display,json=subscriptionDisplay,proto3" json:"subscription_display,omitempty"`
+	SubscriptionStart   int64    `protobuf:"varint,8,opt,name=subscription_start,json=subscriptionStart,proto3" json:"subscription_start,omitempty"`
+	SubscriptionEnd     int64    `protobuf:"varint,9,opt,name=subscription_end,json=subscriptionEnd,proto3" json:"subscription_end,omitempty"`
+	AccessServices      string   `protobuf:"bytes,10,opt,name=access_services,json=accessServices,proto3" json:"access_services,omitempty"` // JSON string
+	Picture             string   `protobuf:"bytes,11,opt,name=picture,proto3" json:"picture,omitempty"`
+	Info                string   `protobuf:"bytes,12,opt,name=info,proto3" json:"info,omitempty"` // JSON string
+	EmailVerified       bool     `protobuf:"varint,13,opt,name=email_verified,json=emailVerified,proto3" json:"email_verified,omitempty"`
+	Aud                 string   `protobuf:"bytes,14,opt,name=aud,proto3" json:"aud,omitempty"`
+	Exp                 int64    `protobuf:"varint,15,opt,name=exp,proto3" json:"exp,omitempty"`
+	LastLogin           int64    `protobuf:"varint,16,opt,name=last_login,json=lastLogin,proto3" json:"last_login,omitempty"`
+	Roles               []string `protobuf:"bytes,17,rep,name=roles,proto3" json:"roles,omitempty"`
 }
 
 func (x *UserInfo) Reset() {
@@ -336,11 +336,11 @@ func (x *UserInfo) GetLastLogin() int64 {
 	return 0
 }
 
-func (x *UserInfo) GetRoles() int64 {
+func (x *UserInfo) GetRoles() []string {
 	if x != nil {
 		return x.Roles
 	}
-	return 0
+	return nil
 }
 
 // UserInfoFromFB represents full information from Firebase token
@@ -1232,7 +1232,7 @@ var file_permission_proto_rawDesc = []byte{
 	0x01, 0x28, 0x03, 0x52, 0x03, 0x65, 0x78, 0x70, 0x12, 0x1d, 0x0a, 0x0a, 0x6c, 0x61, 0x73, 0x74,
 	0x5f, 0x6c, 0x6f, 0x67, 0x69, 0x6e, 0x18, 0x10, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x6c, 0x61,
 	0x73, 0x74, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x72, 0x6f, 0x6c, 0x65, 0x73,
-	0x18, 0x11, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x72, 0x6f, 0x6c, 0x65, 0x73, 0x22, 0xca, 0x02,
+	0x18, 0x11, 0x20, 0x03, 0x28, 0x09, 0x52, 0x05, 0x72, 0x6f, 0x6c, 0x65, 0x73, 0x22, 0xca, 0x02,
 	0x0a, 0x0e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x46, 0x72, 0x6f, 0x6d, 0x46, 0x42,
 	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
 	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x69, 0x63, 0x74, 0x75, 0x72, 0x65, 0x18,
