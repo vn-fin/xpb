@@ -63,6 +63,7 @@ message UserInfo {
   string aud = 14;
   int64 exp = 15;
   int64 last_login = 16;
+  int64 roles = 17;
 }
 
 // UserInfoFromFB represents full information from Firebase token
