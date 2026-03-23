@@ -233,8 +233,10 @@ message FuturePortfolioItem {
   optional double pending_sell = 11;
   optional double filled_buy = 12;
   optional double filled_sell = 13;
-  string due_date = 14;
-  double fee = 15;
+  optional double t0_buy = 14;
+  optional double t0_sell = 15;
+  string due_date = 16;
+  double fee = 17;
 }
 
 message GetFuturePortfolioResponse {
