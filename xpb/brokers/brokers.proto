@@ -207,6 +207,7 @@ message PortfolioItem {
   double avg_price = 13;
   double market_price = 14;
   double fee = 15;
+  double today_fee = 16;
 }
 
 message GetPortfolioRequest {
@@ -237,6 +238,7 @@ message FuturePortfolioItem {
   optional double t0_sell = 15;
   string due_date = 16;
   double fee = 17;
+  double today_fee = 18;
 }
 
 message GetFuturePortfolioResponse {
