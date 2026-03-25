@@ -197,17 +197,17 @@ message PortfolioItem {
   optional int64 t_0_buy = 3;
   optional int64 t_1_buy = 4;
   optional int64 t_2_buy = 5;
-  optional int64 t_0_sell = 6;
-  optional int64 t_1_sell = 7;
-  optional int64 t_2_sell = 8;
+  optional double t_0_sell = 6;
+  optional double t_1_sell = 7;
+  optional double t_2_sell = 8;
   optional int64 pending_buy = 9;
   optional int64 pending_sell = 10;
   optional int64 bonus = 11;
   optional int64 available_trading = 12;
   double avg_price = 13;
   double market_price = 14;
-  double fee = 15;
-  double today_fee = 16;
+  optional double fee = 15;
+  optional double today_fee = 16;
 }
 
 message GetPortfolioRequest {
