@@ -262,9 +262,21 @@ message GetCredentialBalanceRequest{
 message GetAccountBalanceResponse {
   bool success = 1;
   string message = 2;
-  double cash = 3;
-  double equity = 4;
-  double balance = 5;
+  // Stock fields (3-9)
+  optional double total_cash = 3;
+  optional double available_cash = 4;
+  optional double deposit_interest = 5;
+  optional double total_debt = 6;
+  optional double deposit_fee_amount = 7;
+  optional double withdrawable_cash = 8;
+  optional double cash_dividend_receiving = 9;
+  // Future fields (10-15)
+  optional double pending_deposit_withdraw = 10;
+  optional double remain_secure = 11;
+  optional double used_secure = 12;
+  optional double pending_secure = 13;
+  optional double hold_tax_and_fee = 14;
+  optional double total_loan_debt = 15;
 }
 
 message GetCredentialBalanceResponse{
