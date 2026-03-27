@@ -124,6 +124,11 @@ func (c *Client) GetCredentialBalance(ctx context.Context, req *GetCredentialBal
 	return c.client.GetCredentialBalance(ctx, req)
 }
 
+// CheckCredentialLogin checks if a credential is logged in
+func (c *Client) CheckCredentialLogin(ctx context.Context, req *CheckCredentialLoginRequest) (*CheckCredentialLoginResponse, error) {
+	return c.client.CheckCredentialLogin(ctx, req)
+}
+
 func (c *Client) GetOrdersBySession(ctx context.Context, req *GetOrdersBySessionRequest) (*GetOrdersBySessionResponse, error) {
 	return c.client.GetOrdersBySession(ctx, req)
 }
