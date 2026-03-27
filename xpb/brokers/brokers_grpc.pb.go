@@ -36,6 +36,7 @@ type BrokerGatewayServiceClient interface {
 	GetTradingSummary(ctx context.Context, in *GetTradingSummaryRequest, opts ...grpc.CallOption) (*GetTradingSummaryResponse, error)
 	GetPnLSeries(ctx context.Context, in *GetPnLSeriesRequests, opts ...grpc.CallOption) (*GetPnLSeriesResponse, error)
 	GetCredentialBalance(ctx context.Context, in *GetCredentialBalanceRequest, opts ...grpc.CallOption) (*GetCredentialBalanceResponse, error)
+	CheckCredentialLogin(ctx context.Context, in *CheckCredentialLoginRequest, opts ...grpc.CallOption) (*CheckCredentialLoginResponse, error)
 	// Execution methods (by cred_id)
 	ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(ctx context.Context, in *ExecutionGetPositionBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error)
@@ -226,6 +227,15 @@ func (c *brokerGatewayServiceClient) GetCredentialBalance(ctx context.Context, i
 	return out, nil
 }
 
+func (c *brokerGatewayServiceClient) CheckCredentialLogin(ctx context.Context, in *CheckCredentialLoginRequest, opts ...grpc.CallOption) (*CheckCredentialLoginResponse, error) {
+	out := new(CheckCredentialLoginResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CheckCredentialLogin", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *brokerGatewayServiceClient) ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error) {
 	out := new(ExecutionGetPositionsResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositions", in, out, opts...)
@@ -392,6 +402,7 @@ type BrokerGatewayServiceServer interface {
 	GetTradingSummary(context.Context, *GetTradingSummaryRequest) (*GetTradingSummaryResponse, error)
 	GetPnLSeries(context.Context, *GetPnLSeriesRequests) (*GetPnLSeriesResponse, error)
 	GetCredentialBalance(context.Context, *GetCredentialBalanceRequest) (*GetCredentialBalanceResponse, error)
+	CheckCredentialLogin(context.Context, *CheckCredentialLoginRequest) (*CheckCredentialLoginResponse, error)
 	// Execution methods (by cred_id)
 	ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(context.Context, *ExecutionGetPositionBySymbolRequest) (*ExecutionGetPositionBySymbolResponse, error)
@@ -470,6 +481,9 @@ func (UnimplementedBrokerGatewayServiceServer) GetPnLSeries(context.Context, *Ge
 }
 func (UnimplementedBrokerGatewayServiceServer) GetCredentialBalance(context.Context, *GetCredentialBalanceRequest) (*GetCredentialBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCredentialBalance not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) CheckCredentialLogin(context.Context, *CheckCredentialLoginRequest) (*CheckCredentialLoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckCredentialLogin not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositions not implemented")
@@ -856,6 +870,24 @@ func _BrokerGatewayService_GetCredentialBalance_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BrokerGatewayService_CheckCredentialLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckCredentialLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).CheckCredentialLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/CheckCredentialLogin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).CheckCredentialLogin(ctx, req.(*CheckCredentialLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BrokerGatewayService_ExecutionGetPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ExecutionGetPositionsRequest)
 	if err := dec(in); err != nil {
@@ -1222,6 +1254,10 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCredentialBalance",
 			Handler:    _BrokerGatewayService_GetCredentialBalance_Handler,
+		},
+		{
+			MethodName: "CheckCredentialLogin",
+			Handler:    _BrokerGatewayService_CheckCredentialLogin_Handler,
 		},
 		{
 			MethodName: "ExecutionGetPositions",

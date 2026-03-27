@@ -22,6 +22,7 @@ service BrokerGatewayService {
   rpc GetTradingSummary(GetTradingSummaryRequest) returns (GetTradingSummaryResponse);
   rpc GetPnLSeries(GetPnLSeriesRequests)  returns (GetPnLSeriesResponse);
   rpc GetCredentialBalance(GetCredentialBalanceRequest) returns (GetCredentialBalanceResponse);
+  rpc CheckCredentialLogin(CheckCredentialLoginRequest) returns (CheckCredentialLoginResponse);
   // Execution methods (by cred_id)
   rpc ExecutionGetPositions(ExecutionGetPositionsRequest) returns (ExecutionGetPositionsResponse);
   rpc ExecutionGetPositionBySymbol(ExecutionGetPositionBySymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
@@ -60,6 +61,7 @@ message GetPnLSeriesResponse{
   string message = 2;
   repeated PnlSeriesItems PnlSeriesItem = 3;
 }
+
 
 message GatewayOrderAgg {
   string order_session_id = 1;
@@ -595,3 +597,12 @@ message ExecutionGetMaxSellQtysByAccountResponse {
   map<string, MaxSellInfo> max_sell_infos = 3;
 }
 
+message CheckCredentialLoginRequest{
+  string credential_id = 1;
+}
+
+message CheckCredentialLoginResponse{
+  bool success = 1;
+  string message = 2;
+  bool login = 3;
+}
