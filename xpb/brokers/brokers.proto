@@ -210,6 +210,7 @@ message PortfolioItem {
   double market_price = 14;
   optional double fee = 15;
   optional double today_fee = 16;
+  optional DealStockDetailInfo deal_stock_detail = 17;
 }
 
 message GetPortfolioRequest {
@@ -241,6 +242,7 @@ message FuturePortfolioItem {
   string due_date = 16;
   double fee = 17;
   double today_fee = 18;
+  optional DealFutureDetailInfo deal_future_detail = 19;
 }
 
 message GetFuturePortfolioResponse {
@@ -605,4 +607,128 @@ message CheckCredentialLoginResponse{
   bool success = 1;
   string message = 2;
   bool login = 3;
+}
+
+
+
+/* Deal Stock Detail */
+message DealStockDetailInfo {
+  string status = 1;
+  optional double loan_package_id = 2;
+  string side = 3;
+  optional double secure = 4;
+  optional double accumulate_quantity = 5;
+  optional double accumulate_secure = 6;
+  optional double accumulate_debt = 7;
+  optional double accumulate_margin_debt = 8;
+  optional double trade_quantity = 9;
+  optional double closed_quantity = 10;
+  optional double t0_receiving_quantity = 11;
+  optional double t1_receiving_quantity = 12;
+  optional double t2_receiving_quantity = 13;
+  optional double pending_close_quantity = 14;
+  optional double cost_price = 15;
+  optional double cost_price_vm = 16;
+  optional double average_cost_price = 17;
+  optional double average_close_price = 18;
+  optional double market_price = 19;
+  optional double realized_profit = 20;
+  optional double realized_profit_vm = 21;
+  optional double accumulate_realized_profit_vm = 22;
+  optional double collected_buying_fee = 23;
+  optional double collected_buying_tax = 24;
+  optional double collected_selling_fee = 25;
+  optional double collected_stock_transfer_fee = 26;
+  optional double collected_interest_fee = 27;
+  optional double collected_selling_tax = 28;
+  optional double collected_selling_dividend_tax = 29;
+  optional double realized_total_tax_and_fee = 30;
+  optional double realized_open_fee = 31;
+  optional double realized_open_tax = 32;
+  optional double estimate_remain_tax_and_fee = 33;
+  optional double unrealized_profit = 34;
+  optional double dividend_receiving_quantity = 35;
+  optional double dividend_quantity = 36;
+  optional double cash_receiving = 37;
+  optional double right_receiving_quantity = 38;
+  optional double max_right_quantity = 39;
+  optional double t0_receiving_cash = 40;
+  optional double t1_receiving_cash = 41;
+  optional double t2_receiving_cash = 42;
+  optional double break_even_price = 43;
+  optional double current_debt = 44;
+  optional double margin_debt = 45;
+  optional double current_interest = 46;
+  optional double accumulate_prepay_debt = 47;
+  optional double accumulate_margin_prepay_debt = 48;
+  optional double accumulate_prepay_interest = 49;
+  optional double unrealized_prepay_debt = 50;
+  optional double unrealized_margin_prepay_debt = 51;
+  optional double unrealized_prepay_interest = 52;
+  optional double blocked_quantity = 53;
+  optional double restricted_quantity = 54;
+  optional double initial_rate = 55;
+  string created_date = 56;
+  string modified_date = 57;
+  optional double unrealized_deal_mana_prepay_debt = 58;
+  optional double accumulate_deal_mana_prepay_debt = 59;
+  optional double accumulate_deal_mana_debt = 60;
+  optional double deal_mana_debt = 61;
+  optional double open_quantity = 62;
+  optional double unrealized_open_tax_and_fee = 63;
+  bool active = 64;
+  optional double current_debt_exclude_to_collect = 65;
+  optional double current_interest_exclude_to_collect = 66;
+}
+
+/* Deal Future Detail */
+message DealFutureDetailInfo {
+  string side = 1;
+  string status = 2;
+  optional double loan_package_id = 3;
+  optional double secure = 4;
+  optional double open_quantity = 5;
+  optional double closed_quantity = 6;
+  optional double accumulate_quantity = 7;
+  optional double over_night_quantity = 8;
+  optional double break_even_price = 9;
+  optional double cost_price = 10;
+  optional double cost_price_vm = 11;
+  optional double average_cost_price = 12;
+  optional double average_close_price = 13;
+  optional double market_price = 14;
+  optional double realized_profit_vm = 15;
+  optional double unrealized_profit_vm = 16;
+  optional double total_unrealized_profit_vm = 17;
+  optional double total_unrealized_profit = 18;
+  optional double total_unrealized_tax_and_fee = 19;
+  optional double total_unrealized_interest = 20;
+  optional double total_realized_profit = 21;
+  optional double total_realized_tax_and_fee = 22;
+  optional double total_realized_interest = 23;
+  optional double estimate_remain_fee = 24;
+  optional double estimate_remain_tax = 25;
+  optional double total_realized_position_fee = 26;
+  optional double total_unrealized_position_fee = 27;
+  optional double over_draft_unrealized_principal = 28;
+  optional double over_draft_realized_principal = 29;
+  optional double over_draft_unrealized_interest = 30;
+  optional double over_draft_realized_interest = 31;
+  optional double paid_over_draft_principal = 32;
+  optional double paid_over_draft_interest = 33;
+  string created_date = 34;
+  string modified_date = 35;
+  optional double daily_position_fee = 36;
+  optional double deposit_secure = 37;
+  optional double accumulate_secure = 38;
+  optional double total_realized_profit_vm = 39;
+  optional double daily_realized_tax_and_fee = 40;
+  optional double daily_realized_interest = 41;
+  optional double daily_realized_position_fee = 42;
+  optional double maturity_fee = 43;
+  optional double withdraw_secure = 44;
+  optional double daily_tax_and_fee_obligation = 45;
+  optional double daily_closed_tax_and_fee_obligation = 46;
+  optional double daily_position_obligation = 47;
+  optional double daily_realized_paid_profit_vm = 48;
 }
