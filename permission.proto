@@ -36,7 +36,8 @@ message PingRequest {
 }
 
 message PingResponse {
-  string message = 1;
+  bool success = 1;
+  string message = 2;
 }
 
 
@@ -84,9 +85,10 @@ message UserInfoFromFB {
 
 // CheckAuthResponse returns user info if auth succeeds, or error message if fails
 message CheckAuthResponse {
-  string message = 1; // error message if authentication fails
-  UserInfo user_info = 2; // returned when CheckAuthToken succeeds
-  UserInfoFromFB user_info_from_fb = 3; // returned when CheckAuthFirebaseToken succeeds
+  bool success = 1;
+  string message = 2; // error message if authentication fails
+  UserInfo user_info = 3; // returned when CheckAuthToken succeeds
+  UserInfoFromFB user_info_from_fb = 4; // returned when CheckAuthFirebaseToken succeeds
 }
 
 
@@ -98,6 +100,7 @@ message UpdateRateLimitRequest {
 // UpdateRateLimitResponse indicates if the rate-limit update was successful
 message UpdateRateLimitResponse {
   bool success = 1;
+  string message = 2;
 }
 
 // GenerateTokens messages
@@ -109,12 +112,14 @@ message GenerateTokensRequest {
 }
 
 message GenerateTokensResponse {
-  string access_token = 1;
-  string refresh_token = 2;
-  int64 access_expires_at = 3;
-  int64 refresh_expires_at = 4;
-  string session_token = 5;
-  string session_secret = 6;
+  bool success = 1;
+  string message = 2;
+  string access_token = 3;
+  string refresh_token = 4;
+  int64 access_expires_at = 5;
+  int64 refresh_expires_at = 6;
+  string session_token = 7;
+  string session_secret = 8;
 }
 
 // RefreshAccessToken messages
@@ -123,35 +128,47 @@ message RefreshTokenRequest {
 }
 
 message RefreshTokenResponse {
-  string access_token = 1;
-  int64 access_expires_at = 2;
-  string user_id = 3;
-  string refresh_token = 4;
-  int64 refresh_expires_at = 5;
-  string session_token = 6;
-  string session_secret = 7;
+  bool success = 1;
+  string message = 2;
+  string access_token = 3;
+  int64 access_expires_at = 4;
+  string user_id = 5;
+  string refresh_token = 6;
+  int64 refresh_expires_at = 7;
+  string session_token = 8;
+  string session_secret = 9;
 }
 
 // GetUserIDFromFirebaseResponse returns user ID from Firebase token
 message GetUserIDFromFirebaseResponse {
-  string user_id = 1;
+  bool success = 1;
+  string message = 2;
+  string user_id = 3;
 }
 
 // GetUserIDFromTokenResponse returns user ID from regular auth token
 message GetUserIDFromTokenResponse {
-  string user_id = 1;
+  bool success = 1;
+  string message = 2;
+  string user_id = 3;
 }
 
 // GetAudFromTokenResponse returns audience from token
 message GetAudFromTokenResponse {
-  string aud = 1;
+  bool success = 1;
+  string message = 2;
+  string aud = 3;
 }
 
 message GetUserScopesResponse {
-  string user_id = 1;
-  repeated string scopes = 2;
+  bool success = 1;
+  string message = 2;
+  string user_id = 3;
+  repeated string scopes = 4;
 }
 
 message GetPictureFromTokenResponse {
-  string picture = 1;
+  bool success = 1;
+  string message = 2;
+  string picture = 3;
 }
