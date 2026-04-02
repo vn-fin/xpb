@@ -210,7 +210,7 @@ message PortfolioItem {
   double market_price = 14;
   optional double fee = 15;
   optional double today_fee = 16;
-  optional DealStockDetailInfo deal_stock_detail = 17;
+  DealStockDetailInfo deal_stock_detail = 17;
 }
 
 message GetPortfolioRequest {
@@ -242,7 +242,7 @@ message FuturePortfolioItem {
   string due_date = 16;
   double fee = 17;
   double today_fee = 18;
-  optional DealFutureDetailInfo deal_future_detail = 19;
+  DealFutureDetailInfo deal_future_detail = 19;
 }
 
 message GetFuturePortfolioResponse {
