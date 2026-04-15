@@ -133,43 +133,43 @@ import (
 //}
 
 // TestGetPortfolio - Lấy danh mục đầu tư
-//func TestGetPortfolio(t *testing.T) {
-//	if os.Getenv("BROKERS_GRPC_HOST") == "" {
-//		os.Setenv("BROKERS_GRPC_HOST", "localhost:50052")
-//	}
-//
-//	client, err := GetClient()
-//	if err != nil {
-//		t.Fatalf("Failed to create client: %v", err)
-//	}
-//	defer client.Close()
-//
-//	req := &GetPortfolioRequest{
-//		GroupId: "5bec9e5e-d752-4340-845c-ac3c3590a076",
-//	}
-//
-//	resp, err := client.GetPortfolio(context.Background(), req)
-//	if err != nil {
-//		t.Fatalf("GetPortfolio failed: %v", err)
-//	}
-//
-//	t.Logf("GetPortfolio Response:")
-//	t.Logf("  Success: %v", resp.Success)
-//	t.Logf("  Message: %s", resp.Message)
-//	t.Logf("  Total items: %d", len(resp.Items))
-//	for i, item := range resp.Items {
-//		t.Logf("  Item[%d]:", i)
-//		t.Logf("    Symbol: %s", item.Symbol)
-//		t.Logf("    Quantity: %d", item.Quantity)
-//		t.Logf("    AvgPrice: %.2f", item.AvgPrice)
-//		t.Logf("    MarketPrice: %.2f", item.MarketPrice)
-//	}
-//}
+func TestGetPortfolio(t *testing.T) {
+	if os.Getenv("BROKERS_GRPC_HOST") == "" {
+		os.Setenv("BROKERS_GRPC_HOST", "100.74.98.123:50049")
+	}
+
+	client, err := GetClient()
+	if err != nil {
+		t.Fatalf("Failed to create client: %v", err)
+	}
+	defer client.Close()
+
+	req := &GetPortfolioRequest{
+		GroupId: "5f96226f-73f1-4091-a87c-7eca23ff3e44",
+	}
+
+	resp, err := client.GetPortfolio(context.Background(), req)
+	if err != nil {
+		t.Fatalf("GetPortfolio failed: %v", err)
+	}
+
+	t.Logf("GetPortfolio Response:")
+	t.Logf("  Success: %v", resp.Success)
+	t.Logf("  Message: %s", resp.Message)
+	t.Logf("  Total items: %d", len(resp.Items))
+	for i, item := range resp.Items {
+		t.Logf("  Item[%d]:", i)
+		t.Logf("    Symbol: %s", item.Symbol)
+		t.Logf("    Quantity: %d", item.Quantity)
+		t.Logf("    AvgPrice: %.2f", item.AvgPrice)
+		t.Logf("    MarketPrice: %.2f", item.MarketPrice)
+	}
+}
 
 // TestGetAccountBalance - Lấy số dư tài khoản
 func TestGetAccountBalance(t *testing.T) {
 	if os.Getenv("BROKERS_GRPC_HOST") == "" {
-		os.Setenv("BROKERS_GRPC_HOST", "localhost:50052")
+		os.Setenv("BROKERS_GRPC_HOST", "100.74.98.123:50049")
 	}
 
 	client, err := GetClient()
@@ -180,7 +180,7 @@ func TestGetAccountBalance(t *testing.T) {
 
 	req := &GetAccountBalanceRequest{
 		AccessToken: "5fbd07f06c212695250d0b0a925aa02082314018",
-		GroupId:     "5bec9e5e-d752-4340-845c-ac3c3590a076",
+		GroupId:     "5f96226f-73f1-4091-a87c-7eca23ff3e44",
 		AccountType: "VnStock",
 	}
 
@@ -192,9 +192,9 @@ func TestGetAccountBalance(t *testing.T) {
 	t.Logf("GetAccountBalance Response:")
 	t.Logf("  Success: %v", resp.Success)
 	t.Logf("  Message: %s", resp.Message)
-	t.Logf("  Cash: %.2f", resp.Cash)
-	t.Logf("  Equity: %.2f", resp.Equity)
-	t.Logf("  Balance: %.2f", resp.Balance)
+	//t.Logf("  Cash: %.2f", resp.Cash)
+	//t.Logf("  Equity: %.2f", resp.Equity)
+	//t.Logf("  Balance: %.2f", resp.Balance)
 
 }
 
@@ -382,7 +382,7 @@ func TestExecutionGetPositions(t *testing.T) {
 
 	req := &ExecutionGetPositionsRequest{
 		AccessToken: "your_access_token_here",
-		CredId:      "asdd122e-asdx-adin-xzca-12313asdccsa",
+		CredId:      "5f96226f-73f1-4091-a87c-7eca23ff3e44",
 	}
 
 	resp, err := client.ExecutionGetPositions(context.Background(), req)

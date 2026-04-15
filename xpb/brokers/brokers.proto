@@ -322,7 +322,7 @@ message GetOrdersBySessionResponse{
 }
 
 message GetListOrdersRequest {
-  string user_id = 1;
+  string group_id = 1;
 }
 
 message GetListOrdersResponse {
