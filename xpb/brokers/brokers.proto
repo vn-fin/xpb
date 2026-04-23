@@ -215,6 +215,7 @@ message PortfolioItem {
 
 message GetPortfolioRequest {
   string group_id = 1;
+  string date = 2;
 }
 
 message GetPortfolioResponse {

@@ -1627,6 +1627,7 @@ type GetPortfolioRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	GroupId string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Date    string `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
 }
 
 func (x *GetPortfolioRequest) Reset() {
@@ -1664,6 +1665,13 @@ func (*GetPortfolioRequest) Descriptor() ([]byte, []int) {
 func (x *GetPortfolioRequest) GetGroupId() string {
 	if x != nil {
 		return x.GroupId
+	}
+	return ""
+}
+
+func (x *GetPortfolioRequest) GetDate() string {
+	if x != nil {
+		return x.Date
 	}
 	return ""
 }
