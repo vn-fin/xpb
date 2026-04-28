@@ -51,7 +51,7 @@ message PnlSeriesItems{
 }
 
 message GetPnLSeriesRequests{
-  repeated string account_ids = 1;
+  repeated string credential_ids = 1;
   repeated string brokers = 2;
   string from = 3;
   string to = 4;
