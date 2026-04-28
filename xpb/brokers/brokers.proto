@@ -45,15 +45,16 @@ service BrokerGatewayService {
 message PnlSeriesItems{
   string date = 1;
   optional double daily_pnl = 2;
-  optional double total_profit_amount = 3;
-  optional double total_interes_amount = 4;
-  optional double total_loss_amount = 5;
+  optional double open_pnl = 3;
+  optional double close_pnl = 4;
+  optional double daily_open_pnl = 5;
 }
 
 message GetPnLSeriesRequests{
-  string group_id = 1;
-  optional string account_type = 2;
-  string range_time = 3;
+  repeated string account_ids = 1;
+  repeated string brokers = 2;
+  string from = 3;
+  string to = 4;
 }
 
 message GetPnLSeriesResponse{
