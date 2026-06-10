@@ -37,7 +37,6 @@ type BrokerGatewayServiceClient interface {
 	GetPnLSeries(ctx context.Context, in *GetPnLSeriesRequests, opts ...grpc.CallOption) (*GetPnLSeriesResponse, error)
 	GetCredentialBalance(ctx context.Context, in *GetCredentialBalanceRequest, opts ...grpc.CallOption) (*GetCredentialBalanceResponse, error)
 	CheckCredentialLogin(ctx context.Context, in *CheckCredentialLoginRequest, opts ...grpc.CallOption) (*CheckCredentialLoginResponse, error)
-	CreateOrderMultiAccount(ctx context.Context, in *CreateOrderMultiAccountRequest, opts ...grpc.CallOption) (*CreateOrderMultiAccountResponse, error)
 	// Execution methods (by cred_id)
 	ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(ctx context.Context, in *ExecutionGetPositionBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error)
@@ -237,15 +236,6 @@ func (c *brokerGatewayServiceClient) CheckCredentialLogin(ctx context.Context, i
 	return out, nil
 }
 
-func (c *brokerGatewayServiceClient) CreateOrderMultiAccount(ctx context.Context, in *CreateOrderMultiAccountRequest, opts ...grpc.CallOption) (*CreateOrderMultiAccountResponse, error) {
-	out := new(CreateOrderMultiAccountResponse)
-	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CreateOrderMultiAccount", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *brokerGatewayServiceClient) ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error) {
 	out := new(ExecutionGetPositionsResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositions", in, out, opts...)
@@ -413,7 +403,6 @@ type BrokerGatewayServiceServer interface {
 	GetPnLSeries(context.Context, *GetPnLSeriesRequests) (*GetPnLSeriesResponse, error)
 	GetCredentialBalance(context.Context, *GetCredentialBalanceRequest) (*GetCredentialBalanceResponse, error)
 	CheckCredentialLogin(context.Context, *CheckCredentialLoginRequest) (*CheckCredentialLoginResponse, error)
-	CreateOrderMultiAccount(context.Context, *CreateOrderMultiAccountRequest) (*CreateOrderMultiAccountResponse, error)
 	// Execution methods (by cred_id)
 	ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(context.Context, *ExecutionGetPositionBySymbolRequest) (*ExecutionGetPositionBySymbolResponse, error)
@@ -495,9 +484,6 @@ func (UnimplementedBrokerGatewayServiceServer) GetCredentialBalance(context.Cont
 }
 func (UnimplementedBrokerGatewayServiceServer) CheckCredentialLogin(context.Context, *CheckCredentialLoginRequest) (*CheckCredentialLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckCredentialLogin not implemented")
-}
-func (UnimplementedBrokerGatewayServiceServer) CreateOrderMultiAccount(context.Context, *CreateOrderMultiAccountRequest) (*CreateOrderMultiAccountResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateOrderMultiAccount not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositions not implemented")
@@ -902,24 +888,6 @@ func _BrokerGatewayService_CheckCredentialLogin_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BrokerGatewayService_CreateOrderMultiAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateOrderMultiAccountRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrokerGatewayServiceServer).CreateOrderMultiAccount(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/BrokerGatewayService/CreateOrderMultiAccount",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerGatewayServiceServer).CreateOrderMultiAccount(ctx, req.(*CreateOrderMultiAccountRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BrokerGatewayService_ExecutionGetPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ExecutionGetPositionsRequest)
 	if err := dec(in); err != nil {
@@ -1292,10 +1260,6 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BrokerGatewayService_CheckCredentialLogin_Handler,
 		},
 		{
-			MethodName: "CreateOrderMultiAccount",
-			Handler:    _BrokerGatewayService_CreateOrderMultiAccount_Handler,
-		},
-		{
 			MethodName: "ExecutionGetPositions",
 			Handler:    _BrokerGatewayService_ExecutionGetPositions_Handler,
 		},
@@ -1361,5 +1325,5 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "xpb/brokers/brokers.proto",
+	Metadata: "brokers.proto",
 }

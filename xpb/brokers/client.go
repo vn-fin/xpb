@@ -229,3 +229,8 @@ func (c *Client) ExecutionGetMaxSellQtyByAccountSymbol(ctx context.Context, req 
 func (c *Client) ExecutionGetMaxSellQtysByAccount(ctx context.Context, req *ExecutionGetMaxSellQtysByAccountRequest) (*ExecutionGetMaxSellQtysByAccountResponse, error) {
 	return c.client.ExecutionGetMaxSellQtysByAccount(ctx, req)
 }
+
+// CreateOrderMultiAccount creates basket orders across multiple accounts based on balance percentage
+func (c *Client) CreateOrderMultiAccount(ctx context.Context, req *CreateOrderMultiAccountRequest) (*CreateOrderMultiAccountResponse, error) {
+	return c.client.CreateOrderMultiAccount(ctx, req)
+}

@@ -23,6 +23,7 @@ service BrokerGatewayService {
   rpc GetPnLSeries(GetPnLSeriesRequests)  returns (GetPnLSeriesResponse);
   rpc GetCredentialBalance(GetCredentialBalanceRequest) returns (GetCredentialBalanceResponse);
   rpc CheckCredentialLogin(CheckCredentialLoginRequest) returns (CheckCredentialLoginResponse);
+  rpc CreateOrderMultiAccount(CreateOrderMultiAccountRequest) returns (CreateOrderMultiAccountResponse);
   // Execution methods (by cred_id)
   rpc ExecutionGetPositions(ExecutionGetPositionsRequest) returns (ExecutionGetPositionsResponse);
   rpc ExecutionGetPositionBySymbol(ExecutionGetPositionBySymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
@@ -346,15 +347,19 @@ message UpdateOrderResponse {
   OrderInfo order = 4;
 }
 
+message FutureOrderInputInfo {
+  string symbol = 1;
+  string order_side = 2;
+  string order_type = 3;
+  double price = 4;
+  int64 quantity = 5;
+  string remark = 6;
+}
+
 message CreateFutureOrderRequest {
   string access_token = 1;
   string user_id = 2;
-  string symbol = 3;
-  string order_side = 4;
-  string order_type = 5;
-  double price = 6;
-  int64 quantity = 7;
-  string remark = 8;
+  FutureOrderInputInfo order_info = 3;
 }
 
 message CreateFutureOrderResponse {
@@ -599,6 +604,33 @@ message ExecutionGetMaxSellQtysByAccountResponse {
   bool success = 1;
   string message = 2;
   map<string, MaxSellInfo> max_sell_infos = 3;
+}
+
+/* Multi-account basket order */
+message AccountOrderAllocation {
+  string credential_id = 1;
+  double percentage    = 2; // 0 < x <= 100, sum must equal 100
+}
+
+message CreateOrderMultiAccountRequest {
+  string basket_session_id                   = 1;
+  repeated AccountOrderAllocation accounts   = 2;
+  repeated OrderInputInfo order_info         = 3; // quantity field ignored — computed from balance * pct
+  string order_type                          = 4; // "L" | "M"
+  string order_side                          = 5; // "B" | "S"
+}
+
+message AccountOrderResult {
+  string credential_id = 1;
+  bool   success       = 2;
+  string message       = 3;
+  repeated OrderCreatedInfo orders = 4;
+}
+
+message CreateOrderMultiAccountResponse {
+  bool success = 1;
+  string message = 2;
+  repeated AccountOrderResult results = 3;
 }
 
 message CheckCredentialLoginRequest{
