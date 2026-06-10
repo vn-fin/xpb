@@ -12,6 +12,7 @@ service BrokerGatewayService {
   rpc GetPendingOrders(GetPendingOrdersRequest) returns (GetPendingOrdersResponse);
   rpc GetListFutureOrders(GetListOrdersRequest) returns (GetListOrdersResponse);
   rpc GetOrdersBySession(GetOrdersBySessionRequest) returns (GetOrdersBySessionResponse);
+  rpc GetOrdersBySessionId(GetOrdersBySessionIdRequest) returns (GetOrdersBySessionResponse);
   rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
   rpc CancelFutureOrder(CancelFutureOrderRequest) returns (CancelOrderResponse);
   rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
@@ -317,6 +318,10 @@ message GetPendingOrdersResponse {
 message GetOrdersBySessionRequest{
   string group_id = 1;
   string basket_session_id = 2;
+}
+
+message GetOrdersBySessionIdRequest{
+  string basket_session_id = 1;
 }
 
 message GetOrdersBySessionResponse{

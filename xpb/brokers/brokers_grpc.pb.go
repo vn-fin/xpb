@@ -26,6 +26,7 @@ type BrokerGatewayServiceClient interface {
 	GetPendingOrders(ctx context.Context, in *GetPendingOrdersRequest, opts ...grpc.CallOption) (*GetPendingOrdersResponse, error)
 	GetListFutureOrders(ctx context.Context, in *GetListOrdersRequest, opts ...grpc.CallOption) (*GetListOrdersResponse, error)
 	GetOrdersBySession(ctx context.Context, in *GetOrdersBySessionRequest, opts ...grpc.CallOption) (*GetOrdersBySessionResponse, error)
+	GetOrdersBySessionId(ctx context.Context, in *GetOrdersBySessionIdRequest, opts ...grpc.CallOption) (*GetOrdersBySessionResponse, error)
 	CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error)
 	CancelFutureOrder(ctx context.Context, in *CancelFutureOrderRequest, opts ...grpc.CallOption) (*CancelOrderResponse, error)
 	UpdateOrder(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*UpdateOrderResponse, error)
@@ -132,6 +133,15 @@ func (c *brokerGatewayServiceClient) GetListFutureOrders(ctx context.Context, in
 func (c *brokerGatewayServiceClient) GetOrdersBySession(ctx context.Context, in *GetOrdersBySessionRequest, opts ...grpc.CallOption) (*GetOrdersBySessionResponse, error) {
 	out := new(GetOrdersBySessionResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetOrdersBySession", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) GetOrdersBySessionId(ctx context.Context, in *GetOrdersBySessionIdRequest, opts ...grpc.CallOption) (*GetOrdersBySessionResponse, error) {
+	out := new(GetOrdersBySessionResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/GetOrdersBySessionId", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -402,6 +412,7 @@ type BrokerGatewayServiceServer interface {
 	GetPendingOrders(context.Context, *GetPendingOrdersRequest) (*GetPendingOrdersResponse, error)
 	GetListFutureOrders(context.Context, *GetListOrdersRequest) (*GetListOrdersResponse, error)
 	GetOrdersBySession(context.Context, *GetOrdersBySessionRequest) (*GetOrdersBySessionResponse, error)
+	GetOrdersBySessionId(context.Context, *GetOrdersBySessionIdRequest) (*GetOrdersBySessionResponse, error)
 	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error)
 	CancelFutureOrder(context.Context, *CancelFutureOrderRequest) (*CancelOrderResponse, error)
 	UpdateOrder(context.Context, *UpdateOrderRequest) (*UpdateOrderResponse, error)
@@ -462,6 +473,9 @@ func (UnimplementedBrokerGatewayServiceServer) GetListFutureOrders(context.Conte
 }
 func (UnimplementedBrokerGatewayServiceServer) GetOrdersBySession(context.Context, *GetOrdersBySessionRequest) (*GetOrdersBySessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrdersBySession not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) GetOrdersBySessionId(context.Context, *GetOrdersBySessionIdRequest) (*GetOrdersBySessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrdersBySessionId not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOrder not implemented")
@@ -700,6 +714,24 @@ func _BrokerGatewayService_GetOrdersBySession_Handler(srv interface{}, ctx conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BrokerGatewayServiceServer).GetOrdersBySession(ctx, req.(*GetOrdersBySessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_GetOrdersBySessionId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrdersBySessionIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).GetOrdersBySessionId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/GetOrdersBySessionId",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).GetOrdersBySessionId(ctx, req.(*GetOrdersBySessionIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1246,6 +1278,10 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOrdersBySession",
 			Handler:    _BrokerGatewayService_GetOrdersBySession_Handler,
+		},
+		{
+			MethodName: "GetOrdersBySessionId",
+			Handler:    _BrokerGatewayService_GetOrdersBySessionId_Handler,
 		},
 		{
 			MethodName: "CancelOrder",
