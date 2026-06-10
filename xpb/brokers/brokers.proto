@@ -619,6 +619,7 @@ message CreateOrderMultiAccountRequest {
   repeated OrderInputInfo order_info         = 3; // quantity field ignored — computed from balance * pct
   string order_type                          = 4; // "L" | "M"
   string order_side                          = 5; // "B" | "S"
+  string access_token                        = 6;
 }
 
 message AccountOrderResult {
