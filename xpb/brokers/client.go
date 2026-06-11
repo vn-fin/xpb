@@ -238,3 +238,11 @@ func (c *Client) ExecutionGetMaxSellQtysByAccount(ctx context.Context, req *Exec
 func (c *Client) CreateOrderMultiAccount(ctx context.Context, req *CreateOrderMultiAccountRequest) (*CreateOrderMultiAccountResponse, error) {
 	return c.client.CreateOrderMultiAccount(ctx, req)
 }
+
+func (c *Client) UpdateOrderBySessionId(ctx context.Context, req *UpdateOrderBySessionIdRequest) (*UpdateOrderBySessionIdResponse, error) {
+	return c.client.UpdateOrderBySessionId(ctx, req)
+}
+
+func (c *Client) CancelOrderBySessionId(ctx context.Context, req *CancelOrderBySessionIdRequest) (*CancelOrderBySessionIdResponse, error) {
+	return c.client.CancelOrderBySessionId(ctx, req)
+}

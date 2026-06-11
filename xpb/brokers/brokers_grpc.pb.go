@@ -39,6 +39,8 @@ type BrokerGatewayServiceClient interface {
 	GetCredentialBalance(ctx context.Context, in *GetCredentialBalanceRequest, opts ...grpc.CallOption) (*GetCredentialBalanceResponse, error)
 	CheckCredentialLogin(ctx context.Context, in *CheckCredentialLoginRequest, opts ...grpc.CallOption) (*CheckCredentialLoginResponse, error)
 	CreateOrderMultiAccount(ctx context.Context, in *CreateOrderMultiAccountRequest, opts ...grpc.CallOption) (*CreateOrderMultiAccountResponse, error)
+	UpdateOrderBySessionId(ctx context.Context, in *UpdateOrderBySessionIdRequest, opts ...grpc.CallOption) (*UpdateOrderBySessionIdResponse, error)
+	CancelOrderBySessionId(ctx context.Context, in *CancelOrderBySessionIdRequest, opts ...grpc.CallOption) (*CancelOrderBySessionIdResponse, error)
 	// Execution methods (by cred_id)
 	ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(ctx context.Context, in *ExecutionGetPositionBySymbolRequest, opts ...grpc.CallOption) (*ExecutionGetPositionBySymbolResponse, error)
@@ -256,6 +258,24 @@ func (c *brokerGatewayServiceClient) CreateOrderMultiAccount(ctx context.Context
 	return out, nil
 }
 
+func (c *brokerGatewayServiceClient) UpdateOrderBySessionId(ctx context.Context, in *UpdateOrderBySessionIdRequest, opts ...grpc.CallOption) (*UpdateOrderBySessionIdResponse, error) {
+	out := new(UpdateOrderBySessionIdResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/UpdateOrderBySessionId", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerGatewayServiceClient) CancelOrderBySessionId(ctx context.Context, in *CancelOrderBySessionIdRequest, opts ...grpc.CallOption) (*CancelOrderBySessionIdResponse, error) {
+	out := new(CancelOrderBySessionIdResponse)
+	err := c.cc.Invoke(ctx, "/BrokerGatewayService/CancelOrderBySessionId", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *brokerGatewayServiceClient) ExecutionGetPositions(ctx context.Context, in *ExecutionGetPositionsRequest, opts ...grpc.CallOption) (*ExecutionGetPositionsResponse, error) {
 	out := new(ExecutionGetPositionsResponse)
 	err := c.cc.Invoke(ctx, "/BrokerGatewayService/ExecutionGetPositions", in, out, opts...)
@@ -425,6 +445,8 @@ type BrokerGatewayServiceServer interface {
 	GetCredentialBalance(context.Context, *GetCredentialBalanceRequest) (*GetCredentialBalanceResponse, error)
 	CheckCredentialLogin(context.Context, *CheckCredentialLoginRequest) (*CheckCredentialLoginResponse, error)
 	CreateOrderMultiAccount(context.Context, *CreateOrderMultiAccountRequest) (*CreateOrderMultiAccountResponse, error)
+	UpdateOrderBySessionId(context.Context, *UpdateOrderBySessionIdRequest) (*UpdateOrderBySessionIdResponse, error)
+	CancelOrderBySessionId(context.Context, *CancelOrderBySessionIdRequest) (*CancelOrderBySessionIdResponse, error)
 	// Execution methods (by cred_id)
 	ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error)
 	ExecutionGetPositionBySymbol(context.Context, *ExecutionGetPositionBySymbolRequest) (*ExecutionGetPositionBySymbolResponse, error)
@@ -512,6 +534,12 @@ func (UnimplementedBrokerGatewayServiceServer) CheckCredentialLogin(context.Cont
 }
 func (UnimplementedBrokerGatewayServiceServer) CreateOrderMultiAccount(context.Context, *CreateOrderMultiAccountRequest) (*CreateOrderMultiAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrderMultiAccount not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) UpdateOrderBySessionId(context.Context, *UpdateOrderBySessionIdRequest) (*UpdateOrderBySessionIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderBySessionId not implemented")
+}
+func (UnimplementedBrokerGatewayServiceServer) CancelOrderBySessionId(context.Context, *CancelOrderBySessionIdRequest) (*CancelOrderBySessionIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelOrderBySessionId not implemented")
 }
 func (UnimplementedBrokerGatewayServiceServer) ExecutionGetPositions(context.Context, *ExecutionGetPositionsRequest) (*ExecutionGetPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecutionGetPositions not implemented")
@@ -952,6 +980,42 @@ func _BrokerGatewayService_CreateOrderMultiAccount_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BrokerGatewayService_UpdateOrderBySessionId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrderBySessionIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).UpdateOrderBySessionId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/UpdateOrderBySessionId",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).UpdateOrderBySessionId(ctx, req.(*UpdateOrderBySessionIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrokerGatewayService_CancelOrderBySessionId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelOrderBySessionIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerGatewayServiceServer).CancelOrderBySessionId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BrokerGatewayService/CancelOrderBySessionId",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerGatewayServiceServer).CancelOrderBySessionId(ctx, req.(*CancelOrderBySessionIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BrokerGatewayService_ExecutionGetPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ExecutionGetPositionsRequest)
 	if err := dec(in); err != nil {
@@ -1330,6 +1394,14 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateOrderMultiAccount",
 			Handler:    _BrokerGatewayService_CreateOrderMultiAccount_Handler,
+		},
+		{
+			MethodName: "UpdateOrderBySessionId",
+			Handler:    _BrokerGatewayService_UpdateOrderBySessionId_Handler,
+		},
+		{
+			MethodName: "CancelOrderBySessionId",
+			Handler:    _BrokerGatewayService_CancelOrderBySessionId_Handler,
 		},
 		{
 			MethodName: "ExecutionGetPositions",

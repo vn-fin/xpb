@@ -25,6 +25,8 @@ service BrokerGatewayService {
   rpc GetCredentialBalance(GetCredentialBalanceRequest) returns (GetCredentialBalanceResponse);
   rpc CheckCredentialLogin(CheckCredentialLoginRequest) returns (CheckCredentialLoginResponse);
   rpc CreateOrderMultiAccount(CreateOrderMultiAccountRequest) returns (CreateOrderMultiAccountResponse);
+  rpc UpdateOrderBySessionId(UpdateOrderBySessionIdRequest) returns (UpdateOrderBySessionIdResponse);
+  rpc CancelOrderBySessionId(CancelOrderBySessionIdRequest) returns (CancelOrderBySessionIdResponse);
   // Execution methods (by cred_id)
   rpc ExecutionGetPositions(ExecutionGetPositionsRequest) returns (ExecutionGetPositionsResponse);
   rpc ExecutionGetPositionBySymbol(ExecutionGetPositionBySymbolRequest) returns (ExecutionGetPositionBySymbolResponse);
@@ -638,6 +640,32 @@ message CreateOrderMultiAccountResponse {
   bool success = 1;
   string message = 2;
   repeated AccountOrderResult results = 3;
+}
+
+message UpdateOrderBySessionIdRequest {
+  string basket_session_id = 1;
+  string access_token      = 3;
+  double price             = 4; // resolved price (OMS resolves per-symbol, gateway applies)
+  string symbol            = 5; // filter to specific symbol (e.g. "FPT")
+}
+
+message UpdateOrderBySessionIdResponse {
+  bool   success       = 1;
+  string message       = 2;
+  int32  success_count = 3;
+  int32  failed_count  = 4;
+}
+
+message CancelOrderBySessionIdRequest {
+  string basket_session_id = 1;
+  string access_token      = 2;
+}
+
+message CancelOrderBySessionIdResponse {
+  bool   success       = 1;
+  string message       = 2;
+  int32  success_count = 3;
+  int32  failed_count  = 4;
 }
 
 message CheckCredentialLoginRequest{
