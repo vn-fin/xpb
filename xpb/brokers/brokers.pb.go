@@ -5977,16 +5977,9 @@ func (x *UpdateOrderBySessionIdRequest) GetBasketSessionId() string {
 	return ""
 }
 
-func (x *UpdateOrderBySessionIdRequest) GetPrice() float64 {
+func (x *UpdateOrderBySessionIdRequest) GetPriceLevel() string {
 	if x != nil {
-		return x.Price
-	}
-	return 0
-}
-
-func (x *UpdateOrderBySessionIdRequest) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
+		return x.PriceLevel
 	}
 	return ""
 }
