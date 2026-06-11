@@ -6069,6 +6069,7 @@ type CancelOrderBySessionIdRequest struct {
 
 	BasketSessionId string `protobuf:"bytes,1,opt,name=basket_session_id,json=basketSessionId,proto3" json:"basket_session_id,omitempty"`
 	AccessToken     string `protobuf:"bytes,2,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	Symbol          string `protobuf:"bytes,3,opt,name=symbol,proto3" json:"symbol,omitempty"`
 }
 
 func (x *CancelOrderBySessionIdRequest) Reset() {
@@ -6113,6 +6114,13 @@ func (x *CancelOrderBySessionIdRequest) GetBasketSessionId() string {
 func (x *CancelOrderBySessionIdRequest) GetAccessToken() string {
 	if x != nil {
 		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *CancelOrderBySessionIdRequest) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
 	}
 	return ""
 }

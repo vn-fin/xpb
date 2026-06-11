@@ -659,6 +659,7 @@ message UpdateOrderBySessionIdResponse {
 message CancelOrderBySessionIdRequest {
   string basket_session_id = 1;
   string access_token      = 2;
+  string symbol            = 3; // filter to specific symbol, empty = cancel all
 }
 
 message CancelOrderBySessionIdResponse {
