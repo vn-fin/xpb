@@ -5932,9 +5932,10 @@ type UpdateOrderBySessionIdRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BasketSessionId string `protobuf:"bytes,1,opt,name=basket_session_id,json=basketSessionId,proto3" json:"basket_session_id,omitempty"`
-	PriceLevel      string `protobuf:"bytes,2,opt,name=price_level,json=priceLevel,proto3" json:"price_level,omitempty"` // e.g. "ask01"
-	AccessToken     string `protobuf:"bytes,3,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	BasketSessionId string  `protobuf:"bytes,1,opt,name=basket_session_id,json=basketSessionId,proto3" json:"basket_session_id,omitempty"`
+	AccessToken     string  `protobuf:"bytes,3,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	Price           float64 `protobuf:"fixed64,4,opt,name=price,proto3" json:"price,omitempty"`
+	Symbol          string  `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
 }
 
 func (x *UpdateOrderBySessionIdRequest) Reset() {
