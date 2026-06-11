@@ -1469,5 +1469,5 @@ var BrokerGatewayService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "xpb/brokers/brokers.proto",
+	Metadata: "brokers.proto",
 }
