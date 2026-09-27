@@ -55,6 +55,11 @@ class PermissionServiceStub(object):
                 request_serializer=permission__pb2.CheckAuthRequest.SerializeToString,
                 response_deserializer=permission__pb2.CheckAuthResponse.FromString,
                 _registered_method=True)
+        self.GetUserByEmail = channel.unary_unary(
+                '/permission.PermissionService/GetUserByEmail',
+                request_serializer=permission__pb2.GetUserByEmailRequest.SerializeToString,
+                response_deserializer=permission__pb2.GetUserByEmailResponse.FromString,
+                _registered_method=True)
         self.UpdateRateLimit = channel.unary_unary(
                 '/permission.PermissionService/UpdateRateLimit',
                 request_serializer=permission__pb2.UpdateRateLimitRequest.SerializeToString,
@@ -85,6 +90,11 @@ class PermissionServiceStub(object):
                 request_serializer=permission__pb2.CheckAuthRequest.SerializeToString,
                 response_deserializer=permission__pb2.GetUserScopesResponse.FromString,
                 _registered_method=True)
+        self.GetPictureFromToken = channel.unary_unary(
+                '/permission.PermissionService/GetPictureFromToken',
+                request_serializer=permission__pb2.CheckAuthRequest.SerializeToString,
+                response_deserializer=permission__pb2.GetPictureFromTokenResponse.FromString,
+                _registered_method=True)
 
 
 class PermissionServiceServicer(object):
@@ -114,6 +124,14 @@ class PermissionServiceServicer(object):
 
     def CheckAuthToken(self, request, context):
         """Check token and rate-limit; returns allowed or not
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUserByEmail(self, request, context):
+        """Resolve an exact email using current issuer platform-admin authorization.
+        Existing servers return UNIMPLEMENTED; callers must fail closed.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -161,6 +179,13 @@ class PermissionServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetPictureFromToken(self, request, context):
+        """Get picture from token
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PermissionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -183,6 +208,11 @@ def add_PermissionServiceServicer_to_server(servicer, server):
                     servicer.CheckAuthToken,
                     request_deserializer=permission__pb2.CheckAuthRequest.FromString,
                     response_serializer=permission__pb2.CheckAuthResponse.SerializeToString,
+            ),
+            'GetUserByEmail': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserByEmail,
+                    request_deserializer=permission__pb2.GetUserByEmailRequest.FromString,
+                    response_serializer=permission__pb2.GetUserByEmailResponse.SerializeToString,
             ),
             'UpdateRateLimit': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateRateLimit,
@@ -213,6 +243,11 @@ def add_PermissionServiceServicer_to_server(servicer, server):
                     servicer.GetUserScopesFromToken,
                     request_deserializer=permission__pb2.CheckAuthRequest.FromString,
                     response_serializer=permission__pb2.GetUserScopesResponse.SerializeToString,
+            ),
+            'GetPictureFromToken': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPictureFromToken,
+                    request_deserializer=permission__pb2.CheckAuthRequest.FromString,
+                    response_serializer=permission__pb2.GetPictureFromTokenResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -324,6 +359,33 @@ class PermissionService(object):
             '/permission.PermissionService/CheckAuthToken',
             permission__pb2.CheckAuthRequest.SerializeToString,
             permission__pb2.CheckAuthResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetUserByEmail(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/permission.PermissionService/GetUserByEmail',
+            permission__pb2.GetUserByEmailRequest.SerializeToString,
+            permission__pb2.GetUserByEmailResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -486,6 +548,33 @@ class PermissionService(object):
             '/permission.PermissionService/GetUserScopesFromToken',
             permission__pb2.CheckAuthRequest.SerializeToString,
             permission__pb2.GetUserScopesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetPictureFromToken(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/permission.PermissionService/GetPictureFromToken',
+            permission__pb2.CheckAuthRequest.SerializeToString,
+            permission__pb2.GetPictureFromTokenResponse.FromString,
             options,
             channel_credentials,
             insecure,
