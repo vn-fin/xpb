@@ -14,6 +14,9 @@ service PermissionService {
   
   // Check token and rate-limit; returns allowed or not
   rpc CheckAuthToken(CheckAuthRequest) returns (CheckAuthResponse);
+  // Resolve an exact email using current issuer platform-admin authorization.
+  // Existing servers return UNIMPLEMENTED; callers must fail closed.
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
   // Force-update the rate-limit with Slicing-Window algorithm
   rpc UpdateRateLimit(UpdateRateLimitRequest) returns (UpdateRateLimitResponse);
   //Check auth firebase token
@@ -154,4 +157,17 @@ message GetUserScopesResponse {
 
 message GetPictureFromTokenResponse {
   string picture = 1;
+}
+// token is the administrator's access token, never the target user's token.
+// Do not log this message or persist its token/email in jobs.
+message GetUserByEmailRequest {
+  string token = 1;
+  string email = 2;
+}
+
+// Minimal authoritative directory projection; no profile, roles or credentials.
+message GetUserByEmailResponse {
+  string user_id = 1;
+  string email = 2;
+  bool email_verified = 3;
 }

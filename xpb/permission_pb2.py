@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10permission.proto\x12\npermission\"\x1e\n\x0bPingRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1f\n\x0cPingResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"!\n\x10\x43heckAuthRequest\x12\r\n\x05token\x18\x01 \x01(\t\"\xc5\x02\n\x08UserInfo\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\r\n\x05phone\x18\x03 \x01(\t\x12\x10\n\x08username\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x14\n\x0csubscription\x18\x06 \x01(\t\x12\x1c\n\x14subscription_display\x18\x07 \x01(\t\x12\x1a\n\x12subscription_start\x18\x08 \x01(\x03\x12\x18\n\x10subscription_end\x18\t \x01(\x03\x12\x17\n\x0f\x61\x63\x63\x65ss_services\x18\n \x01(\t\x12\x0f\n\x07picture\x18\x0b \x01(\t\x12\x0c\n\x04info\x18\x0c \x01(\t\x12\x16\n\x0e\x65mail_verified\x18\r \x01(\x08\x12\x0b\n\x03\x61ud\x18\x0e \x01(\t\x12\x0b\n\x03\x65xp\x18\x0f \x01(\x03\x12\x12\n\nlast_login\x18\x10 \x01(\x03\"\xdf\x01\n\x0eUserInfoFromFB\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07picture\x18\x02 \x01(\t\x12\x0e\n\x06issuer\x18\x03 \x01(\t\x12\x10\n\x08\x61udience\x18\x04 \x01(\t\x12\x11\n\tauth_time\x18\x05 \x01(\x03\x12\x0f\n\x07user_id\x18\x06 \x01(\t\x12\x0f\n\x07subject\x18\x07 \x01(\t\x12\x11\n\tissued_at\x18\x08 \x01(\x03\x12\x0b\n\x03\x65xp\x18\t \x01(\x03\x12\r\n\x05\x65mail\x18\n \x01(\t\x12\x16\n\x0e\x65mail_verified\x18\x0b \x01(\x08\x12\x10\n\x08\x66irebase\x18\x0c \x01(\t\"\x84\x01\n\x11\x43heckAuthResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\'\n\tuser_info\x18\x02 \x01(\x0b\x32\x14.permission.UserInfo\x12\x35\n\x11user_info_from_fb\x18\x03 \x01(\x0b\x32\x1a.permission.UserInfoFromFB\"\'\n\x16UpdateRateLimitRequest\x12\r\n\x05token\x18\x01 \x01(\t\"*\n\x17UpdateRateLimitResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\\\n\x15GenerateTokensRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x16\n\x0e\x65mail_verified\x18\x03 \x01(\x08\x12\x0b\n\x03\x61ud\x18\x04 \x01(\t\"\xab\x01\n\x16GenerateTokensResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x15\n\rrefresh_token\x18\x02 \x01(\t\x12\x19\n\x11\x61\x63\x63\x65ss_expires_at\x18\x03 \x01(\x03\x12\x1a\n\x12refresh_expires_at\x18\x04 \x01(\x03\x12\x15\n\rsession_token\x18\x05 \x01(\t\x12\x16\n\x0esession_secret\x18\x06 \x01(\t\",\n\x13RefreshTokenRequest\x12\x15\n\rrefresh_token\x18\x01 \x01(\t\"\xba\x01\n\x14RefreshTokenResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x19\n\x11\x61\x63\x63\x65ss_expires_at\x18\x02 \x01(\x03\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x15\n\rrefresh_token\x18\x04 \x01(\t\x12\x1a\n\x12refresh_expires_at\x18\x05 \x01(\x03\x12\x15\n\rsession_token\x18\x06 \x01(\t\x12\x16\n\x0esession_secret\x18\x07 \x01(\t\"0\n\x1dGetUserIDFromFirebaseResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"-\n\x1aGetUserIDFromTokenResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"&\n\x17GetAudFromTokenResponse\x12\x0b\n\x03\x61ud\x18\x01 \x01(\t\"8\n\x15GetUserScopesResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06scopes\x18\x02 \x03(\t2\xf1\x06\n\x11PermissionService\x12\x39\n\x04Ping\x12\x17.permission.PingRequest\x1a\x18.permission.PingResponse\x12W\n\x0eGenerateTokens\x12!.permission.GenerateTokensRequest\x1a\".permission.GenerateTokensResponse\x12W\n\x12RefreshAccessToken\x12\x1f.permission.RefreshTokenRequest\x1a .permission.RefreshTokenResponse\x12M\n\x0e\x43heckAuthToken\x12\x1c.permission.CheckAuthRequest\x1a\x1d.permission.CheckAuthResponse\x12Z\n\x0fUpdateRateLimit\x12\".permission.UpdateRateLimitRequest\x1a#.permission.UpdateRateLimitResponse\x12U\n\x16\x43heckAuthFirebaseToken\x12\x1c.permission.CheckAuthRequest\x1a\x1d.permission.CheckAuthResponse\x12`\n\x15GetUserIDFromFirebase\x12\x1c.permission.CheckAuthRequest\x1a).permission.GetUserIDFromFirebaseResponse\x12Z\n\x12GetUserIDFromToken\x12\x1c.permission.CheckAuthRequest\x1a&.permission.GetUserIDFromTokenResponse\x12T\n\x0fGetAudFromToken\x12\x1c.permission.CheckAuthRequest\x1a#.permission.GetAudFromTokenResponse\x12Y\n\x16GetUserScopesFromToken\x12\x1c.permission.CheckAuthRequest\x1a!.permission.GetUserScopesResponseB\tZ\x07xpb;xpbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10permission.proto\x12\npermission\"\x1e\n\x0bPingRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1f\n\x0cPingResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"!\n\x10\x43heckAuthRequest\x12\r\n\x05token\x18\x01 \x01(\t\"\xd4\x02\n\x08UserInfo\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\r\n\x05phone\x18\x03 \x01(\t\x12\x10\n\x08username\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x14\n\x0csubscription\x18\x06 \x01(\t\x12\x1c\n\x14subscription_display\x18\x07 \x01(\t\x12\x1a\n\x12subscription_start\x18\x08 \x01(\x03\x12\x18\n\x10subscription_end\x18\t \x01(\x03\x12\x17\n\x0f\x61\x63\x63\x65ss_services\x18\n \x01(\t\x12\x0f\n\x07picture\x18\x0b \x01(\t\x12\x0c\n\x04info\x18\x0c \x01(\t\x12\x16\n\x0e\x65mail_verified\x18\r \x01(\x08\x12\x0b\n\x03\x61ud\x18\x0e \x01(\t\x12\x0b\n\x03\x65xp\x18\x0f \x01(\x03\x12\x12\n\nlast_login\x18\x10 \x01(\x03\x12\r\n\x05roles\x18\x11 \x03(\t\"\xdf\x01\n\x0eUserInfoFromFB\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07picture\x18\x02 \x01(\t\x12\x0e\n\x06issuer\x18\x03 \x01(\t\x12\x10\n\x08\x61udience\x18\x04 \x01(\t\x12\x11\n\tauth_time\x18\x05 \x01(\x03\x12\x0f\n\x07user_id\x18\x06 \x01(\t\x12\x0f\n\x07subject\x18\x07 \x01(\t\x12\x11\n\tissued_at\x18\x08 \x01(\x03\x12\x0b\n\x03\x65xp\x18\t \x01(\x03\x12\r\n\x05\x65mail\x18\n \x01(\t\x12\x16\n\x0e\x65mail_verified\x18\x0b \x01(\x08\x12\x10\n\x08\x66irebase\x18\x0c \x01(\t\"\x84\x01\n\x11\x43heckAuthResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\'\n\tuser_info\x18\x02 \x01(\x0b\x32\x14.permission.UserInfo\x12\x35\n\x11user_info_from_fb\x18\x03 \x01(\x0b\x32\x1a.permission.UserInfoFromFB\"\'\n\x16UpdateRateLimitRequest\x12\r\n\x05token\x18\x01 \x01(\t\"*\n\x17UpdateRateLimitResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\\\n\x15GenerateTokensRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x16\n\x0e\x65mail_verified\x18\x03 \x01(\x08\x12\x0b\n\x03\x61ud\x18\x04 \x01(\t\"\xab\x01\n\x16GenerateTokensResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x15\n\rrefresh_token\x18\x02 \x01(\t\x12\x19\n\x11\x61\x63\x63\x65ss_expires_at\x18\x03 \x01(\x03\x12\x1a\n\x12refresh_expires_at\x18\x04 \x01(\x03\x12\x15\n\rsession_token\x18\x05 \x01(\t\x12\x16\n\x0esession_secret\x18\x06 \x01(\t\",\n\x13RefreshTokenRequest\x12\x15\n\rrefresh_token\x18\x01 \x01(\t\"\xba\x01\n\x14RefreshTokenResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x19\n\x11\x61\x63\x63\x65ss_expires_at\x18\x02 \x01(\x03\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x15\n\rrefresh_token\x18\x04 \x01(\t\x12\x1a\n\x12refresh_expires_at\x18\x05 \x01(\x03\x12\x15\n\rsession_token\x18\x06 \x01(\t\x12\x16\n\x0esession_secret\x18\x07 \x01(\t\"0\n\x1dGetUserIDFromFirebaseResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"-\n\x1aGetUserIDFromTokenResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"&\n\x17GetAudFromTokenResponse\x12\x0b\n\x03\x61ud\x18\x01 \x01(\t\"8\n\x15GetUserScopesResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06scopes\x18\x02 \x03(\t\".\n\x1bGetPictureFromTokenResponse\x12\x0f\n\x07picture\x18\x01 \x01(\t\"5\n\x15GetUserByEmailRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"P\n\x16GetUserByEmailResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x16\n\x0e\x65mail_verified\x18\x03 \x01(\x08\x32\xa8\x08\n\x11PermissionService\x12\x39\n\x04Ping\x12\x17.permission.PingRequest\x1a\x18.permission.PingResponse\x12W\n\x0eGenerateTokens\x12!.permission.GenerateTokensRequest\x1a\".permission.GenerateTokensResponse\x12W\n\x12RefreshAccessToken\x12\x1f.permission.RefreshTokenRequest\x1a .permission.RefreshTokenResponse\x12M\n\x0e\x43heckAuthToken\x12\x1c.permission.CheckAuthRequest\x1a\x1d.permission.CheckAuthResponse\x12W\n\x0eGetUserByEmail\x12!.permission.GetUserByEmailRequest\x1a\".permission.GetUserByEmailResponse\x12Z\n\x0fUpdateRateLimit\x12\".permission.UpdateRateLimitRequest\x1a#.permission.UpdateRateLimitResponse\x12U\n\x16\x43heckAuthFirebaseToken\x12\x1c.permission.CheckAuthRequest\x1a\x1d.permission.CheckAuthResponse\x12`\n\x15GetUserIDFromFirebase\x12\x1c.permission.CheckAuthRequest\x1a).permission.GetUserIDFromFirebaseResponse\x12Z\n\x12GetUserIDFromToken\x12\x1c.permission.CheckAuthRequest\x1a&.permission.GetUserIDFromTokenResponse\x12T\n\x0fGetAudFromToken\x12\x1c.permission.CheckAuthRequest\x1a#.permission.GetAudFromTokenResponse\x12Y\n\x16GetUserScopesFromToken\x12\x1c.permission.CheckAuthRequest\x1a!.permission.GetUserScopesResponse\x12\\\n\x13GetPictureFromToken\x12\x1c.permission.CheckAuthRequest\x1a\'.permission.GetPictureFromTokenResponseB\tZ\x07xpb;xpbb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -39,31 +39,37 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_CHECKAUTHREQUEST']._serialized_start=97
   _globals['_CHECKAUTHREQUEST']._serialized_end=130
   _globals['_USERINFO']._serialized_start=133
-  _globals['_USERINFO']._serialized_end=458
-  _globals['_USERINFOFROMFB']._serialized_start=461
-  _globals['_USERINFOFROMFB']._serialized_end=684
-  _globals['_CHECKAUTHRESPONSE']._serialized_start=687
-  _globals['_CHECKAUTHRESPONSE']._serialized_end=819
-  _globals['_UPDATERATELIMITREQUEST']._serialized_start=821
-  _globals['_UPDATERATELIMITREQUEST']._serialized_end=860
-  _globals['_UPDATERATELIMITRESPONSE']._serialized_start=862
-  _globals['_UPDATERATELIMITRESPONSE']._serialized_end=904
-  _globals['_GENERATETOKENSREQUEST']._serialized_start=906
-  _globals['_GENERATETOKENSREQUEST']._serialized_end=998
-  _globals['_GENERATETOKENSRESPONSE']._serialized_start=1001
-  _globals['_GENERATETOKENSRESPONSE']._serialized_end=1172
-  _globals['_REFRESHTOKENREQUEST']._serialized_start=1174
-  _globals['_REFRESHTOKENREQUEST']._serialized_end=1218
-  _globals['_REFRESHTOKENRESPONSE']._serialized_start=1221
-  _globals['_REFRESHTOKENRESPONSE']._serialized_end=1407
-  _globals['_GETUSERIDFROMFIREBASERESPONSE']._serialized_start=1409
-  _globals['_GETUSERIDFROMFIREBASERESPONSE']._serialized_end=1457
-  _globals['_GETUSERIDFROMTOKENRESPONSE']._serialized_start=1459
-  _globals['_GETUSERIDFROMTOKENRESPONSE']._serialized_end=1504
-  _globals['_GETAUDFROMTOKENRESPONSE']._serialized_start=1506
-  _globals['_GETAUDFROMTOKENRESPONSE']._serialized_end=1544
-  _globals['_GETUSERSCOPESRESPONSE']._serialized_start=1546
-  _globals['_GETUSERSCOPESRESPONSE']._serialized_end=1602
-  _globals['_PERMISSIONSERVICE']._serialized_start=1605
-  _globals['_PERMISSIONSERVICE']._serialized_end=2486
+  _globals['_USERINFO']._serialized_end=473
+  _globals['_USERINFOFROMFB']._serialized_start=476
+  _globals['_USERINFOFROMFB']._serialized_end=699
+  _globals['_CHECKAUTHRESPONSE']._serialized_start=702
+  _globals['_CHECKAUTHRESPONSE']._serialized_end=834
+  _globals['_UPDATERATELIMITREQUEST']._serialized_start=836
+  _globals['_UPDATERATELIMITREQUEST']._serialized_end=875
+  _globals['_UPDATERATELIMITRESPONSE']._serialized_start=877
+  _globals['_UPDATERATELIMITRESPONSE']._serialized_end=919
+  _globals['_GENERATETOKENSREQUEST']._serialized_start=921
+  _globals['_GENERATETOKENSREQUEST']._serialized_end=1013
+  _globals['_GENERATETOKENSRESPONSE']._serialized_start=1016
+  _globals['_GENERATETOKENSRESPONSE']._serialized_end=1187
+  _globals['_REFRESHTOKENREQUEST']._serialized_start=1189
+  _globals['_REFRESHTOKENREQUEST']._serialized_end=1233
+  _globals['_REFRESHTOKENRESPONSE']._serialized_start=1236
+  _globals['_REFRESHTOKENRESPONSE']._serialized_end=1422
+  _globals['_GETUSERIDFROMFIREBASERESPONSE']._serialized_start=1424
+  _globals['_GETUSERIDFROMFIREBASERESPONSE']._serialized_end=1472
+  _globals['_GETUSERIDFROMTOKENRESPONSE']._serialized_start=1474
+  _globals['_GETUSERIDFROMTOKENRESPONSE']._serialized_end=1519
+  _globals['_GETAUDFROMTOKENRESPONSE']._serialized_start=1521
+  _globals['_GETAUDFROMTOKENRESPONSE']._serialized_end=1559
+  _globals['_GETUSERSCOPESRESPONSE']._serialized_start=1561
+  _globals['_GETUSERSCOPESRESPONSE']._serialized_end=1617
+  _globals['_GETPICTUREFROMTOKENRESPONSE']._serialized_start=1619
+  _globals['_GETPICTUREFROMTOKENRESPONSE']._serialized_end=1665
+  _globals['_GETUSERBYEMAILREQUEST']._serialized_start=1667
+  _globals['_GETUSERBYEMAILREQUEST']._serialized_end=1720
+  _globals['_GETUSERBYEMAILRESPONSE']._serialized_start=1722
+  _globals['_GETUSERBYEMAILRESPONSE']._serialized_end=1802
+  _globals['_PERMISSIONSERVICE']._serialized_start=1805
+  _globals['_PERMISSIONSERVICE']._serialized_end=2869
 # @@protoc_insertion_point(module_scope)

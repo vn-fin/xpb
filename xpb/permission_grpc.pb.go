@@ -26,6 +26,9 @@ type PermissionServiceClient interface {
 	RefreshAccessToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 	// Check token and rate-limit; returns allowed or not
 	CheckAuthToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*CheckAuthResponse, error)
+	// Resolve an exact email using current issuer platform-admin authorization.
+	// Existing servers return UNIMPLEMENTED; callers must fail closed.
+	GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error)
 	// Force-update the rate-limit with Slicing-Window algorithm
 	UpdateRateLimit(ctx context.Context, in *UpdateRateLimitRequest, opts ...grpc.CallOption) (*UpdateRateLimitResponse, error)
 	// Check auth firebase token
@@ -80,6 +83,15 @@ func (c *permissionServiceClient) RefreshAccessToken(ctx context.Context, in *Re
 func (c *permissionServiceClient) CheckAuthToken(ctx context.Context, in *CheckAuthRequest, opts ...grpc.CallOption) (*CheckAuthResponse, error) {
 	out := new(CheckAuthResponse)
 	err := c.cc.Invoke(ctx, "/permission.PermissionService/CheckAuthToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *permissionServiceClient) GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error) {
+	out := new(GetUserByEmailResponse)
+	err := c.cc.Invoke(ctx, "/permission.PermissionService/GetUserByEmail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -161,6 +173,9 @@ type PermissionServiceServer interface {
 	RefreshAccessToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	// Check token and rate-limit; returns allowed or not
 	CheckAuthToken(context.Context, *CheckAuthRequest) (*CheckAuthResponse, error)
+	// Resolve an exact email using current issuer platform-admin authorization.
+	// Existing servers return UNIMPLEMENTED; callers must fail closed.
+	GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error)
 	// Force-update the rate-limit with Slicing-Window algorithm
 	UpdateRateLimit(context.Context, *UpdateRateLimitRequest) (*UpdateRateLimitResponse, error)
 	// Check auth firebase token
@@ -193,6 +208,9 @@ func (UnimplementedPermissionServiceServer) RefreshAccessToken(context.Context, 
 }
 func (UnimplementedPermissionServiceServer) CheckAuthToken(context.Context, *CheckAuthRequest) (*CheckAuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckAuthToken not implemented")
+}
+func (UnimplementedPermissionServiceServer) GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserByEmail not implemented")
 }
 func (UnimplementedPermissionServiceServer) UpdateRateLimit(context.Context, *UpdateRateLimitRequest) (*UpdateRateLimitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRateLimit not implemented")
@@ -296,6 +314,24 @@ func _PermissionService_CheckAuthToken_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PermissionServiceServer).CheckAuthToken(ctx, req.(*CheckAuthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PermissionService_GetUserByEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserByEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermissionServiceServer).GetUserByEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/permission.PermissionService/GetUserByEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermissionServiceServer).GetUserByEmail(ctx, req.(*GetUserByEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -448,6 +484,10 @@ var PermissionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckAuthToken",
 			Handler:    _PermissionService_CheckAuthToken_Handler,
+		},
+		{
+			MethodName: "GetUserByEmail",
+			Handler:    _PermissionService_GetUserByEmail_Handler,
 		},
 		{
 			MethodName: "UpdateRateLimit",
